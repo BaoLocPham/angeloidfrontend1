@@ -33,7 +33,7 @@ const App = () => {
             <Search />
           </Route>
 
-          <Route path='/anime/:id'>
+          <Route path='/anime/:animeId'>
             <AnimeDetail />
           </Route>
 
