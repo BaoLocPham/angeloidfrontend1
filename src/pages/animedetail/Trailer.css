@@ -1,0 +1,11 @@
+.trailer{
+    border-radius: 2%;
+    height: 17rem;
+}
+
+@media (max-width: 768px) {
+    .trailer{
+        border-radius: 2%;
+        height: 12.3rem;
+    }
+}
