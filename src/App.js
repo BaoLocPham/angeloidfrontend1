@@ -33,7 +33,7 @@ const App = () => {
         {/* Choose pages to render */}
         <Switch>
           <Route path='/' exact>
-            <Home />
+            <Home isLogin={isLogin} />
           </Route>
 
           <Route path='/search'>
