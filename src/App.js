@@ -20,7 +20,7 @@ import Footer from './pages/footer/Footer';
 const App = () => {
   return (
     <Router>
-      <div className="container-fluid">
+      <div className="">
         <Nav />
         
         {/* Choose pages to render */}
