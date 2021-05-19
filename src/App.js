@@ -1,5 +1,6 @@
 import './App.css';
 // Import Libraries
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,15 +19,21 @@ import Error from './pages/error/Error';
 import Footer from './pages/footer/Footer';
 
 const App = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const handleLogout = () => {
+    setIsLogin(false);
+  }
+
   return (
     <Router>
-      <div className="container-fluid">
-        <Nav />
+      <div className="" style={{width:"100vw"}}>
+        <Nav isLogin={isLogin} handleLogout={handleLogout} />
         
         {/* Choose pages to render */}
         <Switch>
           <Route path='/' exact>
-            <Home />
+            <Home isLogin={isLogin} />
           </Route>
 
           <Route path='/search'>
