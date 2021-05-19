@@ -12,7 +12,7 @@ const style = {
 
 const Footer = () => {
     return (
-        <footer className="row">
+        <footer className="row mx-0" style={{width:"100%"}}>
             <div className="col-12 col-md-6" style={style}>
                 <div className="d-flex flex-row mb-4 mt-4">
                     <i className="fa fa-map-marker fa-2x me-4" style={{color: "white"}}></i>
@@ -24,11 +24,11 @@ const Footer = () => {
                 </div>
                 <div className="d-flex flex-row">
                     <i className="fa fa-envelope fa-2x me-2" style={{color: "white"}}></i>
-                    <h5 className="float-end">support_angloid@gmail.com</h5>
+                    <h5 className="float-end">support_angeloid@gmail.com</h5>
                 </div>
             </div>
             <div className="col-12 col-md-6" style={style}>
-                <h3>About the company</h3>
+                <h3>About Us</h3>
                 <p>We are web application making company. Our most important mission is bring the difference to our country. We here to make your dream be come true.</p>
                 <h3>Sponsor by</h3>
                 <img src={logo} alt="FPT logo"/>
