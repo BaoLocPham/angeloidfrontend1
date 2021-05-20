@@ -27,9 +27,9 @@ const App = () => {
 
   return (
     <Router>
-      <div className="" style={{width:"100vw"}}>
+      <div className="" style={{ width: "100vw" }}>
         <Nav isLogin={isLogin} handleLogout={handleLogout} />
-        
+
         {/* Choose pages to render */}
         <Switch>
           <Route path='/' exact>

@@ -9,10 +9,10 @@ const AnimeList = () => {
         {Count:4,Id:4,Name:'Bobobobo', Img:"https://m.media-amazon.com/images/I/61M9MHPcRmL.jpg",  Studio:"Kyoto Animations", Format:"TV series",SeriesLength:"25 episodes", Tag:["rape", "ntr", "scat"]},
         {Count:5,Id:5,Name:'Toloveru', Img:"https://upload.wikimedia.org/wikipedia/vi/e/e3/To_Love-Ru_manga_volume_1.jpg",  Studio:"Kyoto Animations", Format:"TV series",SeriesLength:"25 episodes", Tag:["rape", "ntr", "scat"]}
     ]);
-    const [isVertical, setIsVertical] = useState(true);
+    const [isVertical, setIsVertical] = useState(false);
     if (!isVertical){
         return ( 
-                <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff"}}>
+                <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff", padding: "1rem 0 1rem 0"}}>
                     <div>
                         <h3 style={{display:"inline-block",width:"50%"}}>Recommendation</h3>
                         <a  style={{display:"inline-block",width:"45%",textAlign:"right", textDecoration:'none', color:"#fff", fontSize:"1.5rem", marginRight:"1%"}} href="https://www.google.com.vn">See all</a>
@@ -30,7 +30,7 @@ const AnimeList = () => {
         );
     }else{
         return ( 
-            <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff"}}>
+            <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff", padding: "1rem 0 1rem 0"}}>
                 <div>
                     <h3 style={{display:"inline-block",width:"50%"}}>Recommendation</h3>
                 </div>
