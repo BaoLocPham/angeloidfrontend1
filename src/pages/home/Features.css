@@ -1,0 +1,10 @@
+.bg-features {
+    height: auto;
+    padding-bottom: 6%;
+}
+
+@media screen and (min-width: 768px) {
+    .bg-features {
+        height: 100vh;
+    }
+}
