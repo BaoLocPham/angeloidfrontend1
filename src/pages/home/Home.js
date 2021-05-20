@@ -11,6 +11,9 @@ const Home = ({ isLogin }) => {
                 <Welcome />
                 : <Features />
             }
+            <AnimeList />
+            <AnimeList />
+            <AnimeList />
         </div>
     );
 }
