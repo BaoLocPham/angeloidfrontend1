@@ -14,8 +14,8 @@ const Character = () => {
 
     return (
         <>
-            {/* <h4>Character</h4> */}
-            <div className="row justify-content-start" style={{ backgroundColor: "#131E2A", color: "white" }}>
+            <h5 id="Character">Character</h5>
+            <div className="row mx-0 justify-content-start" style={{ backgroundColor: "#131E2A", color: "white" }}>
                 {/* Character */}
                 {
                     characterList.map(character =>

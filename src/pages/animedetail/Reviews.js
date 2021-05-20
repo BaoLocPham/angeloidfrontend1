@@ -15,17 +15,15 @@ const Review = () => {
 
     return (
         <>
+            <h5 id="Review">Review</h5>
             <div className="row mx-0">
-                <div className="col-12">Review</div>
-                <div className="col-12 justify-content-start">
-                    {
-                        reviewList.slice(reviewList.length - 2, reviewList.length).map(review =>
-                            <div key={review.id} style={frame} className="col-12">
-                                {review.content}
-                            </div>
-                        )
-                    }
-                </div>
+                {
+                    reviewList.slice(reviewList.length - 2, reviewList.length).map(review =>
+                        <div key={review.id} style={frame} className="col-12">
+                            {review.content}
+                        </div>
+                    )
+                }
             </div>
 
         </>

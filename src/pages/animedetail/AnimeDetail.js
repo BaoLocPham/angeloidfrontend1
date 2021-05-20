@@ -11,13 +11,10 @@ const AnimeDetail = () => {
         <>
             I am Anime Detail Page!
             
-            <AnimeProfile />
+            {/* <AnimeProfile /> 
             <Character />
-            <Trailer />
+            <Trailer /> */}
             <Reviews />
-
-            
-
 
         </>
     );

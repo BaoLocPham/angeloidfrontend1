@@ -10,7 +10,7 @@ const AnimeProfile = () => {
 
     return (
         <>
-            <div style={frame} className="row">
+            <div style={frame} className="row mx-0 w-100">
                 <div className="col-4 col-md-12">
                     <div><b>Format</b></div>
                     <div>TV</div>
