@@ -1,0 +1,36 @@
+.bg-arknights {
+  background-image: url("/src/pages/home/image/EVPZSSzUUAIBswf.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.amiya {
+  margin-left: 0;
+  animation-name: left-to-right;
+  animation-duration: 2s;
+}
+
+@keyframes left-to-right {
+  from {
+    margin-left: -200px;
+  }
+  to {
+    margin-left: 0;
+  }
+}
+
+/* .balloon {
+  margin-right: 0;
+  animation-name: right-to-left;
+  animation-duration: 2s;
+}
+
+@keyframes right-to-left {
+  from {
+    margin-right: -200px;
+  }
+  to {
+    margin-right: 0;
+  }
+} */
