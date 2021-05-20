@@ -1,11 +1,11 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.css";
+import './Features.css';
 
 const background_style = {
     backgroundColor: "#131E2A",
     color: "#FFFFFF",
-    height: "100vh",
     width: "100%", 
     paddingTop: 70
 }
@@ -22,7 +22,7 @@ var feature_bootstrap = "m-3 text-center d-flex flex-column justify-content-cent
 
 const Features = () => {
     return (  
-        <div className="row mx-0 d-flex flex-row justify-content-center" style={background_style}>
+        <div className="row mx-0 d-flex flex-row justify-content-center bg-features" style={background_style}>
             <div className="row m-3">
                 <div className="col-0 col-md-1"></div>
                 <p className="col-12 col-md-4 fw-bold my-auto">- Features</p>
