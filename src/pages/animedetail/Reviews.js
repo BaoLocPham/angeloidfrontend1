@@ -10,27 +10,21 @@ const Review = () => {
 
     const frame = {
         backgroundColor: "#19293B",
-        borderRadius: "1%",
-        fontSize: "0.8rem",
+        borderRadius: "8px",
     }
 
     return (
         <>
-            <div>
+            <div className="row mx-0">
                 <div className="col-12">Review</div>
                 <div className="col-12 justify-content-start">
                     {
                         reviewList.slice(reviewList.length - 2, reviewList.length).map(review =>
-
-                            <div key={review.id} style={frame} className="col-sm-11 col-md-11 p-1 mt-3">
+                            <div key={review.id} style={frame} className="col-12">
                                 {review.content}
                             </div>
-
                         )
                     }
-                    <div className="col-12">
-
-                    </div>
                 </div>
             </div>
 

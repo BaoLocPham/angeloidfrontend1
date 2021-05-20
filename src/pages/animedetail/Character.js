@@ -14,17 +14,15 @@ const Character = () => {
 
     return (
         <>
-                <div className="row ml-5">
-                    <h4>Character</h4>
-                </div>
-                <div className="row justify-content-start ">
-                    {/* Character */}
-                    {
-                        characterList.map(character =>
-                            <CharacterList key={character.id} character={character} />
-                        )
-                    }
-                </div>
+            {/* <h4>Character</h4> */}
+            <div className="row justify-content-start" style={{ backgroundColor: "#131E2A", color: "white" }}>
+                {/* Character */}
+                {
+                    characterList.map(character =>
+                        <CharacterList key={character.id} character={character} />
+                    )
+                }
+            </div>
         </>
     );
 }
