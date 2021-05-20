@@ -19,18 +19,3 @@
     margin-left: 0;
   }
 }
-
-/* .balloon {
-  margin-right: 0;
-  animation-name: right-to-left;
-  animation-duration: 2s;
-}
-
-@keyframes right-to-left {
-  from {
-    margin-right: -200px;
-  }
-  to {
-    margin-right: 0;
-  }
-} */

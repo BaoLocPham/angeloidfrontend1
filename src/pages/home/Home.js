@@ -6,7 +6,7 @@ import AnimeList from './AnimeList';
 
 const Home = ({ isLogin }) => {
     return (
-        <div className="bg-dark" style={{ width: "100%" }}>
+        <div className="bg-dark-container" style={{ width: "100%", padding: "0 5% 0 5%" }}>
             { isLogin ?
                 <Welcome />
                 : <Features />
