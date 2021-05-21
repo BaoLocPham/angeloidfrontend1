@@ -21,7 +21,7 @@ const AnimeList = () => {
                     {
                             animeList.map(
                                 anime=>(
-                                    <AnimeCard Anime={anime} isVertical={isVertical}/>
+                                    <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical}/>
                                 )
                             )
                     }
@@ -38,7 +38,7 @@ const AnimeList = () => {
                 {
                         animeList.map(
                             anime=>(
-                                <AnimeCard Anime={anime} isVertical={isVertical}/>
+                                <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical}/>
                             )
                         )
                 }
