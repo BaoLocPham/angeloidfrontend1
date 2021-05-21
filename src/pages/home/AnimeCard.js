@@ -46,8 +46,8 @@ const AnimeCard = (props) => {
             
             <div className="col-6 col-lg-2 d-none d-lg-block">
                 <div data-tip data-for="leftTooltip" style={styleVertical}></div>
-                <ReactTooltip place="left" id="leftTooltip" type="">
-                    <AnimeTooltip Anime={props.Anime}/>
+                <ReactTooltip key={props.Anime.id} place="left" id="leftTooltip" type="">
+                    <AnimeTooltip key={props.Anime.id} Anime={props.Anime}/>
                 </ReactTooltip>
                 <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>       
             </div>
