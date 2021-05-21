@@ -8,6 +8,15 @@ Please run this command to install libraries
 
 ### `npm install --save bootstrap font-awesome jquery react-router-dom react-transition-group react-tooltip`
 
+If you have already installed some libraries, here is libraries list for single installation
+
+- bootstrap
+- font-awesome
+- jquery
+- react-router-dom
+- react-transition-group
+- react-tooltip
+
 ## Available Scripts
 
 In the project directory, you can run:
