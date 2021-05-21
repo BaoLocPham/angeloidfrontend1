@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 import { Link } from 'react-router-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.css";
 import "./Nav.css"
 
 const Nav = ({ isLogin, handleLogout }) => {

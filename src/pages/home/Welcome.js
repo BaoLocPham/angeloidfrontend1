@@ -2,7 +2,6 @@ import React from 'react';
 import './Welcome.css';
 import Amiya from './image/Amiya.png';
 import SpeechBalloon from './image/speech-balloon.png';
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Welcome = () => {
     const balloonStyle = {
