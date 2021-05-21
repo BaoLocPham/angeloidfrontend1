@@ -7,6 +7,7 @@ import {
   Route
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "font-awesome/css/font-awesome.css";
 // Import Pages
 import Nav from './pages/nav/Nav';
 import Home from './pages/home/Home';
