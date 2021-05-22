@@ -37,21 +37,19 @@ const Review = () => {
     }
 
     return (
-        <>
+        <div className="col-12">
             <h5 id="Review" className="py-3">Review</h5>
             <div className="row">
                 <div>
-                    {
-                        reviewList.slice(reviewList.length - 2, reviewList.length).map(review =>
-                            <div key={review.id} style={frame} className="mb-3 p-2">
-                                {(review.content.length < 500) ? review.content : <ReadMore>{review.content}</ReadMore>}
-                            </div>
-                        )
-                    }
+                    {reviewList.slice(reviewList.length - 2, reviewList.length).map(review =>
+                        <div key={review.id} style={frame} className="mb-3 p-2">
+                            {(review.content.length < 500) ? review.content : <ReadMore>{review.content}</ReadMore>}
+                        </div>
+                    )}
                 </div>
             </div>
 
-        </>
+        </div>
     );
 }
 
