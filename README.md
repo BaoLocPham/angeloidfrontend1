@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+# Front-end (Client App) of Angeloid Projekt
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Project Settings
+
+Please run this command to install libraries
+
+### `npm install --save bootstrap font-awesome jquery react-router-dom react-transition-group react-tooltip chart.js react-chartjs-2`
+
+If you have already installed some libraries, here is libraries list for single installation
+
+- bootstrap
+- font-awesome
+- jquery
+- react-router-dom
+- react-transition-group
+- react-tooltip
+- chart.js
+- react-chartjs-2
 
 ## Available Scripts
 

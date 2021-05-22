@@ -12,16 +12,16 @@ const AnimeList = () => {
     const [isVertical, setIsVertical] = useState(false);
     if (!isVertical){
         return ( 
-                <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff", padding: "1rem 0 1rem 0"}}>
+                <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff", margin:"auto "}}>
                     <div>
-                        <h3 style={{display:"inline-block",width:"50%"}}>Recommendation</h3>
-                        <a  style={{display:"inline-block",width:"45%",textAlign:"right", textDecoration:'none', color:"#fff", fontSize:"1.5rem", marginRight:"1%"}} href="https://www.google.com.vn">See all</a>
+                        <h4 style={{display:"inline-block",width:"50%"}}>Recommendation</h4>
+                        <a  style={{display:"inline-block",width:"50%",textAlign:"right", textDecoration:'none', color:"#fff", fontSize:"1.25rem"}} href="https://www.google.com.vn">See all</a>
                     </div>
-                    <div className="row d-flex flex-row justify-content-center" style={{ textAlign:"center"}}>
+                    <div className="w-100 h-auto row justify-content-between" style={{ textAlign:"center"}}>
                     {
                             animeList.map(
                                 anime=>(
-                                    <AnimeCard Anime={anime} isVertical={isVertical}/>
+                                    <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical}/>
                                 )
                             )
                     }
@@ -30,15 +30,15 @@ const AnimeList = () => {
         );
     }else{
         return ( 
-            <div className="w-100 h-auto" style={{backgroundColor:"#131E2A", color:"#fff", padding: "1rem 0 1rem 0"}}>
+            <div style={{backgroundColor:"#131E2A", color:"#fff"}}>
                 <div>
                     <h3 style={{display:"inline-block",width:"50%"}}>Recommendation</h3>
                 </div>
-                <div className="row d-flex flex-row justify-content-center" style={{ textAlign:"center"}}>
+                <div className="row" style={{ textAlign:"center"}}>
                 {
                         animeList.map(
                             anime=>(
-                                <AnimeCard Anime={anime} isVertical={isVertical}/>
+                                <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical}/>
                             )
                         )
                 }

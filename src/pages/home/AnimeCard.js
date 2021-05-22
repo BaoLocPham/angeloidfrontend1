@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/translucent.css';
+import React from 'react';
 import AnimeTooltip from "./AnimeTooltip";
+
+import ReactTooltip from 'react-tooltip';
 const AnimeCard = (props) => {   
-    const styleHorizontal={
+    /* const styleHorizontal={
                 height:"15em", width:"10em", 
                 backgroundSize:"cover",
                 backgroundImage:`url(${props.Anime.Img})`,
                 borderRadius:"5%",
                 margin:"0 10px 0 -10%"   
-            };
+            }; */
     const styleVertical={
         height:"15em", width:"10em", 
         backgroundSize:"cover",
@@ -18,48 +17,39 @@ const AnimeCard = (props) => {
         borderRadius:"5%",
         margin:"auto"   
     }
-    const tooltipStyle={
+    /* const tooltipStyle={
         backgroundColor:"#19293B",
-    }
+    } */
     if (props.isVertical){
         return (
             <div className="col-12">
-                <Tippy 
-                    placement="left"
-                    style={tooltipStyle}
-                    theme= {'translucent'}
-                    content={<AnimeTooltip Anime={props.Anime}/>} >
-                    <div style={styleVertical} ></div>
-                </Tippy> 
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>
+                <div data-tip data-for="leftTooltip" style={styleVertical}></div>
+                    <ReactTooltip  place="left" id="leftTooltip" type="">
+                    <AnimeTooltip Anime={props.Anime}/>
+                    </ReactTooltip>
+                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>  
             </div>
         );
     }
     else if (props.Anime.Count!==5){
         return (
-            <div className="col-5 col-lg-2">
-                <Tippy 
-                    placement="right"
-                    style={tooltipStyle}
-                    theme= {'translucent'}
-                    content={<AnimeTooltip Anime={props.Anime}/>} >
-                    <div style={styleHorizontal} ></div>
-                </Tippy> 
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>
+            <div className="col-6 col-lg-2">
+               <div data-tip data-for="rightTooltip" style={styleVertical}></div>
+                <ReactTooltip  place="right"  id="rightTooltip" type="">
+                    <AnimeTooltip  Anime={props.Anime}/>
+                </ReactTooltip>
+                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>  
             </div>
         );
     }else{
         return (
             
-            <div className="col-5 col-lg-2 d-none d-lg-block">
-                <Tippy 
-                    placement="left"
-                    style={tooltipStyle}
-                    theme= {'translucent'}
-                    content={<AnimeTooltip Anime={props.Anime}/>} >
-                    <div style={styleHorizontal} ></div>
-                </Tippy>  
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>          
+            <div className="col-6 col-lg-2 d-none d-lg-block">
+                <div data-tip data-for="leftTooltip" style={styleVertical}></div>
+                <ReactTooltip key={props.Anime.id} place="left" id="leftTooltip" type="">
+                    <AnimeTooltip key={props.Anime.id} Anime={props.Anime}/>
+                </ReactTooltip>
+                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>       
             </div>
             
         );

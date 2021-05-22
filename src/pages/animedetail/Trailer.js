@@ -6,10 +6,13 @@ const Trailer = () => {
 
     return (
         <>
-            <div>Trailer</div>
-            <iframe className="trailer w-100"
-                src="https://www.youtube.com/embed/LH0yFFPBTuc?autoplay=1&mute=1&playlist=LH0yFFPBTuc&loop=1">
-            </iframe>
+            <h5 className="py-2">Trailer</h5>
+            <div className="row">
+                <iframe className="trailer" title="Anime Trailer"
+                    src="https://www.youtube.com/embed/LH0yFFPBTuc?autoplay=1&mute=1&playlist=LH0yFFPBTuc&loop=1">
+                </iframe>
+            </div>
+
         </>
     );
 }
