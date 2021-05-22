@@ -65,37 +65,48 @@ const AnimeDetailTop = () => {
             <div className="col-12 p-0 bg_img" style={bacground_style}></div>
 
             {/* Print Anime Info */}
-            <div className="col-12 p-0 content">
-                <div className="row mx-0 justify-content-end">
-                    <div className="col-12 col-md-3 h-auto d-flex flex-row-reverse p-1 rate-fav-parent">
-                        <div className="btn-group" role="group">
-                            {/* Rating button */}
-                            <button type="button" style={{ backgroundColor: "#14A38B"}} className="btn btn-primary rating-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Rating
-                            </button>
-                            {/* Favorite button */}
-                            <button type="button favorite-button" className="btn btn-danger ms-4 favoriteButton_style">
-                                <i className="fa fa-heart" aria-hidden="true"></i>
-                            </button>
-                        </div>
+            <div className="row mx-0 content justify-content-end w-100">
+                <div className="col-12 col-md-3 p-1 d-flex flex-row justify-content-end rate-fav-parent align-items-end">
+                    <div className="btn-group" role="group">
+                        {/* Rating button */}
+                        <button 
+                            type="button" 
+                            className="btn btn-primary rating-button" 
+                            style={{ backgroundColor: "#14A38B" }}  
+                            data-bs-toggle="modal" 
+                            data-bs-target="#exampleModal"
+                        >
+                            Rating
+                        </button>
+                        {/* Favorite button */}
+                        <button 
+                            type="button" 
+                            className="btn btn-danger ms-4 favorite-button"
+                        >
+                            <i className="fa fa-heart" aria-hidden="true"></i>
+                        </button>
                     </div>
+                </div>
 
-                    {/* Anime content */}
-                    <div className="col-12 px-2 m-0 px-md-5 col-md-9 h-auto">
-                        <p className="fw-bold m-0 pt-1 p-md-3 h5">
-                            {animeTitle}
-                        </p>
-                        <div className="d-none d-md-block m-0 pt-1 p-md-3 title-desc">
-                            {animeDesc}
+                <div className="col-12 col-md-9 px-2 m-0 px-md-5">
+                    <div className="row">
+                        {/* Anime content */}
+                        <div className="col-12 h-50">
+                            <p className="fw-bold m-0 pt-1 p-md-3 h5">
+                                {animeTitle}
+                            </p>
+                            <div className="d-none d-md-block m-0 pt-1 p-md-3 title-desc">
+                                {animeDesc}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Nav bar in AnimeDetailTop */}
-                    <div className="col-12 col-md-9 p-2 d-flex flex-row justify-content-center">
-                        <p className="mx-3 mx-md-5">Overview</p>
-                        <p className="mx-3 mx-md-5">Characters</p>
-                        <p className="mx-3 mx-md-5">Rating</p>
-                        <p className="mx-3 mx-md-5">Review</p>
+                        {/* Nav bar in AnimeDetailTop */}
+                        <div className="col-12 h-25 p-2 d-flex flex-row justify-content-center">
+                            <p className="mx-3 mx-md-5">Overview</p>
+                            <p className="mx-3 mx-md-5">Characters</p>
+                            <p className="mx-3 mx-md-5">Rating</p>
+                            <p className="mx-3 mx-md-5">Review</p>
+                        </div>
                     </div>
                 </div>
             </div>

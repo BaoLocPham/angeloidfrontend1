@@ -8,7 +8,8 @@
 }
 
 .content {
-    height: 20vh;
+    min-height: 20vh;
+    height: auto;
     position: absolute;
     background-color: #19293B;
     z-index: 1;
@@ -22,20 +23,29 @@
 }
 
 .thumb {
-    height: 20vh;
-    width: 14vh;
+    min-height: 20vh;
+    min-width: 14vh;
+    width: 17%;
+    height: auto;
     position: absolute;
     z-index: 2;
-    top: 2.7rem;
-    left: 2rem;
+    left: 5%;
+    top: 6.5%;
+}
+
+.rate-fav-parent {
+    height: auto;
 }
 
 .rating-button {
     width: 8rem;
+    height: auto;
     color: "white";
 }
 
 .favorite-button {
+    width: 3rem;
+    height: 3rem;
     background-color: #EC294B;
 }
 
@@ -93,22 +103,23 @@
     }
 
     .content {
-        height: 50vh;
+        min-height: 50vh;
         margin-top: 50vh;
     }
 
     .thumb {
-        height: 50vh;
-        width: 36vh;
-        top: 12.5rem;
-        left: 7rem;
-    }
-
-    .rating-button{
-        width: 10rem;
+        min-height: 50vh;
+        min-width: 36vh;
+        left: 7%;
+        top: 30%;
     }
 
     .rate-fav-parent {
-        margin-top: 14rem;
+        margin-bottom: 5%;
+    }
+
+    .rating-button{
+        height: 3rem;
+        width: 10rem;
     }
 }
