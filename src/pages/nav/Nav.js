@@ -39,7 +39,7 @@ const Nav = ({ isLogin, handleLogout }) => {
                         <Link to="/thread" className="nav-white-text">Thread</Link>
                     </li>
                 </ul>
-                <ul className="navbar-nav d-flex flex-row justify-content-end justify-content-md-center col-3 mx-0 mx-md-5">
+                <ul className="navbar-nav d-flex flex-row justify-content-end justify-content-md-center col-3 mx-0 ms-md-5 me-md-1">
                     {isLogin ? <>
                         <li className="nav-item d-none d-md-inline-block me-2">
                             <Link to="/setting" className="shadow-sm">
