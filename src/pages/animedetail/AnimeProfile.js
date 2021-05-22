@@ -1,4 +1,5 @@
 import React from 'react';
+import {Carousel} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AnimeProfile = () => {
@@ -10,7 +11,7 @@ const AnimeProfile = () => {
 
     return (
         <>
-            <div style={frame} className="row">
+            <div style={frame} className="row d-none d-md-block">
                 <div className="col-4 col-md-12 p-2">
                     <div><b>Format</b></div>
                     <div>TV</div>
