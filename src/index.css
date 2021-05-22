@@ -1,13 +1,75 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body > * {
+  width: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-white-text {
+  color: white;
+  text-decoration: none;
+}
+
+.bg-dark-container {
+  background-color: #131E2A;
+  color: #FFF;
+}
+
+.bg-dark-content {
+  background-color: #19293B;
+  color: #FFF;
+}
+
+.bg-footer {
+  background-color: #11161d;
+  color: #FFF;
+}
+
+.bg-white {
+  background-color: #EDF1F5;
+  color: #76899C;
+}
+
+.bg-white-content {
+  background-color: #FAFAFA;
+  color: #76899C;
+}
+
+.bg-green {
+  background-color: #14A38B;
+  color: #FFF;
+}
+
+.bg-white-txt-green {
+  background-color: #FFF;
+  color: #14A38B;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+/* ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+} */
