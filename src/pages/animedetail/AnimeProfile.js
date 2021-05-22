@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel} from 'react';
+// import {Carousel} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AnimeProfile = () => {

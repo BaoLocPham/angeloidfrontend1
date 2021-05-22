@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AnimeTooltip from "./AnimeTooltip";
 
 import ReactTooltip from 'react-tooltip';
 const AnimeCard = (props) => {   
-    const styleHorizontal={
+    /* const styleHorizontal={
                 height:"15em", width:"10em", 
                 backgroundSize:"cover",
                 backgroundImage:`url(${props.Anime.Img})`,
                 borderRadius:"5%",
                 margin:"0 10px 0 -10%"   
-            };
+            }; */
     const styleVertical={
         height:"15em", width:"10em", 
         backgroundSize:"cover",
@@ -17,9 +17,9 @@ const AnimeCard = (props) => {
         borderRadius:"5%",
         margin:"auto"   
     }
-    const tooltipStyle={
+    /* const tooltipStyle={
         backgroundColor:"#19293B",
-    }
+    } */
     if (props.isVertical){
         return (
             <div className="col-12">
