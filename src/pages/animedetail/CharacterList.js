@@ -27,7 +27,7 @@ const CharacterList = ({ character }) => {
 
     return (
         <>
-            <div style={frame} className="col-12 col-12 col-md-5 my-2 m-md-3">
+            <div style={frame} className="col-12 col-sm-12 col-md-5 my-2 me-5">
                 <div className="row">
                     {/* Character Info */}
                     <div style={chaImg} className="col-2"></div>

@@ -9,14 +9,12 @@ const Character = () => {
         { id: 3, character: 'Kousaka Haruka', chaImg: "https://s2.vndb.org/ch/98/62198.jpg", seiyuu: 'Nagisa Shirona', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
         { id: 4, character: 'Yuki Noa', chaImg: "https://s2.vndb.org/ch/97/62197.jpg", seiyuu: 'Kanako', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
         { id: 5, character: 'Naruse Satsuki', chaImg: "https://s2.vndb.org/ch/65/71465.jpg", seiyuu: 'Hina Hazuki', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
-
     ]);
 
     return (
         <>
             <h5 id="Character">Character</h5>
-            <div className="row mx-0 justify-content-start" style={{ backgroundColor: "#131E2A", color: "white" }}>
-                {/* Character */}
+            <div className="row p-3">
                 {
                     characterList.map(character =>
                         <CharacterList key={character.id} character={character} />
