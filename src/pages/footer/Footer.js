@@ -1,7 +1,5 @@
 import React from 'react';
 import logo from './image/Logo-FU-03.png';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.css";
 
 const style = {
     backgroundColor: "#11161d",
