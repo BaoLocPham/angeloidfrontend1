@@ -1,47 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Character from './Character';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const CharacterList = ({ character }) => {
-
-    const frame = {
-        backgroundColor: "#19293B",
-        borderRadius: "8px",
-        fontSize: "0.8rem",
-    }
-
-    const chaImg = {
-        backgroundImage: `url(${character.chaImg})`,
-        backgroundSize: 'cover',
-        height: '7rem',
-        borderRadius: '8px',
-        backgroundPosition: "center",
-    }
-
-    const seiyuuImg = {
-        backgroundImage: `url(${character.seiImg})`,
-        backgroundSize: 'cover',
-        height: '7rem',
-        borderRadius: '8px',
-        backgroundPosition: "center",
-    }
+const CharacterList = () => {
+    const [characterList, setCharacterList] = useState([
+        { id: 1, character: 'Kujo Miyako', chaImg: "https://s2.vndb.org/ch/87/62187.jpg", seiyuu: 'Sawada Natsu', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
+        { id: 2, character: 'Nimi Sora', chaImg: "https://s2.vndb.org/ch/91/62191.jpg", seiyuu: 'Sawasawa Sawa', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
+        { id: 3, character: 'Kousaka Haruka', chaImg: "https://s2.vndb.org/ch/98/62198.jpg", seiyuu: 'Nagisa Shirona', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
+        { id: 4, character: 'Yuki Noa', chaImg: "https://s2.vndb.org/ch/97/62197.jpg", seiyuu: 'Kanako', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
+        { id: 5, character: 'Naruse Satsuki', chaImg: "https://s2.vndb.org/ch/65/71465.jpg", seiyuu: 'Hina Hazuki', seiImg: "http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=502599940" },
+    ]);
 
     return (
         <>
-            <div style={frame} className="col-12 col-sm-12 col-md-5 my-2 me-5">
-                <div className="row">
-                    {/* Character Info */}
-                    <div style={chaImg} className="col-2"></div>
-                    <div className="col-4">
-                        <div style={{ height: "50%" }} className="col-12">{character.character}</div>
-                        <div style={{ height: "50%" }} className="col-12">Main</div>
-                    </div>
-                    {/* Seiyuu Info */}
-                    <div className="col-4">
-                        <div style={{ height: "50%" }} className="col-12">{character.seiyuu}</div>
-                        <div style={{ height: "50%" }} className="col-12">Japan</div>
-                    </div>
-                    <div style={seiyuuImg} className="col-2"></div>
-                </div>
+            <h5 id="Character" className="p-0 pt-md-2">Character</h5>
+            <div className="row p-0 p-md-2">
+                {
+                    characterList.map(character =>
+                        <Character key={character.id} character={character} />
+                    )
+                }
             </div>
         </>
     );
