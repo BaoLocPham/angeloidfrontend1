@@ -1,0 +1,114 @@
+.anime-detail-top {
+    height: 40vh;
+    padding-bottom: 6%;
+}
+
+.bg_img {
+    height: 40vh;
+}
+
+.content {
+    height: 20vh;
+    position: absolute;
+    background-color: #19293B;
+    z-index: 1;
+    width: 100%;
+    margin-top: 20vh;
+}
+
+.title-desc {
+    height: 198px;
+    overflow-y: scroll;
+}
+
+.thumb {
+    height: 20vh;
+    width: 14vh;
+    position: absolute;
+    z-index: 2;
+    top: 2.7rem;
+    left: 2rem;
+}
+
+.rating-button {
+    width: 8rem;
+    color: "white";
+}
+
+.favorite-button {
+    background-color: #EC294B;
+}
+
+/* rate start button */
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rate > input:checked ~ label {
+    color: #14A38B;    
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #14A38B;  
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #14A38B;
+}
+
+@media screen and (min-width: 768px) {
+    .anime-detail-top {
+        height: 100vh;
+    }
+
+    .bg_img {
+        height: 100vh;
+    }
+
+    .content {
+        height: 50vh;
+        margin-top: 50vh;
+    }
+
+    .thumb {
+        height: 50vh;
+        width: 36vh;
+        top: 12.5rem;
+        left: 7rem;
+    }
+
+    .rating-button{
+        width: 10rem;
+    }
+
+    .rate-fav-parent {
+        margin-top: 14rem;
+    }
+}
