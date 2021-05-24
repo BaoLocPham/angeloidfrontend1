@@ -12,8 +12,8 @@ const Welcome = () => {
         <>
             <div className="d-md-none" style={{ height: "60px" }}></div>
             <div className="bg-arknights d-flex flex-row justify-content-center w-100">
-                <img className="h-50 w-50 amiya" src={Amiya} />
-                <img className="h-25 w-25 balloon" src={SpeechBalloon} style={balloonStyle} />
+                <img className="h-50 w-50 amiya" src={Amiya} alt="Amiya" />
+                <img className="h-25 w-25 balloon" src={SpeechBalloon} style={balloonStyle} alt="Speech Balloon" />
             </div>
         </>
     );

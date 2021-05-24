@@ -1,0 +1,118 @@
+.account-wallpaper {
+    background-image: url(img/bg-01.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+.account-wallpaper b {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+
+.account-wallpaper h5 {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 15px;
+}
+
+#formLogin {
+    text-align: center;
+    border-radius: 80px;
+    background-color: transparent !important;
+    border: none !important;
+    align-items: center;
+}
+
+.input-username,
+.input-password,
+.input-email {
+    width: 310px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#register {
+    opacity: 0.8;
+}
+
+
+/* Login Button */
+
+.btn-login {
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 45px;
+    max-width: 160px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.btn-login svg {
+    height: 45px;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 100%;
+}
+
+.btn-login rect {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-dasharray: 422, 0;
+    transition: all 0.35s linear;
+}
+
+.btn-login:hover {
+    background: rgba(214, 213, 213, 0);
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.btn-login:hover rect {
+    stroke-width: 5;
+    stroke-dasharray: 15, 310;
+    stroke-dashoffset: 48;
+    transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-login:text{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* End of button login */
+
+@media screen and (max-width: 768px) {
+    .account-wallpaper {
+        background-image: url(img/bg-01.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+
+    #formLogin {
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    .input-username,
+    .input-password,
+    .account-wallpaper b,
+    .account-wallpaper h5 {
+        align-items: center;
+    }
+}
