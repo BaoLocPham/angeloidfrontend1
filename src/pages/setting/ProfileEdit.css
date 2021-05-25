@@ -1,0 +1,26 @@
+.ProfileEdit-Frame{
+    background-color: #19293B;
+    color: white;
+}
+
+.ProfileEdit-Select{
+    width: 25%;
+}
+
+.ProfileEdit-Button{
+    width: 30%;
+    background-color: #14A38B;
+    color: white;
+}
+
+@media (max-width: 768px)  {
+    .ProfileEdit-Select{
+        width: 50%;
+    }
+    
+    .ProfileEdit-Button{
+        width: 60%;
+        background-color: #14A38B;
+        color: white;
+    }
+}

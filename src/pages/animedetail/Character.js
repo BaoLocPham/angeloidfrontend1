@@ -27,24 +27,22 @@ const Character = ({ character }) => {
     }
 
     return (
-        <>
-            <div style={frame} className="my-2 anime-frame">
-                <div className="row">
-                    {/* Character Info */}
-                    <div style={chaImg} className="col-2"></div>
-                    <div className="col-4 pt-2">
-                        <div style={{ height: "50%" }} className="col-12 text-center">{character.character}</div>
-                        <div style={{ height: "50%" }} className="col-12 text-center">Main</div>
-                    </div>
-                    {/* Seiyuu Info */}
-                    <div className="col-4 pt-2">
-                        <div style={{ height: "50%" }} className="col-12 text-center">{character.seiyuu}</div>
-                        <div style={{ height: "50%" }} className="col-12 text-center">Japan</div>
-                    </div>
-                    <div style={seiyuuImg} className="col-2"></div>
+        <div style={frame} className="my-2 anime-frame">
+            <div className="row">
+                {/* Character Info */}
+                <div style={chaImg} className="col-2"></div>
+                <div className="col-4 pt-2">
+                    <div style={{ height: "50%" }} className="col-12 text-center">{character.character}</div>
+                    <div style={{ height: "50%" }} className="col-12 text-center">Main</div>
                 </div>
+                {/* Seiyuu Info */}
+                <div className="col-4 pt-2">
+                    <div style={{ height: "50%" }} className="col-12 text-center">{character.seiyuu}</div>
+                    <div style={{ height: "50%" }} className="col-12 text-center">Japan</div>
+                </div>
+                <div style={seiyuuImg} className="col-2"></div>
             </div>
-        </>
+        </div>
     );
 }
 
