@@ -48,7 +48,7 @@ const App = () => {
           </Route>
 
           <Route path='/account'>
-            <Account />
+            <Account isLogin={isLogin} />
           </Route>
 
           <Route path='/setting'>
