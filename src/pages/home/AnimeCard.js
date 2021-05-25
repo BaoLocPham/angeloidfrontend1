@@ -23,7 +23,7 @@ const AnimeCard = (props) => {
     if (props.isVertical){
         return (
             <div className="col-12">
-                <div data-tip data-for="leftTooltip" style={styleVertical}></div>
+                <a href="/anime/1"><div data-tip data-for="leftTooltip" style={styleVertical}></div></a>
                     <ReactTooltip  place="left" id="leftTooltip" type="">
                     <AnimeTooltip Anime={props.Anime}/>
                     </ReactTooltip>
@@ -34,7 +34,7 @@ const AnimeCard = (props) => {
     else if (props.Anime.Count!==5){
         return (
             <div className="col-6 col-lg-2">
-               <div data-tip data-for="rightTooltip" style={styleVertical}></div>
+               <a href="/anime/1"><div data-tip data-for="rightTooltip" style={styleVertical}></div></a>
                 <ReactTooltip  place="right"  id="rightTooltip" type="">
                     <AnimeTooltip  Anime={props.Anime}/>
                 </ReactTooltip>
@@ -45,7 +45,7 @@ const AnimeCard = (props) => {
         return (
             
             <div className="col-6 col-lg-2 d-none d-lg-block">
-                <div data-tip data-for="leftTooltip" style={styleVertical}></div>
+                <a href="/anime/1"><div data-tip data-for="leftTooltip" style={styleVertical}></div></a>
                 <ReactTooltip key={props.Anime.id} place="left" id="leftTooltip" type="">
                     <AnimeTooltip key={props.Anime.id} Anime={props.Anime}/>
                 </ReactTooltip>
