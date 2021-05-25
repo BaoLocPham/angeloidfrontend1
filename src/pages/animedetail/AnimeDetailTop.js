@@ -62,25 +62,28 @@ const AnimeDetailTop = () => {
             </div>
 
             {/* Background image */}
-            <div className="col-12 p-0 bg_img" style={bacground_style}></div>
+            <div className="col-12 p-0 bg_img" style={bacground_style}>
+                {/* Anime Thumbnail  */}
+                <div className="thumb" style={thumb_style}></div>
+            </div>
 
             {/* Print Anime Info */}
-            <div className="row mx-0 content justify-content-end w-100">
-                <div className="col-12 col-md-3 p-1 d-flex flex-row justify-content-end rate-fav-parent align-items-end">
-                    <div className="btn-group" role="group">
+            <div className="row mx-0 content w-100">
+                <div className="col-12 col-md-3 p-1 d-flex flex-row justify-content-end align-items-end">
+                    <div className="btn-group rate-fav-parent" role="group">
                         {/* Rating button */}
-                        <button 
-                            type="button" 
-                            className="btn btn-primary rating-button" 
-                            style={{ backgroundColor: "#14A38B" }}  
-                            data-bs-toggle="modal" 
+                        <button
+                            type="button"
+                            className="btn rating-button mx-auto"
+                            style={{ backgroundColor: "#14A38B" }}
+                            data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
                         >
                             Rating
                         </button>
                         {/* Favorite button */}
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className="btn btn-danger ms-4 favorite-button"
                         >
                             <i className="fa fa-heart" aria-hidden="true"></i>
@@ -110,9 +113,6 @@ const AnimeDetailTop = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Anime Thumbnail  */}
-            <div className="thumb" style={thumb_style}></div>
         </div>
     );
 }

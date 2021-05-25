@@ -1,16 +1,35 @@
+.account-wallpaper {
+    background-image: url(img/bg-01.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+.account-wallpaper b {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+
+.account-wallpaper h5 {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 15px;
+}
+
 #formLogin {
     text-align: center;
-    margin-top: 80px;
     border-radius: 80px;
     background-color: transparent !important;
     border: none !important;
     align-items: center;
-    height: 96vh;
 }
 
-input[type=text],
-input[type=password],
-input[type=email] {
+.input-username,
+.input-password,
+.input-email {
     width: 310px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -20,56 +39,12 @@ input[type=email] {
     box-sizing: border-box;
 }
 
-body {
-    background-image: url(img/bg-01.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    
-}
-
-b {
-    color: white;
-    text-shadow: 2px 2px black;
-    font-size: 35px;
-    margin-bottom: 30px;
-}
-
-h5 {
-    color: white;
-    text-shadow: 2px 2px black;
-    font-size: 15px;
-}
-
 #register {
     opacity: 0.8;
 }
 
 
 /* Login Button */
-
-/* .btn-login {
-    border: 0 solid;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-    outline: 1px solid;
-    outline-color: rgba(255, 255, 255, .5);
-    outline-offset: 0px;
-    text-shadow: none;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-    width: 310px;
-    background-color: #14A38B;
-    color: white;
-    text-decoration: bold;
-    font-weight: bold;
-}
-
-.btn-login:hover {
-    border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(107, 38, 171, 0.5), 0 0 20px rgba(49, 32, 103, 0.2);
-    outline-color: rgba(255, 255, 255, 0);
-    outline-offset: 15px;
-    text-shadow: 1px 1px 2px #4a7618;
-} */
 
 .btn-login {
     color: #fff;
@@ -90,6 +65,7 @@ h5 {
     top: 5px;
     width: 100%;
 }
+
 .btn-login rect {
     fill: none;
     stroke: #fff;
@@ -97,12 +73,14 @@ h5 {
     stroke-dasharray: 422, 0;
     transition: all 0.35s linear;
 }
+
 .btn-login:hover {
     background: rgba(214, 213, 213, 0);
     font-weight: 900;
     letter-spacing: 1px;
     color: white;
 }
+
 .btn-login:hover rect {
     stroke-width: 5;
     stroke-dasharray: 15, 310;
@@ -114,26 +92,27 @@ h5 {
     display: inline-block;
     vertical-align: middle;
 }
+
 /* End of button login */
 
-
-
 @media screen and (max-width: 768px) {
-    body {
+    .account-wallpaper {
         background-image: url(img/bg-01.jpg);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
     }
-    input[type=text],
-    input[type=password],
-    b,
-    h5 {
-        align-items: center;
-    }
+
     #formLogin {
         background-color: transparent !important;
         border: none !important;
+    }
+
+    .input-username,
+    .input-password,
+    .account-wallpaper b,
+    .account-wallpaper h5 {
+        align-items: center;
     }
 }
