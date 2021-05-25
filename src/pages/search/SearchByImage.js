@@ -1,10 +1,13 @@
 import React from 'react';
+import ImageFilter from './ImageFilter';
+import SearchResult from './SearchResult';
 
 const SearchByImage = () => {
     return (
-        <>
-            I am SearchByImage Page!
-        </>
+        <div>
+            <ImageFilter />
+            <SearchResult />
+        </div>
     );
 }
 
