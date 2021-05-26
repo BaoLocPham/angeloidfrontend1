@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./SettingNav.css";
 
-const SettingNav = () => {
+const SettingNav = ({ showLeftNav }) => {
     const settingActiveStyle = {
         backgroundColor: "#131E2A"
     }
@@ -15,8 +15,11 @@ const SettingNav = () => {
         setSettingActive(value);
     }
 
+    var leftNavClassName = "navbar navbar-expand-lg setting-nav bg-dark-content d-flex flex-column justify-content-center px-3";
+    if (showLeftNav) leftNavClassName += " left-nav-active";
+
     return (
-        <nav className="navbar navbar-expand-lg setting-nav bg-dark-content d-flex flex-column justify-content-center px-3">
+        <nav className={leftNavClassName}>
             <Link to="/setting/profile"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
                 onClick={() => handleSettingActive("profile")}
