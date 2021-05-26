@@ -1,3 +1,18 @@
+.setting-left {
+    width: 100%;
+}
+
 .setting-right {
+    width: 100%;
     background: linear-gradient(180deg, #14A38B 40%, #131E2A 40%);
+}
+
+@media screen and (min-width: 768px) {
+    .setting-left {
+        width: 20%;
+    }
+    
+    .setting-right {
+        width: 80%;
+    }
 }

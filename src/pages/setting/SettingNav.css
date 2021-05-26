@@ -1,3 +1,9 @@
 .setting-nav {
     height: 100vh;
+    z-index: 2;
+}
+
+.setting-container, .setting-container > * {
+    margin: 0;
+    padding: 0;
 }

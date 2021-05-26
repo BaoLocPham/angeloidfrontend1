@@ -1,11 +1,10 @@
 // Import Libraries
 import React from "react";
 import {
-    BrowserRouter as Router,
     Switch,
     Route
 } from 'react-router-dom';
-// Import Pages
+// Import Components
 import SettingNav from './SettingNav';
 import Profile from './Profile';
 import PasswordSetting from './PasswordSetting';
@@ -15,15 +14,15 @@ import './Setting.css';
 
 const Setting = () => {
     return (
-        <div className="row">
+        <div className="row setting-container">
 
             {/* Left content */}
-            <div className="col-12 col-md-2 setting-left">
+            <div className="setting-left">
                 <SettingNav />
             </div>
 
             {/* Right content */}
-            <div className="col-12 col-md-10 setting-right">
+            <div className="setting-right d-flex flex-row justify-content-center align-items-center">
                 {/* Choose pages to render */}
                 <Switch>
                     <Route path="/setting/profile">
