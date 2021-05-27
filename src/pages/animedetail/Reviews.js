@@ -37,7 +37,7 @@ const Review = () => {
     }
 
     return (
-        <div className="col-12">
+        <div className="col-12 p-0">
             <h5 id="Review" className="py-3">Review</h5>
             <div className="row">
                 <div>
@@ -48,7 +48,6 @@ const Review = () => {
                     )}
                 </div>
             </div>
-
         </div>
     );
 }
