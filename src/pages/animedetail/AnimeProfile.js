@@ -8,6 +8,7 @@ const AnimeProfile = () => {
         borderRadius: "8px",
         color: "white",
         overflowX: "scroll"
+        
     }
 
     return (

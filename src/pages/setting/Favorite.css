@@ -1,11 +1,20 @@
 .Favorite-Frame{
     background-color: #19293B;
     border-radius: 8px;
-    color: white;
 }
 
 .xButton{
-    
     border-radius: 50%;
+    background-color: #EC294B;
     z-index: 2;
+}
+
+.deleteButton{
+    color: white;
+    background-color: #EC294B;
+}
+
+.modal-Frame{
+    color: white;
+    background-color: #19293B;
 }

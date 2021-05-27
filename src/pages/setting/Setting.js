@@ -33,7 +33,7 @@ const Setting = () => {
             </div>
 
             {/* Right content */}
-            <div className="setting-right d-flex flex-row justify-content-center align-items-center">
+            <div className="setting-right d-flex flex-row">
                 {/* Choose pages to render */}
                 <Switch>
                     <Route path="/setting/profile">
