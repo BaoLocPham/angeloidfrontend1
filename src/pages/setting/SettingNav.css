@@ -1,0 +1,36 @@
+.setting-nav {
+    width: 100vw;
+    height: 100vh;
+    left: -100vw;
+    transition: 1.5s;
+}
+
+.btn-left-nav {
+    position: absolute;
+    height: 200px;
+    width: 30px;
+    left: -15px;
+    top: 30vh;
+    transition: 1.5s;
+    font-size: 18px;
+}
+
+.setting-nav.left-nav-active {
+    left: 0;
+}
+
+.btn-left-nav.left-nav-active {
+    left: calc(100vw - 15px);
+}
+
+.setting-container, .setting-container > * {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .setting-nav {
+        width: 100%;
+        left: 0;
+    }
+}

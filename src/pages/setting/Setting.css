@@ -1,0 +1,25 @@
+.setting-container {
+    background: linear-gradient(180deg, #14A38B 40%, #131E2A 40%);
+}
+
+.setting-left {
+    width: 0%;
+}
+
+.setting-right {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .setting-left {
+        width: 20%;
+    }
+    
+    .setting-right {
+        width: 80%;
+    }
+
+    .btn-left-nav {
+        display: none;
+    }
+}
