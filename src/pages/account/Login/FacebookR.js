@@ -64,14 +64,10 @@ export default class FacebookR extends Component {
         </div>
       );
     }
-
-
-
-
     return (
       <>
+      
         <div>{fbContent}</div>
-        
         
       </>
     )
