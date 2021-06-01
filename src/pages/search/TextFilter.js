@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //local dependencies
 import './TextFilter.css';
 
-const TextFilter = ({ handleSelectName, tags, handleSelectTag, years, handleSelectYear, seasons, handleSelectSeason, formats, handleSelectFormat}) => {
+const TextFilter = ({ handleSelectName, tags, handleSelectTag, years, handleSelectYear, seasons, handleSelectSeason, formats, handleSelectFormat }) => {
     return (
         <div className="row w-100 h-auto mx-0 text-filter">
 
@@ -25,9 +25,9 @@ const TextFilter = ({ handleSelectName, tags, handleSelectTag, years, handleSele
                     {/* Tag input */}
                     <div className="search-box">
                         <p>Tag</p>
-                        <select className="form-select" defaultValue={""} onChange={handleSelectTag} aria-label="Default select example">
+                        <select value="" className="form-select" defaultValue={""} onChange={handleSelectTag} aria-label="Default select example">
                             <option hidden disabled value=""></option>
-                            {tags.map(tag => (
+                            {tags.slice(1).map(tag => (
                                 <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>
                             ))}
                         </select>
@@ -36,7 +36,7 @@ const TextFilter = ({ handleSelectName, tags, handleSelectTag, years, handleSele
                     {/* Year input */}
                     <div className="search-box">
                         <p>Year</p>
-                        <select className="form-select" defaultValue={""} onChange={handleSelectYear}  aria-label="Default select example">
+                        <select className="form-select" defaultValue={""} onChange={handleSelectYear} aria-label="Default select example">
                             <option hidden disabled value=""></option>
                             {years.map(year => (
                                 <option key={year.yearId} value={year.yearId}>{year.year}</option>
