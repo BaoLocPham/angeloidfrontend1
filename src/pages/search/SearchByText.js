@@ -3,14 +3,29 @@ import TextFilter from './TextFilter';
 import SearchTagList from './SearchTagList';
 import SearchResult from './SearchResult';
 
+const colorList = [
+    { id: 1, colorCode: "#EC294B" },
+    { id: 2, colorCode: "#F2AC57" },
+    { id: 3, colorCode: "#0880AE" },
+    { id: 4, colorCode: "#178F58" },
+    { id: 5, colorCode: "#14A38B" },
+    { id: 6, colorCode: "#35DF90" },
+]
+
 const SearchByText = () => {
 
     //Khởi tạo giá trị cho các input form (sau này sẽ lấy dữ liệu từ api)
     const tags = [
+        { tagId: 0, tagName: "" },
         { tagId: 1, tagName: "Isekai" },
         { tagId: 2, tagName: "Slice of life" },
         { tagId: 3, tagName: "School" },
-        { tagId: 4, tagName: "Fantasy" }
+        { tagId: 4, tagName: "Fantasy" },
+        { tagId: 5, tagName: "Comedy" },
+        { tagId: 6, tagName: "Romance" },
+        { tagId: 7, tagName: "Action" },
+        { tagId: 8, tagName: "Drama" },
+        { tagId: 9, tagName: "School" }
     ]
 
     const years = [
@@ -38,7 +53,7 @@ const SearchByText = () => {
     //State để quản lí các input form
 
     const [selectedName, setSelectedName] = useState("");
-    const [selectedTag, setSelectedTag] = useState("");
+    const [selectedTag, setSelectedTag] = useState([]);
     const [selectedYear, setSelectedYear] = useState("");
     const [selectedSeason, setSelectedSeason] = useState("");
     const [selectedFormat, setSelectedFormat] = useState("");
@@ -49,14 +64,52 @@ const SearchByText = () => {
         setSelectedName(event.target.value);
     }
 
+    const setColor = () => {
+        for (let color of colorList) {
+            if (color.id == (Math.floor(Math.random() * 6) + 1)) {
+                return color.colorCode;
+            }
+        }
+        return "#FF7171"
+    }
+
+    // Check coi cai tagId truyen vao co trung tagId trong selectedTag
+    const containTagId = (tagId) => {
+        for (let tagItem of selectedTag) {
+            if (tagItem.tagId === tagId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Lay ra tagName bang tagId truyen vao
+    const getNameById = (tagId) => {
+        for (let tagItem of tags) {
+            if (tagItem.tagId == tagId) {
+                return tagItem.tagName;
+            }
+        }
+        return null;
+    }
+
+    // Add tag dươc chon
     const handleSelectTag = (event) => {
-        setSelectedTag(event.target.value);
+        event.preventDefault();
+        if (!containTagId(event.target.value)) {
+            setSelectedTag([...selectedTag, { tagId: event.target.value, tagName: getNameById(event.target.value), tagBgColor: setColor() }])
+        }
+    }
+
+    // Delete tag duoc chon
+    const handleDeleteTag = (tagId) => {
+        setSelectedTag(selectedTag.filter(tag => tag.tagId !== tagId))
     }
 
     const handleSelectYear = (event) => {
         setSelectedYear(event.target.value);
     }
-    
+
     const handleSelectSeason = (event) => {
         setSelectedSeason(event.target.value);
     }
@@ -72,19 +125,19 @@ const SearchByText = () => {
         console.log("Tag: " + selectedTag);
         console.log("Year: " + selectedYear);
         console.log("Season: " + selectedSeason);
-        console.log("Format: " + selectedFormat); 
+        console.log("Format: " + selectedFormat);
         console.log("--------------------------")
     }, [selectedName, selectedTag, selectedYear, selectedSeason, selectedFormat])
 
     return (
         <div>
-            <TextFilter 
-                handleSelectName = {handleSelectName}
-                tags={tags} handleSelectTag={handleSelectTag} 
-                years={years} handleSelectYear={handleSelectYear} 
+            <TextFilter
+                handleSelectName={handleSelectName}
+                tags={tags} handleSelectTag={handleSelectTag}
+                years={years} handleSelectYear={handleSelectYear}
                 seasons={seasons} handleSelectSeason={handleSelectSeason}
-                formats={formats} handleSelectFormat={handleSelectFormat}/>
-            <SearchTagList />
+                formats={formats} handleSelectFormat={handleSelectFormat} />
+            <SearchTagList selectedTag={selectedTag} handleDeleteTag={handleDeleteTag} />
             <SearchResult />
         </div>
     );
