@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AnimeFavorite = ({ anime, onDelete }) => {
     const aniImg = {
@@ -13,9 +14,9 @@ const AnimeFavorite = ({ anime, onDelete }) => {
             <div className="col-6 col-md-3 d-flex justify-content-end">
                 {/* Anime Image */}
                 <div className="w-100 p-3">
-                    <a href="http://localhost:3000/anime/1" className="w-100">
+                    <Link to="/anime/1">
                         <div style={aniImg} className="position-relative w-100"></div>
-                    </a>
+                    </Link>
                 </div>
                 {/* Delete Button */}
                 <button type="button" className="btn btn-danger border-0 btn-sm xButton position-absolute" data-bs-toggle="modal" data-bs-target="#deleteButton"><i className="fa fa-times"></i></button>
