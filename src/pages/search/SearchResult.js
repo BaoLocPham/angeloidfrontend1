@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AnimeCard from '../home/AnimeCard'
+import './SearchResult.css'
 
 
 const SearchResult = () => {
@@ -13,9 +14,9 @@ const SearchResult = () => {
     const [isVertical, setIsVertical] = useState(false);
     if (!isVertical) {
         return (
-            <div className="w-100 h-auto" style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto " }}>
+            <div className="w-100 h-auto " style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto ", width: "100%", padding: "0 5% 0 5%" }}>
                 <br />
-                <div className="w-100 h-auto row justify-content-between" style={{ textAlign: "center" }}>
+                <div className="w-100 h-auto row justify-content-between search-result" style={{ textAlign: "center" }}>
                     {
                         animeList.map(
                             anime => (
@@ -28,8 +29,8 @@ const SearchResult = () => {
         );
     } else {
         return (
-            <div style={{ backgroundColor: "#131E2A", color: "#fff" }}>
-                <div className="row" style={{ textAlign: "center" }}>
+            <div style={{ backgroundColor: "#131E2A", color: "#fff" }} >
+                <div className="row search-result justify-content-center" style={{ textAlign: "center" }}>
                     {
                         animeList.map(
                             anime => (
