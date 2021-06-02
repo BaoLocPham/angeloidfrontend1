@@ -1,5 +1,5 @@
 // Import Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Switch,
     Route
@@ -10,6 +10,10 @@ import SearchByImage from './SearchByImage';
 import Error from '../error/Error';
 
 const Search = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <Switch>
             <Route path='/search' exact>

@@ -1,57 +1,73 @@
+//dependencies
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
+
+//local dependencies
 import AnimeTooltip from "./AnimeTooltip";
 
-import ReactTooltip from 'react-tooltip';
-const AnimeCard = (props) => {   
-    /* const styleHorizontal={
-                height:"15em", width:"10em", 
-                backgroundSize:"cover",
-                backgroundImage:`url(${props.Anime.Img})`,
-                borderRadius:"5%",
-                margin:"0 10px 0 -10%"   
-            }; */
-    const styleVertical={
-        height:"15em", width:"10em", 
-        backgroundSize:"cover",
-        backgroundImage:`url(${props.Anime.Img})`,
-        borderRadius:"5%",
-        margin:"auto"   
+const AnimeCard = ({ anime, isVertical, count }) => {
+
+    //Vertical style
+    const styleVertical = {
+        height: "15em", width: "10em",
+        backgroundSize: "cover",
+        backgroundImage: `url("data:image/jpeg;base64,${anime.thumbnail}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 20%",
+        borderRadius: "5%",
+        margin: "auto"
     }
-    /* const tooltipStyle={
-        backgroundColor:"#19293B",
-    } */
-    if (props.isVertical){
+
+    //Remove underline in text in Link tag
+    const linkStyle = {
+        textDecoration: "none"
+    }
+
+    //Vertical view
+    if (isVertical) {
         return (
             <div className="col-12">
-                <a href="/anime/1"><div data-tip data-for="leftTooltip" style={styleVertical}></div></a>
-                    <ReactTooltip  place="left" id="leftTooltip" type="">
-                    <AnimeTooltip Anime={props.Anime}/>
+                <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
+                    <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
+                    <ReactTooltip place="left" id={`${anime.animeId}`} type="">
+                        <AnimeTooltip anime={anime} />
                     </ReactTooltip>
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>  
+                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                </Link>
             </div>
         );
     }
-    else if (props.Anime.Count!==5){
+
+    // The last item in vertical view to config right tooltip
+    else if (count !== 5) {
         return (
             <div className="col-6 col-lg-2">
-               <a href="/anime/1"><div data-tip data-for="rightTooltip" style={styleVertical}></div></a>
-                <ReactTooltip  place="right"  id="rightTooltip" type="">
-                    <AnimeTooltip  Anime={props.Anime}/>
-                </ReactTooltip>
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>  
+                <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
+                    <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
+                    <ReactTooltip place="right" id={`${anime.animeId}`}>
+                        <AnimeTooltip anime={anime} />
+                    </ReactTooltip>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                </Link>
             </div>
         );
-    }else{
+    } 
+    
+    // Display for mobile app
+    else {
         return (
-            
+
             <div className="col-6 col-lg-2 d-none d-lg-block">
-                <a href="/anime/1"><div data-tip data-for="leftTooltip" style={styleVertical}></div></a>
-                <ReactTooltip key={props.Anime.id} place="left" id="leftTooltip" type="">
-                    <AnimeTooltip key={props.Anime.id} Anime={props.Anime}/>
-                </ReactTooltip>
-                <h4 style={{color:"#fff"}}>{props.Anime.Name}</h4>       
+                <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
+                    <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
+                    <ReactTooltip key={anime.animeId} place="left" id={`${anime.animeId}`} type="">
+                        <AnimeTooltip key={anime.animeId} anime={anime} />
+                    </ReactTooltip>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                </Link>
             </div>
-            
+
         );
     }
 }
