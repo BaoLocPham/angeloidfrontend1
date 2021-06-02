@@ -1,10 +1,27 @@
-.relation-frame {
-    margin-right: 0;
+.anime-card{
+    font-size: 15px;
 }
 
 @media screen and (min-width: 768px) {
     .anime-frame {
         width: 47%;
         margin-right: 3%;
+    }
+    .anime-title{
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 768px)
+{
+    .anime-title{
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .relation{
+        width: 1000px;
     }
 }
