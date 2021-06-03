@@ -1,5 +1,5 @@
 // Import Libraries
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     Switch,
     Route
@@ -12,6 +12,10 @@ import ChangePassword from './ChangePassword';
 import Error from '../error/Error';
 
 const Account = ({ isLogin }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <Switch>
             { isLogin ? "" : <>
