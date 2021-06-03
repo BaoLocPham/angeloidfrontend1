@@ -10,6 +10,7 @@ import Profile from './Profile';
 import PasswordSetting from './PasswordSetting';
 import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
+import AnimeForm from './AnimeForm';
 import './Setting.css';
 
 const Setting = () => {
@@ -46,6 +47,10 @@ const Setting = () => {
 
                     <Route path="/setting/favorite">
                         <FavoriteList />
+                    </Route>
+
+                    <Route path="/setting/anime/form">
+                        <AnimeForm />
                     </Route>
 
                     <Route path="*">
