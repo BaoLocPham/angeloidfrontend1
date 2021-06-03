@@ -64,6 +64,7 @@ const SearchByText = () => {
         setSelectedName(event.target.value);
     }
 
+    // Set Random Background Color for Tag
     const setColor = () => {
         for (let color of colorList) {
             if (color.id == (Math.floor(Math.random() * 6) + 1)) {

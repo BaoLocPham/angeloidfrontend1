@@ -10,23 +10,22 @@ import thumb from './image/thumb.jpg';
 const animeTitle = "Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e Kayou";
 const animeDesc = "Anos, the Demon King of Tyranny, has defeated humans, spirits, and gods alike. But even demon kings get tired of all the fighting sometimes! Hoping for a more peaceful life, Anos decides to reincarnate himself.When he wakes two thousand years later, though, he finds the world has become too peaceful--his descendants have grown weak and magic is in serious decline.Intending to reclaim his rightful place, he enrolls in Demon King Academy, where he finds that his magical power is off the charts.Literally. And because they can't measure his power, the faculty and other students regard Anos as a misfit.With the support of Misha, the one student he manages to befriend, the misfit (Demon King) begins his climb up the demon ranks! (Source: Square Enix Manga & Books)";
 
-//Load background image
-const bacground_style = {
-    backgroundImage: `url(${bg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "50% 20%",
-    backgroundSize: "cover"
-}
+const AnimeDetailTop = ({ Anime }) => {
+    //Load background image
+    const bacground_style = {
+        backgroundImage: `url("data:image/jpeg;base64,${Anime.wallpaper}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 20%",
+        backgroundSize: "cover"
+    }
 
-//Load thumbnail image
-const thumb_style = {
-    backgroundImage: `url(${thumb})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "50% 20%",
-    backgroundSize: "cover"
-}
-
-const AnimeDetailTop = () => {
+    //Load thumbnail image
+    const thumb_style = {
+        backgroundImage: `url("data:image/jpeg;base64,${Anime.thumbnail}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 20%",
+        backgroundSize: "cover"
+    }
     return (
         <div className="row mx-0 w-100 anime-detail-top p-0">
 
@@ -96,10 +95,10 @@ const AnimeDetailTop = () => {
                         {/* Anime content */}
                         <div className="col-12 h-50">
                             <p className="fw-bold m-0 pt-1 p-md-3 h5">
-                                {animeTitle}
+                                {Anime.animeName}
                             </p>
                             <div className="d-none d-md-block m-0 pt-1 p-md-3 title-desc">
-                                {animeDesc}
+                                {Anime.content}
                             </div>
                         </div>
 

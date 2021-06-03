@@ -2,7 +2,7 @@ import React from 'react';
 import './Trailer.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Trailer = () => {
+const Trailer = ({ Anime }) => {
 
     return (
         <div className="col-12 col-md-6 p-0">
