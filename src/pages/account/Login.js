@@ -52,7 +52,7 @@ const Login = ({ setUser, isLogin }) => {
             }
             console.log(loginInput);
             fetch(
-                "https://localhost:5001/api/loginout",
+                `${process.env.REACT_APP_BACKEND_URL}api/loginout`,
                 {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
