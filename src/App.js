@@ -1,6 +1,6 @@
 import './App.css';
 // Import Libraries
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,6 +23,14 @@ import Footer from './pages/footer/Footer';
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(true);
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+
+    user.userId === undefined ? setIsLogin(false) : setIsLogin(true);
+  }, [user]
+  );
 
   const handleLogout = () => {
     setIsLogin(false);
@@ -48,7 +56,7 @@ const App = () => {
           </Route>
 
           <Route path='/account'>
-            <Account isLogin={isLogin} />
+            <Account setUser={setUser} isLogin={isLogin} />
           </Route>
 
           <Route path='/setting'>

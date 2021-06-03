@@ -11,7 +11,7 @@ import ForgotPassword from './ForgotPassword';
 import ChangePassword from './ChangePassword';
 import Error from '../error/Error';
 
-const Account = ({ isLogin }) => {
+const Account = ({ setUser,isLogin }) => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -20,7 +20,7 @@ const Account = ({ isLogin }) => {
         <Switch>
             { isLogin ? "" : <>
                 <Route path='/account/login'>
-                    <Login />
+                    <Login setUser={setUser} isLogin={isLogin}/>
                 </Route>
 
                 <Route path='/account/signup'>
