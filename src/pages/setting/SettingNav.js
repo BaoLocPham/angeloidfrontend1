@@ -52,6 +52,14 @@ const SettingNav = ({ showLeftNav }) => {
                 <i className="fa fa-heart fa-lg p-2"></i>
                 <span className="p-2">Anime Form</span>
             </Link>
+            <Link to="/setting/anime"
+                className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                onClick={() => handleSettingActive("aniform")}
+                style={settingActive === "aniform" ? settingActiveStyle : {}}
+            >
+                <i className="fa fa-heart fa-lg p-2"></i>
+                <span className="p-2">Anime</span>
+            </Link>
         </nav>
     );
 };

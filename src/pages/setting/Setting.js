@@ -11,6 +11,7 @@ import PasswordSetting from './PasswordSetting';
 import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
+import AnimeManage from './AnimeManage';
 import './Setting.css';
 
 const Setting = () => {
@@ -51,6 +52,10 @@ const Setting = () => {
 
                     <Route path="/setting/anime/form">
                         <AnimeForm />
+                    </Route>
+
+                    <Route path="/setting/anime">
+                        <AnimeManage />
                     </Route>
 
                     <Route path="*">

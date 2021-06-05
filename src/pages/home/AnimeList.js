@@ -1,33 +1,12 @@
 //dependencies
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 //local dependencies
 import AnimeCard from './AnimeCard';
 
-const AnimeList = ({ content, isVertical }) => {
+const AnimeList = ({ content, isVertical, animeList }) => {
 
-    //List to store anime
-    const [animeList, setAnimeList] = useState([]);
-
-    //Get all anime from API
-    const listAllAnime = () => {
-        //Url for request api
-        // end with 1: popular this season
-        // end with 2: next season
-        // end with 3: all time popular
-        let url = `${process.env.REACT_APP_BACKEND_URL}api/anime/all/${(content === "POPULAR THIS SEASON") ? "1" : (content === "UPCOMING NEXT SEASON") ? "2" : "3"}`;
-        //Fetch data and store to animeList
-        fetch(url, {
-            method: "GET",
-        }).then(res => res.json()).then(res => { setAnimeList(res); });
-    }
-
-    //First load anime list when loading page
-    useEffect(() => {
-        listAllAnime();
-    }, []);
-
-    //Vertical view
+    //Horizontal view
     if (!isVertical) {
 
         //Check is the last anime
@@ -52,7 +31,10 @@ const AnimeList = ({ content, isVertical }) => {
                 </div>
             </div>
         );
-    } else {
+    } 
+    
+    //Vertical view
+    else {
         return (
             <div style={{ backgroundColor: "#131E2A", color: "#fff" }}>
                 <div>
