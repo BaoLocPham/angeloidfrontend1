@@ -18,7 +18,6 @@ const Account = ({ setUser,isLogin }) => {
 
     return (
         <Switch>
-            { isLogin ? "" : <>
                 <Route path='/account/login'>
                     <Login setUser={setUser} isLogin={isLogin}/>
                 </Route>
@@ -34,7 +33,6 @@ const Account = ({ setUser,isLogin }) => {
                 <Route path='/account/change'>
                     <ChangePassword />
                 </Route>
-            </>}
 
             <Route path='*'>
                 <Error />
