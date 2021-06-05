@@ -27,6 +27,7 @@ const Character = ({ character }) => {
     }
 
     return (
+        // Show Character Info
         <div style={frame} className="my-2 anime-frame">
             <div className="row">
                 {/* Character Info */}

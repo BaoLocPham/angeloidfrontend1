@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 export default class FacebookR extends Component {

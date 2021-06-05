@@ -10,6 +10,7 @@ const colorList = [
     { id: 4, colorCode: "#178F58" },
     { id: 5, colorCode: "#14A38B" },
     { id: 6, colorCode: "#35DF90" },
+    { id: 7, colorCode: "#FF7171" },
 ]
 
 const SearchByText = () => {
@@ -66,15 +67,15 @@ const SearchByText = () => {
 
     // Set Random Background Color for Tag
     const setColor = () => {
+        const colorRandom = (Math.floor(Math.random() * 7) + 1);
         for (let color of colorList) {
-            if (color.id == (Math.floor(Math.random() * 6) + 1)) {
+            if (color.id === colorRandom) {
                 return color.colorCode;
             }
         }
-        return "#FF7171"
     }
 
-    // Check coi cai tagId truyen vao co trung tagId trong selectedTag
+    // Check selected tagId is duplicate with tagId in selectedTag
     const containTagId = (tagId) => {
         for (let tagItem of selectedTag) {
             if (tagItem.tagId === tagId) {
@@ -84,7 +85,7 @@ const SearchByText = () => {
         return false;
     }
 
-    // Lay ra tagName bang tagId truyen vao
+    // Get TagName by TagId
     const getNameById = (tagId) => {
         for (let tagItem of tags) {
             if (tagItem.tagId == tagId) {
@@ -94,7 +95,7 @@ const SearchByText = () => {
         return null;
     }
 
-    // Add tag dươc chon
+    // Handle Add Selected Tag
     const handleSelectTag = (event) => {
         event.preventDefault();
         if (!containTagId(event.target.value)) {
@@ -102,7 +103,7 @@ const SearchByText = () => {
         }
     }
 
-    // Delete tag duoc chon
+    // Handle Delete Selected Tag
     const handleDeleteTag = (tagId) => {
         setSelectedTag(selectedTag.filter(tag => tag.tagId !== tagId))
     }
