@@ -16,8 +16,8 @@ const Login = ({ setUser, isLogin }) => {
     const [password, setPassword] = useState();
 
     // States for response error
-    const [usernameError, setUsernameError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
+    const [usernameError, setUsernameError] = useState(true);
+    const [passwordError, setPasswordError] = useState(true);
     const [isWrong, setIsWrong] = useState(false);
 
 
