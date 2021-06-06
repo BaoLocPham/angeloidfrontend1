@@ -13,12 +13,16 @@ export default class FacebookR extends Component {
 
   responseFacebook = response => {
     this.setState({
-      isLoggedIn: true,
       userID: response.userID,
       name: response.name,
-      email: response.email,
-      picture: response.picture.data.url
+      email: response.email
     });
+  if (this.state.userID != null) {
+      this.setState({
+        isLoggedIn: true,
+        picture: response.picture.data.url
+      })
+    }
   };
 
   responseLogout = response => {
