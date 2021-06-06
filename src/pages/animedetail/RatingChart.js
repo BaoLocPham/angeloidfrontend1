@@ -34,8 +34,9 @@ const RatingChart = () => {
         },
     };
     return (
-        <div className="w-100 h-auto" style={{ backgroundColor: "#19293B" }}>
-            <Bar data={data} options={options} />
+        <div className="col-12 col-md-6 h-auto" >
+            <h5 className="py-2">Rating</h5>
+            <Bar style={{ backgroundColor: "#19293B" }} data={data} options={options} />
         </div>
     );
 }

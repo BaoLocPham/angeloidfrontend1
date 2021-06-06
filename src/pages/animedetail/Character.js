@@ -11,7 +11,7 @@ const Character = ({ character }) => {
     }
 
     const chaImg = {
-        backgroundImage: `url(${character.chaImg})`,
+        backgroundImage: `url("data:image/jpeg;base64,${character.characterImage}")`,
         backgroundSize: 'cover',
         height: '7rem',
         borderRadius: '8px',
@@ -19,7 +19,7 @@ const Character = ({ character }) => {
     }
 
     const seiyuuImg = {
-        backgroundImage: `url(${character.seiImg})`,
+        backgroundImage: `url("data:image/jpeg;base64,${character.seiyuu.seiyuuImage}")`,
         backgroundSize: 'cover',
         height: '7rem',
         borderRadius: '8px',
@@ -27,18 +27,18 @@ const Character = ({ character }) => {
     }
 
     return (
+        // Show Character Info
         <div style={frame} className="my-2 anime-frame">
             <div className="row">
                 {/* Character Info */}
                 <div style={chaImg} className="col-2"></div>
                 <div className="col-4 pt-2">
-                    <div style={{ height: "50%" }} className="col-12 text-center">{character.character}</div>
-                    <div style={{ height: "50%" }} className="col-12 text-center">Main</div>
+                    <div style={{ height: "50%" }} className="col-12 text-center">{character.characterName}</div>
+                    <div style={{ height: "50%" }} className="col-12 text-center">{character.characterRole}</div>
                 </div>
                 {/* Seiyuu Info */}
                 <div className="col-4 pt-2">
-                    <div style={{ height: "50%" }} className="col-12 text-center">{character.seiyuu}</div>
-                    <div style={{ height: "50%" }} className="col-12 text-center">Japan</div>
+                    <div style={{ height: "50%" }} className="col-12 text-center">{character.seiyuu.seiyuuName}</div>
                 </div>
                 <div style={seiyuuImg} className="col-2"></div>
             </div>
