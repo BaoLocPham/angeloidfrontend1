@@ -1,34 +1,28 @@
 //dependencies
-import React, { useState } from 'react';
+import React from 'react';
 
 //local dependencies
 import './AnimeDetailTop.css';
-import bg from './image/bg.jpg';
-import thumb from './image/thumb.jpg';
 
-//Anime Info
-const animeTitle = "Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e Kayou";
-const animeDesc = "Anos, the Demon King of Tyranny, has defeated humans, spirits, and gods alike. But even demon kings get tired of all the fighting sometimes! Hoping for a more peaceful life, Anos decides to reincarnate himself.When he wakes two thousand years later, though, he finds the world has become too peaceful--his descendants have grown weak and magic is in serious decline.Intending to reclaim his rightful place, he enrolls in Demon King Academy, where he finds that his magical power is off the charts.Literally. And because they can't measure his power, the faculty and other students regard Anos as a misfit.With the support of Misha, the one student he manages to befriend, the misfit (Demon King) begins his climb up the demon ranks! (Source: Square Enix Manga & Books)";
+const AnimeDetailTop = ({ anime }) => {
+    //Load background image
+    const bacground_style = {
+        backgroundImage: `url("data:image/jpeg;base64,${anime.wallpaper}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 20%",
+        backgroundSize: "cover"
+    }
 
-//Load background image
-const bacground_style = {
-    backgroundImage: `url(${bg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "50% 20%",
-    backgroundSize: "cover"
-}
+    //Load thumbnail image
+    const thumb_style = {
+        backgroundImage: `url("data:image/jpeg;base64,${anime.thumbnail}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50% 20%",
+        backgroundSize: "cover"
+    }
 
-//Load thumbnail image
-const thumb_style = {
-    backgroundImage: `url(${thumb})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "50% 20%",
-    backgroundSize: "cover"
-}
-
-const AnimeDetailTop = () => {
     return (
-        <div className="row mx-0 w-100 anime-detail-top p-0">
+        <div className="row mx-0 w-100 anime-detail-top p-0 scale125">
 
             {/* Model to rating */}
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,23 +86,23 @@ const AnimeDetailTop = () => {
                 </div>
 
                 <div className="col-12 col-md-9 px-2 m-0 px-md-5">
-                    <div className="row">
+                    <div className="row h-100">
                         {/* Anime content */}
-                        <div className="col-12 h-50">
+                        <div className="col-12 h-auto h-md-75">
                             <p className="fw-bold m-0 pt-1 p-md-3 h5">
-                                {animeTitle}
+                                {anime.animeName}
                             </p>
                             <div className="d-none d-md-block m-0 pt-1 p-md-3 title-desc">
-                                {animeDesc}
+                                {anime.content}
                             </div>
                         </div>
 
                         {/* Nav bar in AnimeDetailTop */}
-                        <div className="col-12 h-25 p-2 d-flex flex-row justify-content-center">
+                        <div className="col-12 h-auto p-2 d-flex flex-row justify-content-center m-auto">
                             <p className="mx-3 mx-md-5">Overview</p>
-                            <p className="mx-3 mx-md-5">Characters</p>
-                            <p className="mx-3 mx-md-5">Rating</p>
-                            <p className="mx-3 mx-md-5">Review</p>
+                            <p className="mx-3 mx-md-5"><a href="#character" className="anime-nav">Characters</a></p>
+                            <p className="mx-3 mx-md-5"><a href="#trailer" className="anime-nav">Trailer</a></p>
+                            <p className="mx-3 mx-md-5"><a href="#review" className="anime-nav">Review</a></p>
                         </div>
                     </div>
                 </div>

@@ -62,7 +62,7 @@ const App = () => {
           </Route>
 
           <Route path='/setting'>
-            <Setting />
+            <Setting user={user} />
           </Route>
 
           <Route path='/thread'>

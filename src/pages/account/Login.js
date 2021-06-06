@@ -1,16 +1,13 @@
 //dependencies
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import FacebookR from './Login/FacebookR';
+import md5 from 'md5';
 
 //local dependencies
 import './Login.css'
 
-import { Redirect } from 'react-router-dom';
-
-import md5 from 'md5';
-
-const Login = ({ setUser, isLogin }) => {
+const Login = ({ setUser, isLogin, BackGround, Author, AuthorLink }) => {
     // States for input data
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -50,7 +47,7 @@ const Login = ({ setUser, isLogin }) => {
                 // md5 encryption for password
                 password: md5(password)
             }
-            console.log(loginInput);
+
             fetch(
                 `${process.env.REACT_APP_BACKEND_URL}api/loginout`,
                 {
@@ -75,7 +72,7 @@ const Login = ({ setUser, isLogin }) => {
         );
     }
     return (
-        <div className="account-wallpaper d-flex flex-column justify-content-center">
+        <div style={BackGround} className="account-wallpaper d-flex flex-column justify-content-center">
             <div className="container div-with-bg" >
                 <div className="row">
                     <div className="card rounded bg-info" id="formLogin" >
@@ -108,6 +105,15 @@ const Login = ({ setUser, isLogin }) => {
                         </form>
                     </div>
                 </div>
+            </div>
+
+            {/* Reference to author's background image */}
+            <div style={{
+                position: "absolute",
+                left: "2%",
+                bottom: "3%"
+            }}>     
+                <span className="fw-bolder" style={{ color: "#76899C"}}>Artwork by <a href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
             </div>
         </div>
     );

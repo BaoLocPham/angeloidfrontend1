@@ -1,6 +1,11 @@
+//dependencies
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+//local dependencies
 import './Features.css';
 
+//Style for element
 const background_style = {
     backgroundColor: "#131E2A",
     color: "#FFFFFF",
@@ -21,6 +26,8 @@ var feature_bootstrap = "m-3 text-center d-flex flex-column justify-content-cent
 const Features = () => {
     return (  
         <div className="row mx-0 d-flex flex-row justify-content-center bg-features" style={background_style}>
+
+            {/* Features of web application */}
             <div className="row m-3">
                 <div className="col-0 col-md-1"></div>
                 <p className="col-12 col-md-4 fw-bold my-auto">- Features</p>
@@ -60,8 +67,11 @@ const Features = () => {
                 </div>
             </div>
             
-
-            <a href="#" className="d-flex flex-row justify-content-center" style={{textDecoration: "none"}}><button type="button" className="btn fw-bold" style={{color: '#14A38B', width: "10rem", height: "3.5rem", backgroundColor: "#FFFFFF"}}>JOIN US</button></a>
+            {/* JOIN US button */}
+            <div className="d-flex flex-row justify-content-center m-auto" >
+                <Link to="/account/signup" style={{ textDecoration: "none" }}><button type="button" className="btn fw-bold" style={{ color: '#14A38B', width: "10rem", height: "3.5rem", backgroundColor: "#FFFFFF" }}>JOIN US</button></Link>
+            </div>
+            
         </div>
     );
 }
