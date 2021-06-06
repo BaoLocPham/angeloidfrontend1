@@ -13,7 +13,7 @@ import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
 import './Setting.css';
 
-const Setting = () => {
+const Setting = ({ user }) => {
     const [showLeftNav, setShowLeftNav] = useState(false);
 
     const handleToggleLeftNavButton = () => setShowLeftNav(!showLeftNav);
@@ -38,7 +38,7 @@ const Setting = () => {
                 {/* Choose pages to render */}
                 <Switch>
                     <Route path="/setting/profile">
-                        <Profile />
+                        <Profile user={user} />
                     </Route>
 
                     <Route path="/setting/change">

@@ -19,10 +19,11 @@ const AnimeFavorite = ({ anime, onDelete }) => {
                     </Link>
                 </div>
                 {/* Delete Button */}
-                <button type="button" className="btn btn-danger border-0 btn-sm xButton position-absolute" data-bs-toggle="modal" data-bs-target="#deleteButton"><i className="fa fa-times"></i></button>
+                <div type="button" className="btn btn-sm xButton position-absolute" data-bs-toggle="modal" data-bs-target={`#deleteButton_${anime.Id}`}><i style={{ color: "white" }} className="fa fa-times"></i></div>
             </div>
+
             {/* Modal */}
-            <div className="modal fade" id="deleteButton" tabIndex="-1" aria-labelledby="deleteButtonLabel" aria-hidden="true">
+            <div className="modal fade" id={`deleteButton_${anime.Id}`} tabIndex="-1" aria-labelledby="deleteButtonLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content modal-Frame">
                         <div className="modal-header">
