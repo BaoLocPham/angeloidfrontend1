@@ -75,7 +75,6 @@ const Account = ({ setUser,isLogin }) => {
                 <Route path='/account/change'>
                     <ChangePassword />
                 </Route>
-
             <Route path='*'>
                 <Error />
             </Route>
