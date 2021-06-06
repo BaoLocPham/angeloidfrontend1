@@ -1,5 +1,5 @@
 // Import Libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Switch,
     Route
@@ -11,12 +11,17 @@ import PasswordSetting from './PasswordSetting';
 import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
+import AnimeManage from './AnimeManage';
 import './Setting.css';
 
 const Setting = ({ user }) => {
     const [showLeftNav, setShowLeftNav] = useState(false);
 
     const handleToggleLeftNavButton = () => setShowLeftNav(!showLeftNav);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className="row setting-container">
@@ -51,6 +56,10 @@ const Setting = ({ user }) => {
 
                     <Route path="/setting/anime/form">
                         <AnimeForm />
+                    </Route>
+
+                    <Route path="/setting/anime">
+                        <AnimeManage />
                     </Route>
 
                     <Route path="*">

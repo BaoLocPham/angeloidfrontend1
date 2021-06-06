@@ -38,7 +38,7 @@ const Review = () => {
 
     return (
         // Show Review
-        <div className="col-12 p-0">
+        <div id="review" className="col-12 p-0">
             <h5 id="Review" className="py-3">Review</h5>
             <div className="row">
                 <div>

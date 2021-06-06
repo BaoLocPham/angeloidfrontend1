@@ -28,8 +28,13 @@
     width: 30%;
     position: relative;
     z-index: 2;
-    top: 6.5vh;
-    left: 3vh;
+    top: 38.5%;
+    left: 6%;
+}
+
+.anime-nav {
+    text-decoration: none;
+    color: #fff;
 }
 
 .rate-fav-parent {
@@ -142,7 +147,6 @@
 
     .bg_img {
         min-height: 50vh;
-        /* height: auto; */
         width: 100%;
     }
 
@@ -152,15 +156,37 @@
     }
 
     .thumb {
-        min-height: 50vh;
-        min-width: 35vh;
-        width: 18%;
-        top: 30vh;
-        left: 14vh;
+        min-height: 21rem;
+        width: 15.25rem;
+        top: 60%;
+        left: 7.2%;
     }
 
     .rate-fav-parent {
         max-height: 50vh;
         margin-bottom: 5%;
+    }
+}
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+    .scale125 {
+        zoom: 0.8;
+    }
+
+    .bg_img {
+        min-height: 50vh;
+        width: 100%;
+    }
+
+    .content {
+        min-height: 50vh;
+        height: auto;
+    }
+
+    .thumb {
+        min-height: 21rem;
+        width: 15.25rem;
+        top: 60%;
+        left: 7.2%;
     }
 }

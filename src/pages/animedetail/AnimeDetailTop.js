@@ -20,8 +20,9 @@ const AnimeDetailTop = ({ anime }) => {
         backgroundPosition: "50% 20%",
         backgroundSize: "cover"
     }
+
     return (
-        <div className="row mx-0 w-100 anime-detail-top p-0">
+        <div className="row mx-0 w-100 anime-detail-top p-0 scale125">
 
             {/* Model to rating */}
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,9 +86,9 @@ const AnimeDetailTop = ({ anime }) => {
                 </div>
 
                 <div className="col-12 col-md-9 px-2 m-0 px-md-5">
-                    <div className="row">
+                    <div className="row h-100">
                         {/* Anime content */}
-                        <div className="col-12 h-50">
+                        <div className="col-12 h-auto h-md-75">
                             <p className="fw-bold m-0 pt-1 p-md-3 h5">
                                 {anime.animeName}
                             </p>
@@ -97,11 +98,11 @@ const AnimeDetailTop = ({ anime }) => {
                         </div>
 
                         {/* Nav bar in AnimeDetailTop */}
-                        <div className="col-12 h-25 p-2 d-flex flex-row justify-content-center">
+                        <div className="col-12 h-auto p-2 d-flex flex-row justify-content-center m-auto">
                             <p className="mx-3 mx-md-5">Overview</p>
-                            <p className="mx-3 mx-md-5">Characters</p>
-                            <p className="mx-3 mx-md-5">Rating</p>
-                            <p className="mx-3 mx-md-5">Review</p>
+                            <p className="mx-3 mx-md-5"><a href="#character" className="anime-nav">Characters</a></p>
+                            <p className="mx-3 mx-md-5"><a href="#trailer" className="anime-nav">Trailer</a></p>
+                            <p className="mx-3 mx-md-5"><a href="#review" className="anime-nav">Review</a></p>
                         </div>
                     </div>
                 </div>
