@@ -14,7 +14,10 @@ const modalConfigs = {
 const ProfileEdit = ({ currentUser, setCurrentUser }) => {
   // Modal state
   const [profileModalShow, setProfileModalShow] = useState(false);
-  const [modalProfile, setModalProfile] = useState({});
+  const [modalProfile, setModalProfile] = useState({
+    header: '',
+    content: ''
+  });
   const toggleModalProfile = (modalConfig) => {
     setModalProfile(modalConfig);
     setProfileModalShow(!profileModalShow);

@@ -6,10 +6,12 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+// import '@fortawesome/fontawesome-free/css/all.min.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "font-awesome/css/font-awesome.css";
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap';
+
 // Import Pages
 import Nav from './pages/nav/Nav';
 import Home from './pages/home/Home';

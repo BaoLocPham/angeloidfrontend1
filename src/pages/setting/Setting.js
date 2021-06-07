@@ -1,5 +1,5 @@
 // Import Libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Switch,
     Route
@@ -11,6 +11,7 @@ import PasswordSetting from './PasswordSetting';
 import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
+import AnimeManage from './AnimeManage';
 import './Setting.css';
 
 const Setting = ({ user }) => {
@@ -21,8 +22,9 @@ const Setting = ({ user }) => {
     const [currentUser, setCurrentUser] = useState({});
     const [base64Img, setBase64Img] = useState('');
 
-    useState(
+    useEffect(
         () => {
+            window.scrollTo(0, 0);
             fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/${user.userId}`)
                 .then(res => res.json())
                 .then(res => {
@@ -73,6 +75,10 @@ const Setting = ({ user }) => {
 
                     <Route path="/setting/anime/form">
                         <AnimeForm />
+                    </Route>
+
+                    <Route path="/setting/anime">
+                        <AnimeManage />
                     </Route>
 
                     <Route path="*">

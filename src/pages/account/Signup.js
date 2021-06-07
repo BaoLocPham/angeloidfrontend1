@@ -5,14 +5,9 @@ import { Link, Redirect } from 'react-router-dom';
 
 //local dependencies
 import './Login.css'
-import bg1 from './img/bg-04.jpg';
-import bg2 from './img/bg-02.jpg';
-import bg3 from './img/bg-03.jpg';
-import bg4 from './img/bg-05.jpg';
-import bg5 from './img/bg-06.jpg';
 import Modal from "./Modal";
 
-const Signup = () => {
+const Signup = ({ BackGround, Author, AuthorLink }) => {
 
     const [UserName, setUserName] = useState([]);
     const [Email, setEmail] = useState([]);
@@ -20,7 +15,6 @@ const Signup = () => {
     const [show, setShow] = useState(false);
     const [Message, setMessage] = useState([]);
     const [isRegistered, setIsRegistered] = useState(false);
-    const [random, setRandom] = useState([]);
 
 
     const hideModal = () => {
@@ -43,30 +37,6 @@ const Signup = () => {
         password: Password,
         email: Email,
     }
-    
-    const getImage = () => {
-        switch (random) {
-            case 1:
-                return bg1;
-            case 2:
-                return bg2;
-            case 3:
-                return bg3;    
-            case 4:
-                return bg4;
-            case 5:
-                return bg5;        
-        }
-    }
-    const BackGround =  {
-        backgroundImage: `url(${getImage()})`,
-    }
-    useEffect(() => {
-        setRandom((Math.floor(Math.random() * 5) + 1));
-    }, [])
-
-
-    
 
     // Tạm sài Alert cho đến khi sài được popup message
     const RegisterSubmit = (event) => {
@@ -103,9 +73,6 @@ const Signup = () => {
         }
     }
 
-
-
-
     if (isRegistered) {
         return <Redirect to="/account/login" />;
     }
@@ -132,7 +99,18 @@ const Signup = () => {
                         <h5>OR</h5>
                         <br />
                         <Link className="btn btn-login" to="/account/login"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Login</Link>
+
+
                     </div>
+                </div>
+
+                {/* Reference to author's background image */}
+                <div style={{
+                    position: "absolute",
+                    left: "2%",
+                    bottom: "3%"
+                }}>
+                    <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
                 </div>
             </div>
             <Modal show={show} handleClose={hideModal}>

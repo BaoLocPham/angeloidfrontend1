@@ -74,6 +74,8 @@ const PasswordSetting = ({ user }) => {
         // If Password Submit Button exist, disable it
         // Prevent too many request to the server
         passwordSubmitBtn.current.setAttribute("disabled", "disabled");
+        
+        // Request PUT Action to change Password
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/password/${user.userId}`, {
             method: "PUT",
             headers: {
@@ -84,7 +86,7 @@ const PasswordSetting = ({ user }) => {
                 oldPassword: md5(passwordForm.oldPass)
             })
         }).then(res => {
-            // Edited successfully
+            // Updated successfully
             if (res.status === 200) {
                 togglePasswordModal(modalConfigs.requestSucceed);
             }
@@ -110,7 +112,7 @@ const PasswordSetting = ({ user }) => {
                         popoverTitle="Invalid Password Format"
                         popoverContent={PASSWORD_MESSAGE}
                     >
-                        <label for="InputOldPassword" className="form-label">Old Password</label>
+                        <label htmlFor="InputOldPassword" className="form-label">Old Password</label>
                     </CustomedPopover>
                     <input
                         type="password" className="form-control" name="InputOldPassword"
@@ -124,7 +126,7 @@ const PasswordSetting = ({ user }) => {
                         popoverTitle="Invalid New Password"
                         popoverContent={PASSWORD_MESSAGE}
                     >
-                        <label for="InputNewPassword" className="form-label">New Password</label>
+                        <label htmlFor="InputNewPassword" className="form-label">New Password</label>
                     </CustomedPopover>
                     <input type="password" className="form-control" name="InputNewPassword"
                         onChange={(event) => handlePasswordFormChange({ newPass: event.target.value })}
@@ -137,7 +139,7 @@ const PasswordSetting = ({ user }) => {
                         popoverTitle="Invalid Password Confirmation"
                         popoverContent="New Password and Password Confirmation do not match!"
                     >
-                        <label for="InputReNewPassword" className="form-label">Re-New Password</label>
+                        <label htmlFor="InputReNewPassword" className="form-label">Re-New Password</label>
                     </CustomedPopover>
                     <input type="password" className="form-control" name="InputReNewPassword"
                         onChange={(event) => handlePasswordFormChange({ confirmPass: event.target.value })}
