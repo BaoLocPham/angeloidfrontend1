@@ -3,6 +3,7 @@
     height: 100vh;
     left: -100vw;
     transition: 1.5s;
+    z-index: 21;
 }
 
 .btn-left-nav {
@@ -13,6 +14,7 @@
     top: 30vh;
     transition: 1.5s;
     font-size: 18px;
+    z-index: 22;
 }
 
 .setting-nav.left-nav-active {
