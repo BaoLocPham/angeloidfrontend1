@@ -34,7 +34,10 @@ const PasswordSetting = ({ user }) => {
 
     // Modal state
     const [passwordModalShow, setPasswordModalShow] = useState(false);
-    const [passwordModal, setPasswordModal] = useState({});
+    const [passwordModal, setPasswordModal] = useState({
+        header: "",
+        body: ""
+    });
     const togglePasswordModal = (modalConfig) => {
         setPasswordModal(modalConfig);
         setPasswordModalShow(!passwordModalShow);

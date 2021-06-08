@@ -41,7 +41,7 @@ const App = () => {
   return (
     <Router>
       <div className="" style={{ width: "100vw" }}>
-        <Nav isLogin={isLogin} handleLogout={handleLogout} />
+        <Nav isLogin={isLogin} handleLogout={handleLogout} user={user} />
 
         {/* Choose pages to render */}
         <Switch>
@@ -66,7 +66,7 @@ const App = () => {
           </Route>
 
           <Route path='/thread'>
-            <Thread />
+            <Thread user={user} />
           </Route>
 
           <Route path='*'>
