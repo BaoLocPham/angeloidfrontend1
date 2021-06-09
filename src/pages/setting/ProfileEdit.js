@@ -5,9 +5,9 @@ import CustomedModal from '../components/Modal';
 // Const Variables
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const modalConfigs = {
-  validate: {header: "Alert", body: "Wrong Email format!!!"},
-  requestFailed: {header: "Failed", body: "Failed to send data to server!!!"},
-  requestSucceed: {header: "Succeed", body: "Update profile information successfully!!!"}
+  validate: { header: "Alert", body: "Wrong Email format!!!" },
+  requestFailed: { header: "Failed", body: "Failed to send data to server!!!" },
+  requestSucceed: { header: "Succeed", body: "Update profile information successfully!!!" }
 }
 
 

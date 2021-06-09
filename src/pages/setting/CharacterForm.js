@@ -60,7 +60,7 @@ const CharacterForm = ({ character, handleDeleteCharacter }) => {
     return (
         <div className="col-12 my-3">
             <div className="d-flex justify-content-end m-0">
-                <div onClick={() => handleDeleteCharacter(character.id)} type="button" className="btn btn-sm xButton text-center position-absolute"><i style={{ color: "white" }} className="fa fa-times"></i></div>
+                <div onClick={() => handleDeleteCharacter(character.id)} type="button" className="btn btn-sm DeleteCharacterButton text-center position-absolute"><i style={{ color: "white" }} className="fa fa-times"></i></div>
             </div>
             <div className="row justify-content-between mx-0">
                 {/* Character Info */}

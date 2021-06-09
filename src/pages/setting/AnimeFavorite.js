@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Favorite.css"
 import { Link } from 'react-router-dom';
 
 const AnimeFavorite = ({ anime, onDelete }) => {
@@ -19,7 +20,7 @@ const AnimeFavorite = ({ anime, onDelete }) => {
                     </Link>
                 </div>
                 {/* Delete Button */}
-                <div type="button" className="btn btn-sm xButton position-absolute" data-bs-toggle="modal" data-bs-target={`#deleteButton_${anime.Id}`}><i style={{ color: "white" }} className="fa fa-times"></i></div>
+                <div type="button" className="btn btn-sm DeleteFavoriteButton position-absolute" data-bs-toggle="modal" data-bs-target={`#deleteButton_${anime.Id}`}><i style={{ color: "white" }} className="fa fa-times"></i></div>
             </div>
 
             {/* Modal */}

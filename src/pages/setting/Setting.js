@@ -12,6 +12,7 @@ import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
 import AnimeManage from './AnimeManage';
+import UserManage from './UserManage';
 import './Setting.css';
 
 const Setting = ({ user }) => {
@@ -60,6 +61,10 @@ const Setting = ({ user }) => {
 
                     <Route path="/setting/anime">
                         <AnimeManage />
+                    </Route>
+
+                    <Route path="/setting/user">
+                        <UserManage />
                     </Route>
 
                     <Route path="*">
