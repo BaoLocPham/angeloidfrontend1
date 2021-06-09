@@ -47,15 +47,25 @@ const SettingNav = ({ showLeftNav, user }) => {
             </Link>
 
             {/* If user is Admin, show button to access management page */}
-            { user.isAdmin ? 
-            <Link to="/setting/anime"
+            { user.isAdmin ?
+            <>
+                <Link to="/setting/anime"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("anitable")}
+                    style={settingActive === "anitable" ? settingActiveStyle : {}}
+                >
+                    <i className="fa fa-folder-open fa-lg p-2"></i>
+                    <span className="p-2">Anime</span>
+                </Link>
+                <Link to="/setting/user"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                onClick={() => handleSettingActive("anitable")}
-                style={settingActive === "anitable" ? settingActiveStyle : {}}
-            >
-                <i className="fa fa-folder-open fa-lg p-2"></i>
-                <span className="p-2">Anime</span>
-            </Link>
+                onClick={() => handleSettingActive("usertable")}
+                style={settingActive === "usertable" ? settingActiveStyle : {}}
+                >
+                <i className="fa fa-users fa-lg p-2"></i>
+                <span className="p-2">User</span>
+                </Link>
+            </>
             : "" }
         </nav>
     );

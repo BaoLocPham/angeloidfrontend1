@@ -22,7 +22,7 @@ const ThreadPosting = ({ user }) => {
         backgroundImage: `url(data:image/*;base64,${user.avatar})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        backgroundSize: "40px 40px",
+        backgroundSize: "cover",
         width: 40,
         height: 40
     }
