@@ -6,7 +6,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
+// import '@fortawesome/fontawesome-free/css/all.min.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "font-awesome/css/font-awesome.css";
 import 'jquery';
@@ -41,7 +41,7 @@ const App = () => {
   return (
     <Router>
       <div className="" style={{ width: "100vw" }}>
-        <Nav isLogin={isLogin} handleLogout={handleLogout} />
+        <Nav isLogin={isLogin} handleLogout={handleLogout} user={user} />
 
         {/* Choose pages to render */}
         <Switch>
@@ -66,7 +66,7 @@ const App = () => {
           </Route>
 
           <Route path='/thread'>
-            <Thread />
+            <Thread user={user} />
           </Route>
 
           <Route path='*'>

@@ -2,22 +2,33 @@
 import React, { useRef, useState } from "react";
 import './ProfileEdit.css'
 import CustomedModal from '../components/Modal';
+import CustomedPopover from '../components/Popover';
 // Const Variables
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const modalConfigs = {
-  validate: { header: "Alert", body: "Wrong Email format!!!" },
-  requestFailed: { header: "Failed", body: "Failed to send data to server!!!" },
-  requestSucceed: { header: "Succeed", body: "Update profile information successfully!!!" }
+  requestFailed: {header: "Failed", body: "Failed to send data to server!!!"},
+  requestSucceed: {header: "Succeed", body: "Update profile information successfully!!!"}
 }
 
 
 const ProfileEdit = ({ currentUser, setCurrentUser }) => {
   // Modal state
   const [profileModalShow, setProfileModalShow] = useState(false);
-  const [modalProfile, setModalProfile] = useState({});
-  const toggleModal = (modalConfig) => {
+  const [modalProfile, setModalProfile] = useState({
+    header: '',
+    content: ''
+  });
+  const toggleModalProfile = (modalConfig) => {
     setModalProfile(modalConfig);
     setProfileModalShow(!profileModalShow);
+  }
+  // Popover state
+  const [profileEmailShow, setProfileEmailShow] = useState(false);
+  const togglePopover = () => {
+    setProfileEmailShow(true);
+  }
+  const dismissPopover = () => {
+    setProfileEmailShow(false);
   }
 
   // Ref to disable btn when user submit data
@@ -39,13 +50,13 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
 
     // Validate email
     if (!EMAIL_REGEX.test(currentUser.email)) {
-      toggleModal(modalConfigs.validate);
+      togglePopover();
       return;
     }
     // If Profile Submit Button exist, disable it
+    // Prevent too many request to the server
     if (profileSubmitBtn.current) {
       profileSubmitBtn.current.setAttribute("disabled", "disabled");
-      profileSubmitBtn.current.value = "Updating...";
     }
     fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/profile/${currentUser.userId}`, {
       method: "PUT",
@@ -56,11 +67,11 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
     }).then(res => {
       // Edited successfully
       if (res.status === 200) {
-        toggleModal(modalConfigs.requestSucceed);
+        toggleModalProfile(modalConfigs.requestSucceed);
       }
       // Error in back-end...
       else {
-        toggleModal(modalConfigs.requestFailed);
+        toggleModalProfile(modalConfigs.requestFailed);
       }
       // Enable submit btn
       profileSubmitBtn.current.removeAttribute("disabled");
@@ -79,8 +90,14 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
           </div>
           {/* Email Form*/}
           <div className="mb-3">
-            <label htmlFor="userEmail" className="form-label">Email</label>
-            <input type="email" className="form-control" id="userEmail" name="email" value={currentUser.email} onChange={handleEmailChange} />
+            <CustomedPopover
+              show={profileEmailShow}
+              popoverTitle="Invalid Email"
+              popoverContent="Please input valid email"
+            >
+              <label htmlFor="userEmail" className="form-label">Email</label>
+            </CustomedPopover>
+            <input type="email" className="form-control" id="userEmail" name="email" value={currentUser.email} onChange={handleEmailChange} onClick={dismissPopover} />
           </div>
           {/* Gender Select*/}
           <div className="mb-3">
@@ -99,7 +116,7 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
       <CustomedModal
         modalHeader={modalProfile.header}
         modalBody={modalProfile.body}
-        handleToggle={toggleModal}
+        handleToggle={toggleModalProfile}
         show={profileModalShow}
       />
     </>

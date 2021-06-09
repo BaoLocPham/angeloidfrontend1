@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const CharacterForm = ({ character, handleDeleteCharacter }) => {
+const CharacterForm = ({ character, handleDeleteCharacter, handleInputCharactersInfo }) => {
+    // Default image for character
     const [uploadCharacterImage, setUploadCharacterImage] = useState("https://s2.vndb.org/ch/97/62197.jpg");
     const [uploadSeiyuuImage, setUploadSeiyuuImage] = useState("http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=199083852");
 
@@ -15,7 +16,8 @@ const CharacterForm = ({ character, handleDeleteCharacter }) => {
         }
         let reader = new FileReader();
         reader.onload = function (e) {
-            console.log(e.target.result)
+            //Get base64 only
+            handleInputCharactersInfo({ characterImage: e.target.result.split(',')[1] }, character.id)
             setUploadCharacterImage(e.target.result);
         };
         reader.readAsDataURL(event.target.files[0]);
@@ -29,12 +31,14 @@ const CharacterForm = ({ character, handleDeleteCharacter }) => {
         }
         let reader = new FileReader();
         reader.onload = function (e) {
+            //Get base64 only
+            handleInputCharactersInfo({ seiyuu: { ...character.seiyuu, seiyuuImage: e.target.result.split(',')[1] } }, character.id)
             setUploadSeiyuuImage(e.target.result);
         };
         reader.readAsDataURL(event.target.files[0]);
     };
 
-
+    //Styling
     const characterImage = {
         backgroundImage: `url(${uploadCharacterImage})`,
         backgroundSize: 'cover',
@@ -68,18 +72,24 @@ const CharacterForm = ({ character, handleDeleteCharacter }) => {
                 <div className="col-3 p-1">
                     <div style={{ height: "50%" }}>
                         <label htmlFor="characterName" className="form-label">Character Name</label>
-                        <input type="text" className="form-control" id="characterName" name="characterName" />
+                        <input type="text" className="form-control" id="characterName" name="characterName"
+                            onChange={(event) => handleInputCharactersInfo({ characterName: event.target.value }, character.id)}
+                        />
                     </div>
                     <div style={{ height: "50%" }}>
                         <label htmlFor="characterRole" className="form-label">Character Role</label>
-                        <input type="text" className="form-control" id="characterRole" name="characterRole" />
+                        <input type="text" className="form-control" id="characterRole" name="characterRole"
+                            onChange={(event) => handleInputCharactersInfo({ characterRole: event.target.value }, character.id)}
+                        />
                     </div>
                 </div>
                 {/* Seiyuu Info */}
                 <div className="col-3 p-1">
                     <div style={{ height: "50%" }}>
                         <label htmlFor="seiyuuName" className="form-label">Seiyuu Name</label>
-                        <input type="text" className="form-control" id="seiyuuName" name="seiyuuName" />
+                        <input type="text" className="form-control" id="seiyuuName" name="seiyuuName"
+                            onChange={(event) => handleInputCharactersInfo({ seiyuu: { ...character.seiyuu, seiyuuName: event.target.value } }, character.id)}
+                        />
                     </div>
                 </div>
                 <input style={seiyuuImage} onChange={handleUploadSeiyuuImage} type="file" id="seiyuuImage" name="seiyuuImage" accept="image/x-png,image/gif,image/jpeg" />
