@@ -110,7 +110,7 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
                     left: "2%",
                     bottom: "3%"
                 }}>
-                    <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
+                    <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
                 </div>
             </div>
             <Modal show={show} handleClose={hideModal}>
