@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
-const CustomedModal = ({ modalHeader, modalBody, handleToggle, show }) => {
+const CustomedModal = ({ modalHeader, modalBody, handleToggle, show, deleteBtn }) => {
     return (
         <Modal
             show={show}
@@ -20,6 +20,11 @@ const CustomedModal = ({ modalHeader, modalBody, handleToggle, show }) => {
                 <Button variant="warning" onClick={handleToggle}>
                     Close
                 </Button>
+                { deleteBtn !== undefined ?
+                    <Button variant="danger" onClick={() => {deleteBtn.btnFunction(deleteBtn.idToDelete)}}>
+                        {deleteBtn.message}
+                    </Button>
+                : ""}
             </Modal.Footer>
         </Modal>
     );
