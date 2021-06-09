@@ -1,0 +1,21 @@
+.threadFixed {
+    position: fixed;
+    height: 100vh;
+}
+
+.threadAnimeList {
+    overflow-y: scroll;
+    right: 0%;
+}
+
+.threadCenter {
+    overflow-y: scroll;
+    right: 0%;
+}
+
+@media screen and (min-width: 768px) {
+    .threadCenter {
+    overflow-y: scroll;
+    right: 27%;
+}
+}

@@ -3,14 +3,16 @@ import ThreadSearch from './ThreadSearch';
 import ThreadPosting from './ThreadPosting';
 import ThreadList from './ThreadList';
 
-const ThreadCenter = ({ user }) => {
+const ThreadCenter = ({ user, isLogin }) => {
     return (
         <>
             <ThreadSearch />
-            {/* <ThreadPosting user={user} /> */}
+            { isLogin ? 
+                <ThreadPosting user={user} />
+            : <h5 className="p-3">Please Login to post something!!!</h5> }
             <ThreadList />
         </>
     );
 }
- 
+
 export default ThreadCenter;

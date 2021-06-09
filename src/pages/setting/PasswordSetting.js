@@ -76,8 +76,10 @@ const PasswordSetting = ({ user }) => {
 
         // If Password Submit Button exist, disable it
         // Prevent too many request to the server
-        passwordSubmitBtn.current.setAttribute("disabled", "disabled");
-        
+        if (passwordSubmitBtn.current) {
+            passwordSubmitBtn.current.setAttribute("disabled", "disabled");
+        }
+
         // Request PUT Action to change Password
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/password/${user.userId}`, {
             method: "PUT",
@@ -88,14 +90,15 @@ const PasswordSetting = ({ user }) => {
                 newPassword: md5(passwordForm.newPass),
                 oldPassword: md5(passwordForm.oldPass)
             })
-        }).then(res => {
+        }).then(async res => {
             // Updated successfully
             if (res.status === 200) {
                 togglePasswordModal(modalConfigs.requestSucceed);
             }
             // Error in back-end...
             else {
-                togglePasswordModal(modalConfigs.requestFailed);
+                let obj = await res.json();
+                togglePasswordModal({ header: "Error", body: obj.Message });
             }
         });
 

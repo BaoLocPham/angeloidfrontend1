@@ -1,10 +1,11 @@
+import userEvent from "@testing-library/user-event";
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
 import "./SettingNav.css";
 
-const SettingNav = ({ showLeftNav }) => {
+const SettingNav = ({ showLeftNav, user }) => {
     const settingActiveStyle = {
         backgroundColor: "#131E2A"
     }
@@ -44,30 +45,28 @@ const SettingNav = ({ showLeftNav }) => {
                 <i className="fa fa-heart fa-lg p-2"></i>
                 <span className="p-2">Favorite</span>
             </Link>
-            <Link to="/setting/anime/form"
+
+            {/* If user is Admin, show button to access management page */}
+            { user.isAdmin ?
+            <>
+                <Link to="/setting/anime"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("anitable")}
+                    style={settingActive === "anitable" ? settingActiveStyle : {}}
+                >
+                    <i className="fa fa-folder-open fa-lg p-2"></i>
+                    <span className="p-2">Anime</span>
+                </Link>
+                <Link to="/setting/user"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                onClick={() => handleSettingActive("aniform")}
-                style={ settingActive === "aniform" ? settingActiveStyle : {} }
-            >
-                <i className="fa fa-heart fa-lg p-2"></i>
-                <span className="p-2">Anime Form</span>
-            </Link>
-            <Link to="/setting/anime"
-                className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                onClick={() => handleSettingActive("anime")}
-                style={settingActive === "anime" ? settingActiveStyle : {}}
-            >
-                <i className="fa fa-heart fa-lg p-2"></i>
-                <span className="p-2">Anime</span>
-            </Link>
-            <Link to="/setting/user"
-                className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                onClick={() => handleSettingActive("user")}
-                style={settingActive === "user" ? settingActiveStyle : {}}
-            >
-                <i className="fa fa-heart fa-lg p-2"></i>
+                onClick={() => handleSettingActive("usertable")}
+                style={settingActive === "usertable" ? settingActiveStyle : {}}
+                >
+                <i className="fa fa-users fa-lg p-2"></i>
                 <span className="p-2">User</span>
-            </Link>
+                </Link>
+            </>
+            : "" }
         </nav>
     );
 };

@@ -7,6 +7,16 @@ const Nav = ({ isLogin, handleLogout, user }) => {
     // Show mobile nav when user click hamburger
     const [showMobileNav, setShowMobileNav] = useState(false);
 
+    const navAvatar = {
+        width: 40,
+        height: 40,
+        borderRadius: "100%",
+        backgroundImage: `url(data:image/*;base64,${user.avatar})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover"
+    }
+
     const navStyle = {
         backgroundColor: "rgba(25, 41, 59, 0.3)",
         position: "fixed",
@@ -50,8 +60,7 @@ const Nav = ({ isLogin, handleLogout, user }) => {
                     {isLogin ? <>
                         <li className="nav-item d-none d-md-inline-block me-2">
                             <Link to="/setting/profile" className="shadow-sm">
-                            <img className="img-fluid rounded-circle" style={{ width: "40px", height: "40px" }} 
-                                src={`data:image/*;base64,${user.avatar}`} alt="Avatar" />
+                            <div style={navAvatar}></div>
                             </Link>
                         </li>
                         <li className="nav-item px-3 d-none d-md-inline-block">

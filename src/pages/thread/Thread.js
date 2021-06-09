@@ -1,10 +1,15 @@
+//dependencies
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
+
+//local component
 import Advertisement from './Advertisement';
 import ThreadCenter from './ThreadCenter';
 import AnimeList from '../home/AnimeList';
 
-const Thread = ({ user }) => {
+import './Thread.css';
+
+const Thread = ({ user, isLogin }) => {
     //List of content anime
     const [thisSeasonAnime, setThisSeasonAnime] = useState([]);
     const [loadStatus, setLoadStatus] = useState(true);
@@ -29,14 +34,14 @@ const Thread = ({ user }) => {
     }
 
     return (
-        <div className="row pt-5 bg-dark-container">
+        <div className="row mx-0 pt-5 bg-dark-container w-100 threadFixed">
             <div className="d-none d-md-block col-md-3">
                 <Advertisement />
             </div>
-            <div className="col-12 col-md-6 px-4">
-                <ThreadCenter user={user} />
+            <div className="col-12 col-md-6 px-5 threadFixed threadCenter">
+                <ThreadCenter user={user} isLogin={isLogin} />
             </div>
-            <div className="d-none d-md-block col-md-3 px-5 py-3">
+            <div className="d-none d-md-block col-md-3 px-5 py-3 threadFixed threadAnimeList">
                 <AnimeList content="POPULAR THIS SEASON" isVertical={true} animeList={thisSeasonAnime} />
             </div>
         </div>
