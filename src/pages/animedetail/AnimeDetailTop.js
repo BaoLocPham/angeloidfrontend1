@@ -7,7 +7,7 @@ import './AnimeDetailTop.css';
 const AnimeDetailTop = ({ anime }) => {
     //Load background image
     const bacground_style = {
-        backgroundImage: `url("data:image/jpeg;base64,${anime.wallpaper}")`,
+        backgroundImage: `url("data:image/*;base64,${anime.wallpaper}")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 20%",
         backgroundSize: "cover"
@@ -15,7 +15,7 @@ const AnimeDetailTop = ({ anime }) => {
 
     //Load thumbnail image
     const thumb_style = {
-        backgroundImage: `url("data:image/jpeg;base64,${anime.thumbnail}")`,
+        backgroundImage: `url("data:image/*;base64,${anime.thumbnail}")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 20%",
         backgroundSize: "cover"

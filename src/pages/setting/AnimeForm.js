@@ -1,6 +1,22 @@
+//dependencies
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
+
+//style
 import './AnimeForm.css';
-import React, { useRef, useState } from 'react';
+
+//Child component
+import AnimeImageForm from './AnimeImageForm';
+import AnimeDetailForm from './AnimeDetailForm';
+import AnimeTagForm from './AnimeTagForm';
 import CharacterFormList from './CharacterFormList';
+
+// Model for notification
+import CustomedModal from '../components/Modal';
+const modalConfigs = {
+    inputFail: { header: "Failed", body: "Fail to add new anime please check your input carefully!" },
+    inputConnectError: { header: "Connection fail", body: "Fail to connect to server!" },
+}
 
 // Declare color code for tag background
 const colorList = [
@@ -13,22 +29,43 @@ const colorList = [
     { id: 7, colorCode: "#FF7171" },
 ]
 
-// Declare season name
-const seasons = [
-    { seasonId: 1, seasonName: "Spring" },
-    { seasonId: 2, seasonName: "Summer" },
-    { seasonId: 3, seasonName: "Autumn" },
-    { seasonId: 4, seasonName: "Winter" }
-]
-
 var characterId = 0;
 
 const AnimeForm = () => {
-    const [uploadThumbnail, setUploadThumbnail] = useState("https://steamuserimages-a.akamaihd.net/ugc/1625192018160506083/C15D4EA1F20C70D056721EF003BB703643EAFDF0/");
-    const [uploadWallpaper, setUploadWallpaper] = useState("https://steamuserimages-a.akamaihd.net/ugc/1755813918770084879/217A2F65616B66DC92206F403A2F6412BF7DD9E3/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
-    const [selectedTag, setSelectedTag] = useState([]);
+    //Model properties and method to call model
+    const [profileModalShow, setProfileModalShow] = useState(false);
+    const [modalProfile, setModalProfile] = useState({});
+    const toggleModal = (modalConfig) => {
+        setModalProfile(modalConfig);
+        setProfileModalShow(!profileModalShow);
+    }
 
-    // Handle Upload Thumbnail
+    const [defaultThumbnail, setDefaultThumbnail] = useState("https://steamuserimages-a.akamaihd.net/ugc/1625192018160506083/C15D4EA1F20C70D056721EF003BB703643EAFDF0/");
+    const [defaultWallpaper, setDefaultWallpaper] = useState("https://steamuserimages-a.akamaihd.net/ugc/1755813918770084879/217A2F65616B66DC92206F403A2F6412BF7DD9E3/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+
+    //all properties of anime input
+    const [uploadThumbnail, setUploadThumbnail] = useState("");
+    const [uploadWallpaper, setUploadWallpaper] = useState("");
+    const [selectedTag, setSelectedTag] = useState([]);
+    const [inputAnime, setInputAnime] = useState({
+        animeName: "",
+        content: "",
+        status: "",
+        trailer: "",
+        episodeDuration: "",
+        episode: "",
+        startDay: "",
+        web: "",
+        season: {
+            year: "",
+            seasonName: ""
+        },
+        studioId: ""
+    });
+    const [characters, setCharacter] = useState([]);
+    const [uploadStatus, setUploadStatus] = useState(false);
+
+    // Thumbnail upload
     const handleUploadThumbnail = (event) => {
         if (!event.target.files[0].type.match(/image.*/)) {
             alert('You can\'t upload this type of file.');
@@ -39,13 +76,13 @@ const AnimeForm = () => {
         }
         let reader = new FileReader();
         reader.onload = function (e) {
-            console.log(e.target.result)
-            setUploadThumbnail(e.target.result);
+            setUploadThumbnail(e.target.result.split(',')[1]);
+            setDefaultThumbnail(e.target.result);
         };
         reader.readAsDataURL(event.target.files[0]);
     };
 
-    // Handle Upload Wallpaper
+    // Wallpaper upload
     const handleUploadWallpaper = (event) => {
         if (!event.target.files[0].type.match(/image.*/)) {
             alert('You can\'t upload this type of file.');
@@ -56,47 +93,17 @@ const AnimeForm = () => {
         }
         let reader = new FileReader();
         reader.onload = function (e) {
-            setUploadWallpaper(e.target.result);
+            setUploadWallpaper(e.target.result.split(',')[1]);
+            setDefaultWallpaper(e.target.result);
         };
 
         reader.readAsDataURL(event.target.files[0]);
     };
 
-
-    const thumbnailImage = {
-        backgroundImage: `url(${uploadThumbnail})`,
-        backgroundSize: 'cover',
-        width: "30%",
-        height: '19rem',
-        backgroundPosition: "center",
-        cursor: "pointer",
-        marginLeft: "35%",
-        paddingTop: "19rem"
+    // Anime detail update
+    const handleInputAnime = (obj) => {
+        setInputAnime(Object.assign({}, inputAnime, obj));
     }
-
-    const wallpaperImage = {
-        backgroundImage: `url(${uploadWallpaper})`,
-        backgroundSize: 'cover',
-        width: "100%",
-        height: '19rem',
-        backgroundPosition: "center",
-        cursor: "pointer",
-        paddingTop: "19rem"
-    }
-
-    //Khởi tạo giá trị cho các input form (sau này sẽ lấy dữ liệu từ api)
-    const tags = [
-        { tagId: 0, tagName: "" },
-        { tagId: 1, tagName: "Isekai" },
-        { tagId: 2, tagName: "Slice of life" },
-        { tagId: 3, tagName: "School" },
-        { tagId: 4, tagName: "Fantasy" },
-        { tagId: 5, tagName: "Comedy" },
-        { tagId: 6, tagName: "Romance" },
-        { tagId: 7, tagName: "Action" },
-        { tagId: 8, tagName: "Drama" },
-        { tagId: 9, tagName: "School" }
-    ]
 
     // Set Random Background Color for Tag
     const setColor = () => {
@@ -111,7 +118,7 @@ const AnimeForm = () => {
     // Check selected tagId is duplicate with tagId in selectedTag
     const containTagId = (tagId) => {
         for (let tagItem of selectedTag) {
-            if (tagItem.tagId === tagId) {
+            if (tagItem.tagId == tagId) {
                 return true;
             }
         }
@@ -128,7 +135,7 @@ const AnimeForm = () => {
         return null;
     }
 
-    // Handle Add Selected Tag
+    // Add Selected Tag
     const handleSelectTag = (event) => {
         event.preventDefault();
         if (!containTagId(event.target.value)) {
@@ -136,13 +143,135 @@ const AnimeForm = () => {
         }
     }
 
-    // Handle Delete Selected Tag
+    // Delete Selected Tag
     const handleDeleteTag = (tagId) => {
         setSelectedTag(selectedTag.filter(tag => tag.tagId !== tagId))
     }
 
+    // Handle Add new Character
+    const handAddNewCharacter = () => {
+        setCharacter([
+            ...characters, {
+                id: characterId,
+                characterName: "",
+                characterRole: "",
+                characterImage: "",
+                seiyuu: {
+                    seiyuuName: "",
+                    seiyuuImage: ""
+                }
+            }
+        ])
+        characterId++;
+    }
+
+    // Handle Delete selected Character
+    const handleDeleteCharacter = (selectedId) => {
+        setCharacter(characters.filter(character => character.id !== selectedId));
+    }
+
+    const handleInputCharactersInfo = (obj, id) => {
+        setCharacter(prev => {
+            return prev.map(character => (
+                (character.id === id) ? Object.assign({}, character, obj) : character
+            ));
+        });
+    }
+
+    //List of content need to load from db
+    const [seasons, setSeason] = useState([]);
+    const [studios, setStudio] = useState([]);
+    const [tags, setTag] = useState([]);
+    const [loadStatus, setLoadStatus] = useState(true);
+
+    //Async fetch data when load form
+    const fetchAnimeRelateData = async () => {
+
+        //Fetch all season
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/season`,
+            { method: "GET" }
+        ).then(res => res.json())
+            .then(res => setSeason(res))
+            .catch(error => {
+                setLoadStatus(false);
+            });
+
+        // Fetch all tag
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/tag`,
+            { method: "GET" }
+        ).then(res => res.json())
+            .then(res => {
+                setTag(res)
+            })
+            .catch(error => {
+                setLoadStatus(false);
+            });
+
+        // Fetch all studio
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/studio`,
+            { method: "GET" }
+        ).then(res => res.json())
+            .then(res => setStudio(res))
+            .catch(error => {
+                setLoadStatus(false);
+            });
+    };
+
+    //Load data form db when page is loaded and Redirect to error page when load data fail
+    useEffect(() => {
+        //Call fetch anime
+        fetchAnimeRelateData();
+    }, [])
+
+    if (loadStatus === false) {
+        return (
+            <Redirect to='/Error' />
+        );
+    }
+
+    // Insert new anime and redirect or notify error to user
+    const handleClickUpdate = (event) => {
+        event.preventDefault();
+        
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime`,
+            { 
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ...inputAnime,
+                    thumbnail: uploadThumbnail,
+                    wallpaper: uploadWallpaper,
+                    tags: selectedTag,
+                    characters: characters
+                })
+            }
+        ).then(async res => {
+            //Fail to add
+            if (res.status === 409 || res.status === 500) {
+                toggleModal(modalConfigs.inputFail);
+                return;
+            }
+
+            //Add success
+            setUploadStatus(true);
+        })
+        .catch(error => {
+            //Connect fail
+            setLoadStatus(false);
+        });
+    }
+
+    if (uploadStatus === true) {
+        return (
+            <Redirect to='/setting/anime' />
+        );
+    }
+
+    //View of anime form
     return (
-        <div>
+        <div className="mb-5">
             {/* Mobile View */}
             <h1 style={{ color: "white", marginTop: "50%", marginLeft: "50%" }} className="d-block d-sm-block d-md-none d-lg-none d-xl-none"><b>Mở Desktop lên bạn</b></h1>
 
@@ -152,94 +281,50 @@ const AnimeForm = () => {
                 {/* Form Input Anime Info */}
                 <form>
                     <div className="row px-5">
-                        {/* Thumbnail */}
-                        <div>
-                            <h4><b>Thumbnail</b></h4>
-                            <input style={thumbnailImage} onChange={handleUploadThumbnail} type="file" id="thumbnail" name="thumbnail" accept="image/*" />
-                        </div>
+                        <AnimeImageForm
+                            defaultThumbnail={defaultThumbnail}
+                            handleUploadThumbnail={handleUploadThumbnail}
+                            defaultWallpaper={defaultWallpaper}
+                            handleUploadWallpaper={handleUploadWallpaper}
+                        />
 
-                        {/* Wallpaper */}
-                        <div>
-                            <h4><b>Wallpaper</b></h4>
-                            <input style={wallpaperImage} onChange={handleUploadWallpaper} type="file" id="wallpaper" name="wallpaper" accept="image/*" />
-                        </div>
+                        <AnimeDetailForm
+                            studios={studios}
+                            seasons={seasons}
+                            inputAnime={inputAnime}
+                            handleInputAnime={handleInputAnime}
+                        />
 
-                        {/* Anime Name */}
-                        <div className=" col-12 col-md-6 my-1">
-                            <label htmlFor="animeName" className="form-label">Anime Name</label>
-                            <input type="text" className="form-control" id="animeName" name="animeName" />
-                        </div>
+                        <AnimeTagForm
+                            tags={tags}
+                            selectedTag={selectedTag}
+                            handleSelectTag={handleSelectTag}
+                            handleDeleteTag={handleDeleteTag}
+                        />
 
-                        {/* Studio */}
-                        <div className=" col-12 col-md-6 my-1">
-                            <label htmlFor="studio" className="form-label">Studio</label>
-                            <input type="text" className="form-control" id="studio" name="studio" />
-                        </div>
-
-                        {/* Description */}
-                        <div class=" col-12 col-md-6 my-1">
-                            <label htmlfor="description" class="form-label">Description</label>
-                            <textarea className="form-control" id="description" rows="9"></textarea>
-                        </div>
-                        <div class=" col-12 col-md-6">
-
-                            {/* Episodes */}
-                            <div className="my-1">
-                                <label htmlFor="episodes" className="form-label">Episodes</label>
-                                <input type="text" className="form-control" id="episodes" name="episodes" />
-                            </div>
-
-                            {/* Duration */}
-                            <div className="my-1">
-                                <label htmlFor="duration" className="form-label">Duration</label>
-                                <input type="text" className="form-control" id="duration" name="duration" />
-                            </div>
-
-                            {/* Season */}
-                            <div className="my-1">
-                                <label htmlFor="duration" className="form-label">Season</label>
-                                <select className="form-select" aria-label="Default select example">
-                                    {seasons.map(season =>
-                                        <option key={season.seasonId} value={season.seasonId}>{season.seasonName}</option>
-                                    )}
-                                </select>
-                            </div>
-
-                            {/* Year */}
-                            <div className="my-1">
-                                <label htmlFor="year" className="form-label">Year</label>
-                                <input type="text" className="form-control" id="year" name="year" />
-                            </div>
-                        </div>
-
-                        {/* Select Tag */}
-                        <div className="col-12 col-md-6">
-                            <label htmlFor="duration" className="form-label">Tag</label>
-                            <select value="" className="form-select" defaultValue={""} onChange={handleSelectTag} aria-label="Default select example">
-                                <option hidden disabled value=""></option>
-                                {tags.slice(1).map(tag => (
-                                    <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>
-                                ))}
-                            </select>
-                        </div>
-                        {/* Show Tag */}
-                        <div className="p-0 mt-3">
-                            {selectedTag.map(tag =>
-                                <div key={tag.tagId} style={{ color: "white", backgroundColor: tag.tagBgColor }} className="btn rounded-pill mx-2 mb-2 mx-md-3 mb-md-3">{tag.tagName}<i onClick={() => handleDeleteTag(tag.tagId)} className="ms-2 fa fa-times"></i></div>
-                            )}
-                        </div>
-
-                        {/* Character */}
-                        <CharacterFormList />
+                        <CharacterFormList
+                            characters={characters}
+                            handAddNewCharacter={handAddNewCharacter}
+                            handleInputCharactersInfo={handleInputCharactersInfo}
+                            handleDeleteCharacter={handleDeleteCharacter}
+                        />
 
                         {/* Upload Button */}
                         <div className="my-3 d-flex justify-content-end">
-                            <button type="submit" className="UploadButton btn">Upload</button>
+                            <button type="submit" className="UploadButton btn" onClick={handleClickUpdate}>Upload</button>
                         </div>
 
                     </div>
                 </form>
             </div>
+
+            {/* Model to notify to user */}
+            <CustomedModal
+                modalHeader={modalProfile.header}
+                modalBody={modalProfile.body}
+                handleToggle={toggleModal}
+                show={profileModalShow}
+            />
         </div>
     );
 }
