@@ -49,6 +49,7 @@
 .btn-login {
     color: #fff;
     cursor: pointer;
+    background-color: #14A38B;   
     font-size: 16px;
     font-weight: 400;
     line-height: 45px;
@@ -59,23 +60,24 @@
 }
 
 .btn-login svg {
-    height: 45px;
-    left: 0;
+    height: 58px;
+    left: 0px;
     position: absolute;
-    top: 5px;
-    width: 100%;
+    /* top: 5px; */
+    bottom: 0px;
+    width: 101%;
 }
 
 .btn-login rect {
     fill: none;
     stroke: #fff;
-    stroke-width: 2;
+    stroke-width: 4;
     stroke-dasharray: 422, 0;
     transition: all 0.35s linear;
 }
 
 .btn-login:hover {
-    background: rgba(214, 213, 213, 0);
+    background: #14A38B;
     font-weight: 900;
     letter-spacing: 1px;
     color: white;

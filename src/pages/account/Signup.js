@@ -38,7 +38,7 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
         email: Email,
     }
 
-    // Tạm sài Alert cho đến khi sài được popup message
+    // Đã sài được Modal
     const RegisterSubmit = (event) => {
         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
         var userpatterm = new RegExp("^[A-z][A-z|\.|\s]+$");
@@ -93,12 +93,12 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
                             <input type="password" className="input-password" name="re-password" placeholder="Re-Enter Password"></input>
                             <br />
                             <br />
-                            <button className="btn btn-login" onClick={RegisterSubmit}><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Signup</button>
+                            <button className="btn btn-login" onClick={RegisterSubmit}>Signup</button>
                             <br />
                         </form>
                         <h5>OR</h5>
                         <br />
-                        <Link className="btn btn-login" to="/account/login"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Login</Link>
+                        <Link className="btn btn-login" to="/account/login">Login</Link>
 
 
                     </div>
@@ -121,3 +121,5 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
 }
 
 export default Signup;
+
+//  <svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>
