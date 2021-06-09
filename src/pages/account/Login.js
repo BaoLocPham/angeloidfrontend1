@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import FacebookR from './Login/FacebookR';
 import md5 from 'md5';
+
 // for user response when input worng format or wrong username password. credit Bắp.
 import CustomedPopover from '../components/Popover';
 import CustomedModal from '../components/Modal';
@@ -20,7 +21,7 @@ const REGEX_PASSWORD = new RegExp("^[a-zA-Z0-9!@#$%^&*]{5,32}$");
 const USERNAME_FORMAT = `Only contains alphanumeric characters, underscore and dot`;
 const PASSWORD_FORMAT = `Password length is between 5 to 32 and can only contains lowercase/uppercase alphabet characters, number and some special characters: !@#$%^&*`;
 
-const Login = ({ setUser, isLogin, BackGround, Author, AuthorLink }) => {
+const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) => {
     // Form States
     const [loginForm, setLoginForm] = useState({
         username: '',
@@ -81,7 +82,10 @@ const Login = ({ setUser, isLogin, BackGround, Author, AuthorLink }) => {
             .then(res => res.json())
             .then(res => {
                 if (res.status != 404) {// if login success
+                    let expires = new Date()
+                    expires.setTime(expires.getTime() + (1000000000));
                     setUser(res);
+                    setCookie("user",{userId:res.userId, isAdmin:res.isAdmin},{path:"/", expires:expires});
                 } else {// feedback to user username or password is wrong
                     toggleLoginModal();
                 }
@@ -134,19 +138,19 @@ const Login = ({ setUser, isLogin, BackGround, Author, AuthorLink }) => {
                                 id="password" name="password" placeholder="Enter Password"></input>
                             <br />
                             <br />
-                            <button type="button" ref={loginSubmitBtn}
+                            <button type="submit" ref={loginSubmitBtn}
                                 onClick={handleSubmitLogin} className="btn btn-login" ><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg> Login</button>
                             <br />
                             <br />
                             <h5>OR</h5>
-                            <br />
-                            <Link className="btn btn-login" to="/account/signup"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Register</Link>
                         </form>
+                        <br />
+                            <Link className="btn btn-login" to="/account/signup"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Register</Link>
                     </div>
                 </div>
             </div>
             <CustomedModal
-                modalHeader="注意"
+                modalHeader="Attention"
                 modalBody="Your username or password is incorrect!!!"
                 handleToggle={toggleLoginModal}
                 show={loginModalShow}
