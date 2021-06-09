@@ -3,11 +3,11 @@ import ThreadSearch from './ThreadSearch';
 import ThreadPosting from './ThreadPosting';
 import ThreadList from './ThreadList';
 
-const ThreadCenter = () => {
+const ThreadCenter = ({ user }) => {
     return (
         <>
             <ThreadSearch />
-            <ThreadPosting />
+            <ThreadPosting user={user} />
             <ThreadList />
         </>
     );
