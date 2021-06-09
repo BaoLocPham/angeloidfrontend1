@@ -3,11 +3,13 @@ import React, { useRef, useState } from "react";
 import './ProfileEdit.css'
 import CustomedModal from '../components/Modal';
 import CustomedPopover from '../components/Popover';
+
 // Const Variables
+// const FULLNAME_REGEX = /^[a-zA-Z0-9!@#$%^&*]{5,32}$/;
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const modalConfigs = {
   requestFailed: {header: "Failed", body: "Failed to send data to server!!!"},
-  requestSucceed: {header: "Succeed", body: "Update profile information successfully!!!"}
+  requestSucceed: {header: "Succeed", body: "Profile information updated successfully!!!"}
 }
 
 
@@ -35,13 +37,8 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
   let profileSubmitBtn = useRef();
 
   // Handle user email inputing
-  const handleEmailChange = (event) => {
-    setCurrentUser(prev => ({ ...prev, email: event.target.value }));
-  }
-
-  // Handle user gender choosing
-  const handleGenderChange = (event) => {
-    setCurrentUser(prev => ({ ...prev, gender: event.target.value }));
+  const handleProfileChange = (obj) => {
+    setCurrentUser(Object.assign({}, currentUser, obj));
   }
 
   const handleSubmitProfileForm = (event) => {
@@ -64,18 +61,16 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(currentUser)
-    }).then(res => {
-      // Edited successfully
+    }).then(async (res) => {
       if (res.status === 200) {
         toggleModalProfile(modalConfigs.requestSucceed);
+      } else {
+        let obj = await res.json();
+        toggleModalProfile({ header: "Error", body: obj.Message })
       }
-      // Error in back-end...
-      else {
-        toggleModalProfile(modalConfigs.requestFailed);
-      }
-      // Enable submit btn
+
       profileSubmitBtn.current.removeAttribute("disabled");
-    });
+    })
   }
 
   return (
@@ -86,7 +81,10 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
           {/* User Name Form */}
           <div className="mb-3">
             <label htmlFor="userFullName" className="form-label">Full Name</label>
-            <input type="text" className="form-control" id="userFullName" name="userFullName" />
+            <input type="text" className="form-control" id="userFullName" name="userFullName" 
+              value={currentUser.fullname}
+              onChange={(event) => handleProfileChange({ fullname: event.target.value })}
+            />
           </div>
           {/* Email Form*/}
           <div className="mb-3">
@@ -97,12 +95,16 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
             >
               <label htmlFor="userEmail" className="form-label">Email</label>
             </CustomedPopover>
-            <input type="email" className="form-control" id="userEmail" name="email" value={currentUser.email} onChange={handleEmailChange} onClick={dismissPopover} />
+            <input type="email" className="form-control" id="userEmail" name="email"
+              value={currentUser.email}
+              onChange={(event) => handleProfileChange({ email: event.target.value })}
+              onClick={dismissPopover}
+            />
           </div>
           {/* Gender Select*/}
           <div className="mb-3">
             <label htmlFor="userGender" className="form-label">Gender</label>
-            <select name="gender" id="userGender" className="ProfileEdit-Select form-select" onChange={handleGenderChange} defaultValue={currentUser.gender} value={currentUser.gender} >
+            <select name="gender" id="userGender" className="ProfileEdit-Select form-select" onChange={(event) => handleProfileChange({ gender: event.target.value })} defaultValue={currentUser.gender} value={currentUser.gender} >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="None">None</option>
