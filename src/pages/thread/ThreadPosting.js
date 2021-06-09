@@ -77,12 +77,13 @@ const ThreadPosting = ({ user }) => {
         <>
             <form className="my-3 p-2 d-flex flex-column rounded-3 bg-dark-content">
                 {/* Posting Header (Avatar & Tít le) */}
-                <div class="d-flex flex-row p-2 align-items-center">
+                <div className="d-flex flex-row p-2 align-items-center">
                     <div className="rounded-circle" style={POSTING_AVATAR}></div>
                     <input type="text" className="ms-3 form-control w-50" placeholder="Your tít le"
                         style={INPUT_FIELDS_STYLE}
                         value={postingForm.title}
                         onChange={(event) => handlePostingFormChange({ title: event.target.value })}
+                        name="posting-title"
                     />
                 </div>
 

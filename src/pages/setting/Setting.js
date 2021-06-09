@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import {
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 // Import Components
 import SettingNav from './SettingNav';
@@ -14,7 +15,7 @@ import AnimeForm from './AnimeForm';
 import AnimeManage from './AnimeManage';
 import './Setting.css';
 
-const Setting = ({ user }) => {
+const Setting = ({ user, setUser, isLogin }) => {
     const [showLeftNav, setShowLeftNav] = useState(false);
 
     const handleToggleLeftNavButton = () => setShowLeftNav(!showLeftNav);
@@ -34,12 +35,16 @@ const Setting = ({ user }) => {
         }, []
     );
 
+    if (!isLogin) {
+        return <Redirect to="/error" />
+    }
+
     return (
         <div className="row setting-container">
 
             {/* Left content */}
             <div className="setting-left">
-                <SettingNav showLeftNav={showLeftNav} />
+                <SettingNav showLeftNav={showLeftNav} user={user} />
 
                 {/* Button to show Setting Left Nav on Mobile */}
                 <button
@@ -56,6 +61,7 @@ const Setting = ({ user }) => {
                     <Route path="/setting/profile">
                         <Profile
                             user={user}
+                            setUser={setUser}
                             currentUser={currentUser}
                             setCurrentUser={setCurrentUser}
                             base64Img={base64Img}
@@ -73,13 +79,23 @@ const Setting = ({ user }) => {
                         <FavoriteList />
                     </Route>
 
-                    <Route path="/setting/anime/form">
-                        <AnimeForm />
-                    </Route>
+                    { user.isAdmin ?
+                        <>
+                            <Route path="/setting/anime/form" exact>
+                                <AnimeForm />
+                            </Route>
 
-                    <Route path="/setting/anime">
-                        <AnimeManage />
-                    </Route>
+                            <Route path="/setting/anime/form/*">
+                                <AnimeForm />
+                            </Route>
+                        
+
+                            <Route path="/setting/anime">
+                                <AnimeManage />
+                            </Route>
+                        </>
+                        : ""
+                    }
 
                     <Route path="*">
                         <Error />

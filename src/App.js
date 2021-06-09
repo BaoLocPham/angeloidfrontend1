@@ -62,11 +62,11 @@ const App = () => {
           </Route>
 
           <Route path='/setting'>
-            <Setting user={user} />
+            <Setting user={user} setUser={setUser} isLogin={isLogin} />
           </Route>
 
           <Route path='/thread'>
-            <Thread user={user} />
+            <Thread user={user} isLogin={isLogin} />
           </Route>
 
           <Route path='*'>

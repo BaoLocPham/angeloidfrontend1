@@ -3,7 +3,7 @@ import Advertisement from './Advertisement';
 import ThreadCenter from './ThreadCenter';
 import ThreadAnimeList from './ThreadAnimeList';
 
-const Thread = ({ user }) => {
+const Thread = ({ user, isLogin }) => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -14,7 +14,7 @@ const Thread = ({ user }) => {
                 <Advertisement />
             </div>
             <div className="col-12 col-md-6 px-4">
-                <ThreadCenter user={user} />
+                <ThreadCenter user={user} isLogin={isLogin} />
             </div>
             <div className="d-none d-md-block col-md-3">
                 <ThreadAnimeList />
