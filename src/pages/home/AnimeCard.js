@@ -33,7 +33,7 @@ const AnimeCard = ({ anime, isVertical, count }) => {
                     <ReactTooltip place="left" id={`${anime.animeId}`} type="">
                         <AnimeTooltip anime={anime} />
                     </ReactTooltip>
-                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem" }}>{anime.animeName}</h6>
                 </Link>
             </div>
         );
@@ -48,12 +48,12 @@ const AnimeCard = ({ anime, isVertical, count }) => {
                     <ReactTooltip place="right" id={`${anime.animeId}`}>
                         <AnimeTooltip anime={anime} />
                     </ReactTooltip>
-                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem" }}>{anime.animeName}</h6>
                 </Link>
             </div>
         );
-    } 
-    
+    }
+
     // Display for mobile app
     else {
         return (
@@ -64,7 +64,7 @@ const AnimeCard = ({ anime, isVertical, count }) => {
                     <ReactTooltip key={anime.animeId} place="left" id={`${anime.animeId}`} type="">
                         <AnimeTooltip key={anime.animeId} anime={anime} />
                     </ReactTooltip>
-                    <h6 style={{ color: "#fff", paddingTop: "1rem"}}>{anime.animeName}</h6>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem" }}>{anime.animeName}</h6>
                 </Link>
             </div>
 

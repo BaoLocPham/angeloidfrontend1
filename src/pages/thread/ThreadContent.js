@@ -3,13 +3,7 @@ import React from 'react';
 
 import wall from './image/75117132_p0.jpg';
 
-const content = {
-    title: "Anime ga sukidesu",
-    content: "Anyone know this character. I see this on the internet.",
-    image:""
-}
-
-const ThreadContent = () => {
+const ThreadContent = ({content}) => {
 
     // Styles
     const POSTING_AVATAR = {
@@ -19,16 +13,6 @@ const ThreadContent = () => {
         backgroundSize: "40px 40px",
         width: 40,
         height: 40
-    }
-    const IMG_CLOSE_BTN = {
-        position: "absolute",
-        zIndex: "2",
-        width: 36,
-        height: 36
-    }
-    const INPUT_FIELDS_STYLE = {
-        backgroundColor: "#19293B",
-        color: "#FFF"
     }
 
     return (  

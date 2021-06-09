@@ -6,7 +6,7 @@ const AnimeTooltip = ({ anime }) => {
             <p>{anime.studio.studioName}</p>
             <p>{anime.format} - <br /> {(anime.episode === "null") ? "Comming soon" : anime.episode}</p>
             <div>
-                {
+                {   (anime === undefined) ? '' :
                     anime.tags.map(tag => (
                         <div key={tag.tagId} 
                             style={{ backgroundColor: "orange", 
