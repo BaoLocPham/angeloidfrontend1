@@ -1,6 +1,6 @@
 import './App.css';
 // Import Libraries
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,25 +23,59 @@ import Thread from './pages/thread/Thread';
 import Error from './pages/error/Error';
 import Footer from './pages/footer/Footer';
 
-const App = () => {
-  const [isLogin, setIsLogin] = useState(true);
+// using cookies
+import { useCookies } from 'react-cookie';
 
+const App = () => {
+  // isLogin state
+  const [isLogin, setIsLogin] = useState(true);
+  // Cookies state
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  //user state
   const [user, setUser] = useState({});
 
-  useEffect(() => {
+  useEffect(() => {// call when start up website
+    if (cookies.user == undefined) {// if there is no cookies
+      setIsLogin(false);
+    } else {
+      // fetch user data
+      fetch(
+        `${process.env.REACT_APP_BACKEND_URL}api/user/${cookies.user.userId}`,
+        {
+          method: "GET",
+          headers: { 'Content-Type': 'application/json'}
+        }
+      )
+        .then(res => res.json())
+        .then(res => {
+          if (res.status != 404) {// if login success
+            let expires = new Date()
+            expires.setTime(expires.getTime() + (1000000000)); // set time expires of the cookies
+            setUser(res);
+            setCookie("user", { userId: res.userId, isAdmin: res.isAdmin }, { path: "/", expires: expires });
+          }
+        });
+      user.userId === undefined ? setIsLogin(false) : setIsLogin(true);
+    }
+  }, []
+  );
 
-    user.userId === undefined ? setIsLogin(false) : setIsLogin(true);
+  useEffect(() => {// when change user state
+    {
+      user.userId === undefined ? setIsLogin(false) : setIsLogin(true);
+    }
   }, [user]
   );
 
-  const handleLogout = () => {
+  const handleLogout = () => {// logout
+    removeCookie("user");// remove cookies
     setIsLogin(false);
   }
 
   return (
     <Router>
       <div className="" style={{ width: "100vw" }}>
-        <Nav isLogin={isLogin} handleLogout={handleLogout} user={user} />
+        <Nav isLogin={isLogin} handleLogout={handleLogout} user={user}/>
 
         {/* Choose pages to render */}
         <Switch>
@@ -58,7 +92,7 @@ const App = () => {
           </Route>
 
           <Route path='/account'>
-            <Account setUser={setUser} isLogin={isLogin} />
+            <Account setUser={setUser} isLogin={isLogin} setCookie={setCookie} />
           </Route>
 
           <Route path='/setting'>
@@ -66,7 +100,7 @@ const App = () => {
           </Route>
 
           <Route path='/thread'>
-            <Thread user={user} />
+            <Thread />
           </Route>
 
           <Route path='*'>

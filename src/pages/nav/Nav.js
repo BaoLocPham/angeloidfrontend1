@@ -50,7 +50,8 @@ const Nav = ({ isLogin, handleLogout, user }) => {
                     {isLogin ? <>
                         <li className="nav-item d-none d-md-inline-block me-2">
                             <Link to="/setting/profile" className="shadow-sm">
-                                <img className="img-fluid rounded-circle" style={{ width: "40px", height: "40px" }} src={`data:image/*;base64,${user.avatar}`} alt="Avatar" />
+                            <img className="img-fluid rounded-circle" style={{ width: "40px", height: "40px" }} 
+                                src={`data:image/*;base64,${user.avatar}`} alt="Avatar" />
                             </Link>
                         </li>
                         <li className="nav-item px-3 d-none d-md-inline-block">
