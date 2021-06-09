@@ -2,20 +2,7 @@ import React, { useState } from 'react';
 import ProfileEdit from './ProfileEdit';
 import Avatar from './Avatar';
 
-const Profile = ({ user }) => {
-    const [currentUser, setCurrentUser] = useState({});
-    const [base64Img, setBase64Img] = useState('');
-
-    useState(
-        () => {
-            fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/${user.userId}`)
-            .then(res => res.json())
-            .then(res => {
-                setCurrentUser(res);
-                setBase64Img('data:image/*;base64,' + res.avatar);
-            });
-        }, []
-    );
+const Profile = ({ user, currentUser, setCurrentUser, base64Img, setBase64Img }) => {
 
     return (
         <div className="row d-flex flex-column-reverse flex-md-row w-100 justify-content-center align-items-center">
