@@ -27,7 +27,7 @@ const AnimeCard = ({ anime, isVertical, count }) => {
     //Vertical view
     if (isVertical) {
         return (
-            <div className="col-12">
+            <div className="col-12 py-2">
                 <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
                     <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
                     <ReactTooltip place="left" id={`${anime.animeId}`} type="">

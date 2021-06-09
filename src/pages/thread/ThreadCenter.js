@@ -7,7 +7,7 @@ const ThreadCenter = ({ user }) => {
     return (
         <>
             <ThreadSearch />
-            <ThreadPosting user={user} />
+            {/* <ThreadPosting user={user} /> */}
             <ThreadList />
         </>
     );

@@ -1,11 +1,13 @@
 import React from 'react';
 
+import ThreadContent from './ThreadContent'
+
 const ThreadList = () => {
     return (
         <div>
-            I am ThreadList!
+            <ThreadContent />
         </div>
     );
 }
- 
+
 export default ThreadList;
