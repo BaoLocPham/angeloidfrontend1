@@ -34,11 +34,11 @@ const Thread = ({ user, isLogin }) => {
     }
 
     return (
-        <div className="row mx-0 pt-5 bg-dark-container w-100 threadFixed">
+        <div className="row mx-0 pt-5 bg-dark-container w-100">
             <div className="d-none d-md-block col-md-3">
                 <Advertisement />
             </div>
-            <div className="col-12 col-md-6 px-5 threadFixed threadCenter">
+            <div className="col-12 col-md-6 px-5">
                 <ThreadCenter user={user} isLogin={isLogin} />
             </div>
             <div className="d-none d-md-block col-md-3 px-5 py-3 threadFixed threadAnimeList">

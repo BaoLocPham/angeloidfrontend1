@@ -15,7 +15,10 @@ const SearchResult = () => {
         { animeId: 4, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
         { animeId: 5, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
         { animeId: 6, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
-        { animeId: 7, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] }
+        { animeId: 7, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 8, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 8, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 10, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] }
     ];
 
     return (
