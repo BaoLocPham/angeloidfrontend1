@@ -14,5 +14,5 @@ const ThreadCenter = ({ user, isLogin }) => {
         </>
     );
 }
- 
+
 export default ThreadCenter;
