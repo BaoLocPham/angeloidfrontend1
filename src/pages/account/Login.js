@@ -65,7 +65,7 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
         {
             username: loginForm.username,
             // md5 encryption for password
-            password: loginForm.password
+            password: md5(loginForm.password)
         }
 
         // Prevent too many request to the server
