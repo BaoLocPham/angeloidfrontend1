@@ -8,8 +8,8 @@ import CustomedPopover from '../components/Popover';
 // const FULLNAME_REGEX = /^[a-zA-Z0-9!@#$%^&*]{5,32}$/;
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const modalConfigs = {
-  requestFailed: {header: "Failed", body: "Failed to send data to server!!!"},
-  requestSucceed: {header: "Succeed", body: "Profile information updated successfully!!!"}
+  requestFailed: { header: "Failed", body: "Failed to send data to server!!!" },
+  requestSucceed: { header: "Succeed", body: "Profile information updated successfully!!!" }
 }
 
 
@@ -81,7 +81,7 @@ const ProfileEdit = ({ currentUser, setCurrentUser }) => {
           {/* User Name Form */}
           <div className="mb-3">
             <label htmlFor="userFullName" className="form-label">Full Name</label>
-            <input type="text" className="form-control" id="userFullName" name="userFullName" 
+            <input type="text" className="form-control" id="userFullName" name="userFullName"
               value={currentUser.fullname}
               onChange={(event) => handleProfileChange({ fullname: event.target.value })}
             />
