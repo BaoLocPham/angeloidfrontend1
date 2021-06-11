@@ -71,6 +71,7 @@ const ForgotPassword = () => {
                             <h5>Enter your email below to recover your password</h5>
                             <br />
                             <br />
+<<<<<<< HEAD
                             {/* Input Email Form */}
                             <form>
                                 <CustomedPopover
@@ -93,6 +94,10 @@ const ForgotPassword = () => {
                                 ><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Continue</button>
                             </form>
                         </div>
+=======
+                            <Link className="btn btn-login" to="/account/signup">Continue</Link>
+                        </form>
+>>>>>>> 51ce8ec474c0c7a7e6f328fa48b7a02fa5bfa59a
                     </div>
                 </div>
             </div>
