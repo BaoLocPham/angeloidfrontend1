@@ -90,7 +90,7 @@ const ForgotPassword = () => {
                                 <button className="btn btn-login"
                                     ref={submitBtn}
                                     onClick={handleSubmitEmail}
-                                ><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Continue</button>
+                                >Continue</button>
                             </form>
                         </div>
                     </div>
