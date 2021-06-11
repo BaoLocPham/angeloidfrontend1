@@ -80,7 +80,7 @@ const Setting = ({ user, setUser, isLogin }) => {
                         <FavoriteList />
                     </Route>
 
-                    { user.isAdmin ?
+                    {user.isAdmin ?
                         <>
                             <Route path="/setting/anime" exact>
                                 <AnimeManage />
@@ -93,13 +93,13 @@ const Setting = ({ user, setUser, isLogin }) => {
                             <Route path="/setting/anime/form/:animeId">
                                 <AnimeForm />
                             </Route>
+                            
+                            <Route path="/setting/user">
+                                <UserManage />
+                            </Route>
                         </>
                         : ""
                     }
-
-                    <Route path="/setting/user">
-                        <UserManage />
-                    </Route>
 
                     <Route path="*">
                         <Error />

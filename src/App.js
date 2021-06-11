@@ -28,7 +28,7 @@ import { useCookies } from 'react-cookie';
 
 const App = () => {
   // isLogin state
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   // Cookies state
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   //user state
@@ -61,9 +61,7 @@ const App = () => {
   );
 
   useEffect(() => {// when change user state
-    {
       user.userId === undefined ? setIsLogin(false) : setIsLogin(true);
-    }
   }, [user]
   );
 
