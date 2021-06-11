@@ -3,7 +3,7 @@ import "./Avatar.css";
 import CustomedModal from '../components/Modal';
 
 
-const Avatar = ({ currentUser, base64Img, setBase64Img }) => {
+const Avatar = ({ user, currentUser, base64Img, setBase64Img, setUser }) => {
     const wrapper = {
         backgroundColor: "#19293B",
         borderRadius: "5%",
@@ -65,7 +65,10 @@ const Avatar = ({ currentUser, base64Img, setBase64Img }) => {
                 })
             })
             .then(res => {
-                if (res.status == 200) { setBase64Img(reader.result); }
+                if (res.status == 200) {
+                    setBase64Img(reader.result);
+                    setUser({... user, avatar: reader.result.split(',')[1] })
+                }
             });
         }
     }

@@ -38,7 +38,7 @@ const AnimeList = ({ content, isVertical, animeList }) => {
         return (
             <div style={{ backgroundColor: "#131E2A", color: "#fff" }}>
                 <div>
-                    <h5 style={{ display: "inline-block", width: "50%" }}>{content}</h5>
+                    <h5 className="pb-3 text-center" style={{ display: "inline-block", width: "100%" }}>{content}</h5>
                 </div>
                 <div className="row" style={{ textAlign: "center" }}>
                     {

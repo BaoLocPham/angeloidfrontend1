@@ -198,7 +198,7 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             </div>
             <CustomedModal
                 modalHeader="Attention"
-                modalBody="Your username are already exited!!!"
+                modalBody="Your username or email are already exited!!!"
                 handleToggle={toggleRegisterModal}
                 show={registerModalShow}
             />

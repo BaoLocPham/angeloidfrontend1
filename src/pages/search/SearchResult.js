@@ -4,44 +4,39 @@ import './SearchResult.css'
 
 
 const SearchResult = () => {
-    const [animeList, setAnimeList] = useState([
-        { Count: 1, Id: 1, Name: 'Konosuba', Img: "https://upload.wikimedia.org/wikipedia/vi/3/3e/Kono_Subarashii_Sekai_ni_Shukufuku_o%21_light_novel_volume_1_cover.jpg", Studio: "Kyoto Animations", Format: "TV series", SeriesLength: "25 episodes", Tag: ["rape", "ntr", "scat"] },
-        { Count: 2, Id: 2, Name: 'Gintama', Img: "https://upload.wikimedia.org/wikipedia/vi/e/ee/Gintamavol01cover.jpg", Studio: "Kyoto Animations", Format: "TV series", SeriesLength: "25 episodes", Tag: ["rape", "ntr", "scat"] },
-        { Count: 3, Id: 3, Name: 'SlamDunk', Img: "https://upload.wikimedia.org/wikipedia/vi/1/1c/Slam_Dunk_cover.jpg", Studio: "Kyoto Animations", Format: "TV series", SeriesLength: "25 episodes", Tag: ["rape", "ntr", "scat"] },
-        { Count: 4, Id: 4, Name: 'Bobobobo', Img: "https://m.media-amazon.com/images/I/61M9MHPcRmL.jpg", Studio: "Kyoto Animations", Format: "TV series", SeriesLength: "25 episodes", Tag: ["rape", "ntr", "scat"] },
-        { Count: 5, Id: 5, Name: 'Toloveru', Img: "https://upload.wikimedia.org/wikipedia/vi/e/e3/To_Love-Ru_manga_volume_1.jpg", Studio: "Kyoto Animations", Format: "TV series", SeriesLength: "25 episodes", Tag: ["rape", "ntr", "scat"] }
-    ]);
-    const [isVertical, setIsVertical] = useState(false);
-    if (!isVertical) {
-        return (
-            <div className="w-100 h-auto " style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto ", width: "100%", padding: "0 5% 0 5%" }}>
-                <br />
-                <div className="w-100 h-auto row justify-content-between search-result" style={{ textAlign: "center" }}>
-                    {
-                        animeList.map(
-                            anime => (
-                                <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical} />
-                            )
+    // const [animeList, setAnimeList] = useState([
+    //     { animeId: 1, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", Tag: [{ tagId: "rape", tagName: "abc"}] }
+    // ]);
+
+    const animeList = [
+        { animeId: 1, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 2, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 3, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 4, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 5, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 6, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 7, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 8, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 8, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] },
+        { animeId: 10, animeName: 'Konosuba', thumbnail: "", studio: { studioName: "Hello" }, format: "TV series", episode: "25 episodes", tags: [{ tagId: "rape", tagName: "abc" }] }
+    ];
+
+    return (
+        <div className="w-100 h-auto" style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto ", width: "100%", padding: "0 5% 0 5%", minHeight: "74vh"}}>
+            <div className="w-100 h-auto row mx-0 justify-content-between search-result" style={{ textAlign: "center" }}>
+                {
+                    animeList.map(
+                        anime => (
+                            <div className="col-2 p-2">
+                                <AnimeCard key={anime.animeId} anime={anime} isVertical={false} />
+                            </div>
+                            
                         )
-                    }
-                </div>
+                    )
+                }
             </div>
-        );
-    } else {
-        return (
-            <div style={{ backgroundColor: "#131E2A", color: "#fff" }} >
-                <div className="row search-result justify-content-center" style={{ textAlign: "center" }}>
-                    {
-                        animeList.map(
-                            anime => (
-                                <AnimeCard key={anime.Id} Anime={anime} isVertical={isVertical} />
-                            )
-                        )
-                    }
-                </div>
-            </div>
-        );
-    }
+        </div>
+    );
 }
- 
+
 export default SearchResult;
