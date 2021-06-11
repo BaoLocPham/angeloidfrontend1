@@ -12,6 +12,7 @@ import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
 import AnimeManage from './AnimeManage';
+import UserManage from './UserManage';
 import './Setting.css';
 
 const Setting = ({ user }) => {
@@ -19,9 +20,20 @@ const Setting = ({ user }) => {
 
     const handleToggleLeftNavButton = () => setShowLeftNav(!showLeftNav);
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+    const [currentUser, setCurrentUser] = useState({});
+    const [base64Img, setBase64Img] = useState('');
+
+    useEffect(
+        () => {
+            window.scrollTo(0, 0);
+            fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/${user.userId}`)
+                .then(res => res.json())
+                .then(res => {
+                    setCurrentUser(res);
+                    setBase64Img('data:image/*;base64,' + res.avatar);
+                });
+        }, []
+    );
 
     return (
         <div className="row setting-container">
@@ -39,15 +51,23 @@ const Setting = ({ user }) => {
             </div>
 
             {/* Right content */}
-            <div className="setting-right d-flex flex-row">
+            <div className="setting-right d-flex flex-row justify-content-center align-items-center">
                 {/* Choose pages to render */}
                 <Switch>
                     <Route path="/setting/profile">
-                        <Profile user={user} />
+                        <Profile
+                            user={user}
+                            currentUser={currentUser}
+                            setCurrentUser={setCurrentUser}
+                            base64Img={base64Img}
+                            setBase64Img={setBase64Img}
+                        />
                     </Route>
 
                     <Route path="/setting/change">
-                        <PasswordSetting />
+                        <PasswordSetting
+                            user={user}
+                        />
                     </Route>
 
                     <Route path="/setting/favorite">
@@ -60,6 +80,10 @@ const Setting = ({ user }) => {
 
                     <Route path="/setting/anime">
                         <AnimeManage />
+                    </Route>
+
+                    <Route path="/setting/user">
+                        <UserManage />
                     </Route>
 
                     <Route path="*">

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Nav.css"
 
-const Nav = ({ isLogin, handleLogout }) => {
+const Nav = ({ isLogin, handleLogout, user }) => {
     // Show mobile nav when user click hamburger
     const [showMobileNav, setShowMobileNav] = useState(false);
 
@@ -50,7 +50,8 @@ const Nav = ({ isLogin, handleLogout }) => {
                     {isLogin ? <>
                         <li className="nav-item d-none d-md-inline-block me-2">
                             <Link to="/setting/profile" className="shadow-sm">
-                                <img className="img-fluid rounded-circle img-thumbnail" style={{ width: "40px", height: "40px" }} src="https://scr.vn/wp-content/uploads/2020/07/H%C3%ACnh-%C4%91%E1%BA%A1i-di%E1%BB%87n-Anime-c%C3%B4-b%C3%A9-%C4%91eo-k%C3%ADnh-cute.jpg" alt="Avatar" />
+                            <img className="img-fluid rounded-circle" style={{ width: "40px", height: "40px" }} 
+                                src={`data:image/*;base64,${user.avatar}`} alt="Avatar" />
                             </Link>
                         </li>
                         <li className="nav-item px-3 d-none d-md-inline-block">

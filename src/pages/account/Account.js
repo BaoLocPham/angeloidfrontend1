@@ -22,7 +22,7 @@ import bg6 from './img/bg-06.jpg';
 import bg7 from './img/bg-07.jpg';
 import bg8 from './img/bg-08.jpg';
 
-const Account = ({ setUser,isLogin }) => {
+const Account = ({ setUser,isLogin, setCookie }) => {
 
     //Random variable to get image random
     const [random, setRandom] = useState();
@@ -54,6 +54,7 @@ const Account = ({ setUser,isLogin }) => {
                     <Login 
                         setUser={setUser} 
                         isLogin={isLogin}
+                        setCookie={setCookie}
                         BackGround={BackGround}
                         Author={Author}
                         AuthorLink={AuthorLink}

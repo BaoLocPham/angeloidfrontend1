@@ -18,7 +18,7 @@ const ForgotPassword = () => {
                             <input type="email" className="input-email" name="email" placeholder="Enter Email"></input>
                             <br />
                             <br />
-                            <Link className="btn btn-login" to="/account/signup"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Continue</Link>
+                            <Link className="btn btn-login" to="/account/signup">Continue</Link>
                         </form>
                     </div>
                 </div>
