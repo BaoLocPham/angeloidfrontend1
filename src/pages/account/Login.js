@@ -1,7 +1,7 @@
 //dependencies
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import FacebookR from './Login/FacebookR';
+import FacebookS from './Login/FacebookS';
 import md5 from 'md5';
 
 // for user response when input worng format or wrong username password. credit Bắp.
@@ -65,7 +65,7 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
         {
             username: loginForm.username,
             // md5 encryption for password
-            password: md5(loginForm.password)
+            password: loginForm.password
         }
 
         // Prevent too many request to the server
@@ -85,7 +85,7 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                     let expires = new Date()
                     expires.setTime(expires.getTime() + (1000000000));
                     setUser(res);
-                    setCookie("user",{userId:res.userId, isAdmin:res.isAdmin},{path:"/", expires:expires});
+                    setCookie("user", { userId: res.userId, isAdmin: res.isAdmin }, { path: "/", expires: expires });
                 } else {// feedback to user username or password is wrong
                     toggleLoginModal();
                 }
@@ -107,7 +107,8 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                     <div className="card rounded bg-info" id="formLogin" >
                         <b>Login</b>
                         <div className="p-2">
-                            <FacebookR />
+                            <FacebookS setUser={setUser} isLogin={isLogin} setCookie={setCookie}
+                            />
                         </div>
                         <br />
                         <h5>OR</h5>
@@ -139,13 +140,16 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                             <br />
                             <br />
                             <button type="submit" ref={loginSubmitBtn}
-                                onClick={handleSubmitLogin} className="btn btn-login" ><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg> Login</button>
+                                onClick={handleSubmitLogin} className="btn btn-login" >Login</button>
                             <br />
                             <br />
-                            <h5>OR</h5>
+                            <h5 className="the-or">OR</h5>
                         </form>
                         <br />
-                            <Link className="btn btn-login" to="/account/signup"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Register</Link>
+                        <Link className="btn btn-login" to="/account/signup">Register</Link>
+                        <br />
+                        <br />
+                        <Link className="btn btn-forgot" to="/account/forgot">Forgot Password ?</Link>
                     </div>
                 </div>
             </div>
@@ -161,8 +165,8 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                 position: "absolute",
                 left: "2%",
                 bottom: "3%"
-            }}>     
-                <span className="fw-bolder" style={{ color: "#76899C"}}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
+            }}>
+                <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
             </div>
         </div>
     );
