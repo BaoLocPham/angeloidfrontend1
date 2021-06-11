@@ -7,6 +7,7 @@ import md5 from 'md5';
 import './Login.css'
 import CustomedPopover from '../components/Popover';
 import CustomedModal from '../components/Modal';
+import avatar from './img/default-avatar.jpg';
 
 // Regex
 const REGEX_USERNAME = new RegExp("^(?=[a-zA-Z0-9._]{5,32}$)(?!.*[_.]{2})[^_.].*[^_.]$");
@@ -23,7 +24,6 @@ const DEFAULT_AVATAR = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEB
 const Signup = ({ BackGround, Author, AuthorLink }) => {
     const [isSigned, setSigned] = useState(false);
 
-    const [modalBody,setModalBody] = useState("");
 
     // Form for Register
     const [registerForm, setRegisterForm] = useState({
@@ -82,14 +82,12 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             username: registerForm.username,
             email: registerForm.email,
             avatar: DEFAULT_AVATAR,
-            password: registerForm.password
+            password: md5(registerForm.password)
         }
 
         // Prevent too many request to the server
         registerSubmitBtn.current.setAttribute("disabled", "disabled");
-
-        console.log(registerInput);
-
+        // console.log(registerInput);
         fetch(
             `${process.env.REACT_APP_BACKEND_URL}api/user`,
             {
@@ -101,8 +99,9 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             // .then(res => res.json())
             .then(res => {
                 if (res.status == 400) {
-                    toggleRegisterModal();
+                    console.log("here");
                     event.preventDefault();
+                    toggleRegisterModal();
                 } else {
                     setSigned(true);
                 }
@@ -140,8 +139,6 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
                                 onClick={() => toggleRegisterPopover({ username: false })}
                                 id="username" name="username" placeholder="Enter Username" ></input>
                             <br />
-
-
                             {/* This is the Email input */}
                             <CustomedPopover
                                 show={registerPopover.email}
@@ -155,8 +152,6 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
                                 onClick={() => toggleRegisterPopover({ email: false })}
                                 id="email" name="email" placeholder="Enter Email"></input>
                             <br />
-
-
                             {/* This is the Password input */}
                             <CustomedPopover
                                 show={registerPopover.password}
@@ -198,7 +193,8 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             </div>
             <CustomedModal
                 modalHeader="Attention"
-                modalBody="Your username or email are already exited!!!"
+                modalBody="Your username or email are already exited
+                Please check again !!!"
                 handleToggle={toggleRegisterModal}
                 show={registerModalShow}
             />

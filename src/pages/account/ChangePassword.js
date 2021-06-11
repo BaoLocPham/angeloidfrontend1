@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +21,7 @@ const ChangePassword = () => {
                             <br />
                             <br />
                             <br />
-                            <Link className="btn btn-login" to="/account/signup"><svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>Continue</Link>
+                            <button type="submit" className="btn btn-login" to="/account/signup">Continue</button>
                         </form>
                     </div>
                 </div>
