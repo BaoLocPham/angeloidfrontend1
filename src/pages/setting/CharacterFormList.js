@@ -4,12 +4,13 @@ import CharacterForm from './CharacterForm';
 const CharacterFormList = ({ characters, handAddNewCharacter, handleInputCharactersInfo, handleDeleteCharacter, handleUploadCharacterImage, handleUploadSeiyuuImage}) => {
     return (
         <div>
+            {/* {console.log(characters.length)} */}
             <div>
                 <h4 className="my-3"><b>Character</b></h4>
             </div>
             {characters.map(character =>
                 <CharacterForm
-                    key={character.id}
+                    key={character.characterId}
                     character={character}
                     handleDeleteCharacter={handleDeleteCharacter}
                     handleInputCharactersInfo={handleInputCharactersInfo} 
