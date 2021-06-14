@@ -79,7 +79,7 @@ const Account = ({ setUser, isLogin, setCookie }) => {
                 <ForgotPassword />
             </Route>
 
-            <Route path='/account/change'>
+            <Route path='/account/change/:guid'>
                 <ChangePassword />
             </Route>
             

@@ -65,11 +65,11 @@ const PasswordSetting = ({ user }) => {
             togglePasswordPopover({ newPass: true });
             return;
         }
-        if (passwordForm.oldPass == passwordForm.newPass) {
+        if (passwordForm.oldPass === passwordForm.newPass) {
             togglePasswordModal(modalConfigs['validate']);
             return;
         }
-        if (passwordForm.confirmPass != passwordForm.newPass) {
+        if (passwordForm.confirmPass !== passwordForm.newPass) {
             togglePasswordPopover({ confirmPass: true });
             return;
         }
