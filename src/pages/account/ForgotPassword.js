@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ BackGround, Author, AuthorLink }) => {
     // Modal state
     const [forgotModalShow, setForgotModalShow] = useState(false);
     const [forgotModal, setForgotModal] = useState({
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
 
     return (
         <>
-            <div className="account-wallpaper d-flex flex-column justify-content-center">
+            <div style={BackGround} className="account-wallpaper d-flex flex-column justify-content-center">
                 <div className="container div-with-bg">
                     <div className="row">
                         <div className="card rounded bg-info" id="formLogin" >
@@ -94,6 +94,15 @@ const ForgotPassword = () => {
                             </form>
                         </div>
                     </div>
+                </div>
+
+                {/* Reference to author's background image */}
+                <div style={{
+                    position: "absolute",
+                    left: "2%",
+                    bottom: "3%"
+                }}>
+                    <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
                 </div>
             </div>
             <CustomedModal

@@ -69,8 +69,6 @@ const AnimeForm = () => {
     const [characters, setCharacter] = useState([]);
     const [uploadStatus, setUploadStatus] = useState(false);
 
-    // console.log(inputAnime);
-
     // Thumbnail upload
     const handleUploadThumbnail = (event) => {
         try {
@@ -394,13 +392,19 @@ const AnimeForm = () => {
                             handleDeleteCharacter={handleDeleteCharacter}
                         />
 
-                        {/* Upload Button */}
+                        {/* Insert Button */}
+                        { (inputAnime.animeName != "") ? 
                         <div className="my-3 d-flex justify-content-end">
                             <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
                         </div>
+
+                        :
+
                         <div className="my-3 d-flex justify-content-end">
                             <button type="submit" className="UploadButton btn" onClick={handleClickUpload}>Upload</button>
                         </div>
+
+                        }
 
                     </div>
                 </form>

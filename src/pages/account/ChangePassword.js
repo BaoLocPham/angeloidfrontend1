@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{5,32}$/;
 const PASSWORD_MESSAGE = `Password length is between 5 to 32 and can only contains lowercase/uppercase alphabet characters, number and some special characters: !@#$%^&*`;
 
-const ChangePassword = () => {
+const ChangePassword = ({ BackGround, Author, AuthorLink }) => {
     // Check Loading
     const [isLoading, setIsLoading] = useState('loading');
 
@@ -135,7 +135,7 @@ const ChangePassword = () => {
     }
     return (
         <>
-            <div className="account-wallpaper d-flex flex-column justify-content-center">
+            <div style={BackGround} className="account-wallpaper d-flex flex-column justify-content-center">
                 <div className="container div-with-bg">
                     <div className="row">
                         <div className="card rounded bg-info" id="formLogin" >
@@ -176,6 +176,15 @@ const ChangePassword = () => {
                             </form>
                         </div>
                     </div>
+                </div>
+
+                {/* Reference to author's background image */}
+                <div style={{
+                    position: "absolute",
+                    left: "2%",
+                    bottom: "3%"
+                }}>
+                    <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
                 </div>
             </div>
             <CustomedModal
