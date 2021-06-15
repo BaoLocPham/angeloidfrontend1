@@ -16,7 +16,7 @@ const Thread = ({ user, isLogin }) => {
 
     useEffect(() => {
         //Fetch this season anime
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/thisseason`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/home/thisseason`,
             { method: "GET" }
         ).then(res => res.json())
             .then(res => setThisSeasonAnime(res))

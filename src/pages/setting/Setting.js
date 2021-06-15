@@ -90,10 +90,10 @@ const Setting = ({ user, setUser, isLogin }) => {
                                 <AnimeForm />
                             </Route>
 
-                            <Route path="/setting/anime/form/*">
+                            <Route path="/setting/anime/form/:animeId">
                                 <AnimeForm />
                             </Route>
-
+                            
                             <Route path="/setting/user">
                                 <UserManage />
                             </Route>

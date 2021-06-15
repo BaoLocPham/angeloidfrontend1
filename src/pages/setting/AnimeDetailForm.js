@@ -14,6 +14,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="animeName"
                     name="animeName"
+                    defaultValue={inputAnime.animeName}
                     onChange={(event) =>
                         handleInputAnime({ animeName: event.target.value })
                     }
@@ -28,7 +29,8 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                 <select
                     className="form-select"
                     aria-label="Default select example"
-                    defaultValue={""}
+                    value={(inputAnime !== undefined) ? inputAnime.studioId : ""}
+                    defaultValue={inputAnime.studioId}
                     onChange={(event) =>
                         handleInputAnime({ studioId: event.target.value })
                     }
@@ -51,6 +53,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="description"
                     rows="9"
+                    defaultValue={inputAnime.content}
                     onChange={(event) =>
                         handleInputAnime({ content: event.target.value })
                     }
@@ -67,6 +70,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                         className="form-control"
                         id="episodes"
                         name="episodes"
+                        defaultValue={inputAnime.episode}
                         onChange={(event) =>
                             handleInputAnime({ episode: event.target.value })
                         }
@@ -83,6 +87,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                         className="form-control"
                         id="duration"
                         name="duration"
+                        defaultValue={inputAnime.episodeDuration}
                         onChange={(event) =>
                             handleInputAnime({ episodeDuration: event.target.value })
                         }
@@ -97,7 +102,8 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     <select
                         className="form-select"
                         aria-label="Default select example"
-                        defaultValue={""}
+                        value={(inputAnime.season !== undefined) ? inputAnime.season.seasonName : ""}
+                        defaultValue={(inputAnime.season !== undefined) ? inputAnime.season.seasonName : ""}
                         onChange={(event) =>
                             handleInputAnime({
                                 season: {
@@ -123,7 +129,8 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     <select
                         className="form-select"
                         aria-label="Default select example"
-                        defaultValue={""}
+                        value={(inputAnime.season !== undefined) ? inputAnime.season.year : ""}
+                        defaultValue={(inputAnime.season !== undefined) ? inputAnime.season.year : ""}
                         onChange={(event) =>
                             handleInputAnime({
                                 season: { ...inputAnime.season, year: event.target.value },
@@ -150,6 +157,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="status"
                     name="status"
+                    defaultValue={inputAnime.status}
                     onChange={(event) => handleInputAnime({ status: event.target.value })}
                 />
             </div>
@@ -164,6 +172,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="startDay"
                     name="startDay"
+                    defaultValue={inputAnime.startDay}
                     onChange={(event) =>
                         handleInputAnime({ startDay: event.target.value })
                     }
@@ -180,6 +189,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="web"
                     name="web"
+                    defaultValue={inputAnime.web}
                     onChange={(event) => handleInputAnime({ web: event.target.value })}
                 />
             </div>
@@ -194,6 +204,7 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     className="form-control"
                     id="trailer"
                     name="trailer"
+                    defaultValue={inputAnime.trailer}
                     onChange={(event) =>
                         handleInputAnime({ trailer: event.target.value })
                     }

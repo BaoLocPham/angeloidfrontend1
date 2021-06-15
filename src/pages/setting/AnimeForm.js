@@ -1,6 +1,10 @@
 //dependencies
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+// import { useParams, Redirect } from 'react-router-dom';
+import {
+    useParams,
+    Redirect
+} from "react-router-dom";
 
 //style
 import './AnimeForm.css';
@@ -67,37 +71,45 @@ const AnimeForm = () => {
 
     // Thumbnail upload
     const handleUploadThumbnail = (event) => {
-        if (!event.target.files[0].type.match(/image.*/)) {
-            alert('You can\'t upload this type of file.');
-            return;
-        } else if (event.target.files[0].size > 1e6) {
-            alert('You can\'t upload file has size greater than 1 mb.');
-            return;
+        try {
+            if (!event.target.files[0].type.match(/image.*/)) {
+                alert('You can\'t upload this type of file.');
+                return;
+            } else if (event.target.files[0].size > 1e6) {
+                alert('You can\'t upload file has size greater than 1 mb.');
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                setUploadThumbnail(e.target.result.split(',')[1]);
+                setDefaultThumbnail(e.target.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        } catch {
         }
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            setUploadThumbnail(e.target.result.split(',')[1]);
-            setDefaultThumbnail(e.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
+
     };
 
     // Wallpaper upload
     const handleUploadWallpaper = (event) => {
-        if (!event.target.files[0].type.match(/image.*/)) {
-            alert('You can\'t upload this type of file.');
-            return;
-        } else if (event.target.files[0].size > 1e6) {
-            alert('You can\'t upload file has size greater than 1 mb.');
-            return;
-        }
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            setUploadWallpaper(e.target.result.split(',')[1]);
-            setDefaultWallpaper(e.target.result);
-        };
+        try{
+            if (!event.target.files[0].type.match(/image.*/)) {
+                alert('You can\'t upload this type of file.');
+                return;
+            } else if (event.target.files[0].size > 1e6) {
+                alert('You can\'t upload file has size greater than 1 mb.');
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                setUploadWallpaper(e.target.result.split(',')[1]);
+                setDefaultWallpaper(e.target.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }catch{
 
-        reader.readAsDataURL(event.target.files[0]);
+        }
     };
 
     // Anime detail update
@@ -162,18 +174,18 @@ const AnimeForm = () => {
                 }
             }
         ])
-        characterId++;
+        characterId--;
     }
 
     // Handle Delete selected Character
     const handleDeleteCharacter = (selectedId) => {
-        setCharacter(characters.filter(character => character.id !== selectedId));
+        setCharacter(characters.filter(character => character.characterId !== selectedId));
     }
 
     const handleInputCharactersInfo = (obj, id) => {
         setCharacter(prev => {
             return prev.map(character => (
-                (character.id === id) ? Object.assign({}, character, obj) : character
+                (character.characterId === id) ? Object.assign({}, character, obj) : character
             ));
         });
     }
@@ -184,9 +196,44 @@ const AnimeForm = () => {
     const [tags, setTag] = useState([]);
     const [loadStatus, setLoadStatus] = useState(true);
 
+    // Get animeId to show
+    let { animeId } = useParams();
     //Async fetch data when load form
     const fetchAnimeRelateData = async () => {
+        // fetch anime data 
+        fetch(`http://localhost:5000/api/anime/${animeId}`,
+            {
+                method: "GET"
+            }).then(res => res.json())
+            .then(res => {
+                setInputAnime(
+                    {
+                        animeName: res.animeName,
+                        content: res.content,
+                        status: res.status,
+                        trailer: res.trailer,
+                        episodeDuration: res.episodeDuration,
+                        episode: res.episode,
+                        startDay: res.startDay,
+                        web: res.web,
+                        season: {
+                            year: res.season.year,
+                            seasonName: res.season.seasonName
+                        },
+                        studioId: res.studioId
+                    }
+                );
+                setCharacter(res.characters);
+                setSelectedTag(res.tags);
 
+                setDefaultThumbnail(`data:image/*;base64,${res.thumbnail}`);
+                setUploadThumbnail(res.thumbnail);
+
+                setDefaultWallpaper(`data:image/*;base64,${res.wallpaper}`);
+                setUploadWallpaper(res.wallpaper);
+
+            })
+            .catch(err => setInputAnime({}));
         //Fetch all season
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/season`,
             { method: "GET" }
@@ -221,6 +268,7 @@ const AnimeForm = () => {
     useEffect(() => {
         //Call fetch anime
         fetchAnimeRelateData();
+        window.scrollTo(0, 0);
     }, [])
 
     if (loadStatus === false) {
@@ -228,13 +276,14 @@ const AnimeForm = () => {
             <Redirect to='/Error' />
         );
     }
+    // console.log(characters);
 
     // Insert new anime and redirect or notify error to user
-    const handleClickUpdate = (event) => {
+    const handleClickInsert = (event) => {
         event.preventDefault();
-        
+
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime`,
-            { 
+            {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -257,11 +306,45 @@ const AnimeForm = () => {
             //Add success
             setUploadStatus(true);
         })
-        .catch(error => {
-            //Connect fail
-            setLoadStatus(false);
-        });
+            .catch(error => {
+                //Connect fail
+                setLoadStatus(false);
+            });
     }
+
+    const handleClickUpload = (event) => {
+        event.preventDefault();
+
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/${animeId}`,
+            {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ...inputAnime,
+                    thumbnail: uploadThumbnail,
+                    wallpaper: uploadWallpaper,
+                    tags: selectedTag,
+                    characters: characters
+                })
+            }
+        ).then(async res => {
+            //Fail to add
+            if (res.status === 409 || res.status === 500) {
+                toggleModal(modalConfigs.inputFail);
+                return;
+            }
+
+            //Add success
+            setUploadStatus(true);
+        })
+            .catch(error => {
+                //Connect fail
+                setLoadStatus(false);
+            });
+    }
+
 
     if (uploadStatus === true) {
         return (
@@ -309,10 +392,19 @@ const AnimeForm = () => {
                             handleDeleteCharacter={handleDeleteCharacter}
                         />
 
-                        {/* Upload Button */}
+                        {/* Insert Button */}
+                        { (inputAnime.animeName != "") ? 
                         <div className="my-3 d-flex justify-content-end">
-                            <button type="submit" className="UploadButton btn" onClick={handleClickUpdate}>Upload</button>
+                            <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
                         </div>
+
+                        :
+
+                        <div className="my-3 d-flex justify-content-end">
+                            <button type="submit" className="UploadButton btn" onClick={handleClickUpload}>Upload</button>
+                        </div>
+
+                        }
 
                     </div>
                 </form>
