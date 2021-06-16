@@ -143,7 +143,7 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                                 onClick={handleSubmitLogin} className="btn btn-login" >Login</button>
                             <br />
                             <br />
-                            <h5 className="the-or">OR</h5>
+                            <h5 className="the-or" >OR</h5>
                         </form>
                         <br />
                         <Link className="btn btn-login" to="/account/signup">Register</Link>
