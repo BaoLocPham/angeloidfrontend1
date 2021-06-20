@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ImageFilter from './ImageFilter';
 import SearchResult from './SearchResult';
 
 const SearchByImage = () => {
+    
+
     return (
         <div>
             <ImageFilter />
