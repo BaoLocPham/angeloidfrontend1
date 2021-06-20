@@ -14,6 +14,7 @@ import Error from '../error/Error';
 import AnimeForm from './AnimeForm';
 import AnimeManage from './AnimeManage';
 import UserManage from './UserManage';
+import ThreadManage from './ThreadManage';
 import './Setting.css';
 
 const Setting = ({ user, setUser, isLogin }) => {
@@ -96,6 +97,10 @@ const Setting = ({ user, setUser, isLogin }) => {
                             
                             <Route path="/setting/user">
                                 <UserManage />
+                            </Route>
+
+                            <Route path="/setting/thread">
+                                <ThreadManage />
                             </Route>
                         </>
                         : ""

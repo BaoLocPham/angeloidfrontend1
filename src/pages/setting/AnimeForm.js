@@ -392,10 +392,10 @@ const AnimeForm = () => {
                         />
 
                         {/* Insert Button */}
-                        {(inputAnime.animeName != "") ?
-                            <div className="my-3 d-flex justify-content-end">
-                                <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
-                            </div>
+                        { (inputAnime.animeName === "") ? 
+                        <div className="my-3 d-flex justify-content-end">
+                            <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
+                        </div>
 
                             :
 
