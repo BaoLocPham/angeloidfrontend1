@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const RatingChart = () => {
+const RatingChart = ({rateList}) => {
+
     const data = {
         labels: ['1 Points', '2 Points', '3 Points', '4 Points', '5 Points'],
         datasets: [
             {
                 label: "# of ratings",
-                data: [10, 20, 46, 150, 96],
+                data: [rateList.one, rateList.two, rateList.three, rateList.four, rateList.five],
                 backgroundColor: [
                     '#EC294B',
                     '#FF7171',

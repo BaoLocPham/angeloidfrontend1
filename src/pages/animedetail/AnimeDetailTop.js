@@ -1,10 +1,10 @@
 //dependencies
-import React from 'react';
+import React, { useState } from 'react';
 
 //local dependencies
 import './AnimeDetailTop.css';
 
-const AnimeDetailTop = ({ anime }) => {
+const AnimeDetailTop = ({ anime, isClicked, isLogin }) => {
     //Load background image
     const bacground_style = {
         backgroundImage: `url("data:image/*;base64,${anime.wallpaper}")`,
@@ -72,6 +72,7 @@ const AnimeDetailTop = ({ anime }) => {
                             style={{ backgroundColor: "#14A38B" }}
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
+                            disabled={isClicked.rated}
                         >
                             Rating
                         </button>
@@ -79,6 +80,7 @@ const AnimeDetailTop = ({ anime }) => {
                         <button
                             type="button"
                             className="btn btn-danger ms-4 favorite-button"
+                            disabled={isClicked.favorite}
                         >
                             <i className="fa fa-heart" aria-hidden="true"></i>
                         </button>

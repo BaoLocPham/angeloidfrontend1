@@ -1,6 +1,7 @@
 //dependencies
 import React, { useState, useEffect } from 'react';
 import CustomedModal from '../components/Modal';
+import Loading from "../components/Loading";
 
 //Data table
 import { MDBDataTableV5 } from 'mdbreact';
@@ -28,6 +29,9 @@ const ThreadManage = () => {
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
 
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     // Show Modal
     const toggleModal = (modalConfig) => {
         setModalContent(modalConfig);
@@ -50,7 +54,10 @@ const ThreadManage = () => {
     const listAllThread = async () => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread`)
             .then(res => res.json())
-            .then(res => setThreadList(res));
+            .then(res => {
+                setThreadList(res);
+                setIsLoading('succeed');
+            });
     }
 
     useEffect(() => {
@@ -59,16 +66,16 @@ const ThreadManage = () => {
         []
     );
 
-    // Delete User By UserId
-    const deleteUser = (selectedUserId) => {
+    // Delete Thread By ThreadId
+    const deleteUser = (selectedThreadId) => {
         closeModal();
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/${selectedUserId}`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/${selectedThreadId}`,
             {
                 method: "DELETE"
             }).then(res => {
                 // Deleted successfully
                 if (res.status === 200) {
-                    setThreadList(threadList.filter(user => user.userId !== selectedUserId));
+                    setThreadList(threadList.filter(thread => thread.threadId !== selectedThreadId));
                 }
             });
     }
@@ -119,6 +126,11 @@ const ThreadManage = () => {
         })
     });
 
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     return (
         <>

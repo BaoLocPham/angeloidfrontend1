@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CustomedModal from '../components/Modal';
+import Loading from "../components/Loading";
 
 //Data table
 import { MDBDataTableV5 } from 'mdbreact';
@@ -19,6 +20,10 @@ const AnimeManage = () => {
     const [animeIdToDelete, setAnimeIdToDelete] = useState(0);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     // Show Modal
     const toggleModal = (modalConfig) => {
         setModalContent(modalConfig);
@@ -42,11 +47,16 @@ const AnimeManage = () => {
 
     //Fetch data function load when mounting component
     const listAllAnime = async () => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/all`).then(res => res.json()).then(res => setAnimeList(res));
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/all`)
+                .then(res => res.json())
+                .then(res => { 
+                    setAnimeList(res); 
+                    setIsLoading('succeed');
+                });
     };
 
-     // Delete User By UserId
-     const deleteAnime = (selectedAnimeId) => {
+     // Delete Anime By AnimeId
+    const deleteAnime = (selectedAnimeId) => {
         closeModal();
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/${selectedAnimeId}`,
             {
@@ -136,10 +146,16 @@ const AnimeManage = () => {
         borderRadius: "10px"
     }
 
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
             <Link to={`/setting/anime/form`} className="btn btn-success m-2">Add new</Link>
-            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[10, 20, 25]} entries={10} pagesAmount={4} data={datatable} />
+            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal
                 modalHeader={modalContent.header}
                 modalBody={modalContent.body}

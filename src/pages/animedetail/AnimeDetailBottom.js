@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from 'react-router';
 import AnimeProfile from "./AnimeProfile";
 import Reviews from "./Reviews";
 import Trailer from "./Trailer";
@@ -7,8 +8,37 @@ import CharacterList from "./CharacterList";
 import AnimeRelations from "./AnimeRelations";
 import RatingChart from "./RatingChart";
 import Content from "./Content";
+import AnimeList from "../home/AnimeList";
 
-const AnimeDetailBottom = ({ anime }) => {
+const AnimeDetailBottom = ({ anime, rateList, reviewList }) => {
+
+    //List of content anime
+    const [thisSeasonAnime, setThisSeasonAnime] = useState([]);
+    const [loadStatus, setLoadStatus] = useState(true);
+
+    //Fetch this season anime
+    const thisSeasonAnimeData = () => fetch(`${process.env.REACT_APP_BACKEND_URL}api/home/thisseason`,
+        { method: "GET" }
+    ).then(res => res.json())
+        .then(res => setThisSeasonAnime(res))
+        .catch(error => {
+            setLoadStatus(false);
+        });
+
+    useEffect(() => {
+        //Scroll to top every time load the home
+        window.scrollTo(0, 0);
+
+        //Call fetch anime
+        thisSeasonAnimeData();
+    }, [])
+
+    if (loadStatus === false) {
+        return (
+            <Redirect to='/Error' />
+        );
+    }
+
     return (
         <div
             className="bg-dark-container row mx-0 w-100 h-auto scale125"
@@ -23,12 +53,13 @@ const AnimeDetailBottom = ({ anime }) => {
             {/* Right content */}
             <div className="col-12 col-md-9">
                 <div className="row ps-1 ps-md-4">
-                    <Content anime={anime}/>
+                    <Content anime={anime} />
                     <AnimeRelations />
                     <CharacterList anime={anime} />
                     <Trailer anime={anime} />
-                    <RatingChart />
-                    <Reviews />
+                    <RatingChart rateList={rateList} />
+                    {/* <AnimeList content="Recommend" isVertical={false} animeList={thisSeasonAnime} /> */}
+                    <Reviews reviewList={reviewList} />
                 </div>
             </div>
         </div>

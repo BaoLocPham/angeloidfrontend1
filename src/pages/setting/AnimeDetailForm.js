@@ -139,9 +139,9 @@ const AnimeDetailForm = ({ studios, seasons, inputAnime, handleInputAnime }) => 
                     >
                         <option hidden disabled value=""></option>
                         {seasons.map((season) => (
-                            <option key={`season${season}`} value={season}>
+                            (season != 0) ? <option key={`season${season}`} value={season}>
                                 {season}
-                            </option>
+                            </option> : ""
                         ))}
                     </select>
                 </div>
