@@ -48,27 +48,6 @@ const SettingNav = ({ showLeftNav, user }) => {
 
             {/* If user is Admin, show button to access management page */}
             { user.isAdmin ?
-<<<<<<< HEAD
-                <>
-                    <Link to="/setting/anime"
-                        className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                        onClick={() => handleSettingActive("anitable")}
-                        style={settingActive === "anitable" ? settingActiveStyle : {}}
-                    >
-                        <i className="fa fa-folder-open fa-lg p-2"></i>
-                        <span className="p-2">Anime</span>
-                    </Link>
-                    <Link to="/setting/user"
-                        className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                        onClick={() => handleSettingActive("usertable")}
-                        style={settingActive === "usertable" ? settingActiveStyle : {}}
-                    >
-                        <i className="fa fa-users fa-lg p-2"></i>
-                        <span className="p-2">User</span>
-                    </Link>
-                </>
-                : ""}
-=======
             <>
                 <Link to="/setting/anime"
                     className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
@@ -97,9 +76,19 @@ const SettingNav = ({ showLeftNav, user }) => {
                     <i class="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
                     <span className="p-2">Thread</span>
                 </Link>
+
+                {/* Thread Management */}
+                <Link to="/setting/dashboard"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("threadtable")}
+                        style={settingActive === "threadtable" ? settingActiveStyle : {}}
+                >
+                    {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
+                    <i class="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
+                    <span className="p-2">Thread</span>
+                </Link>
             </>
             : "" }
->>>>>>> ab6c3f12d62db0e89e52002657a9dd79057d0a6d
         </nav>
     );
 };
