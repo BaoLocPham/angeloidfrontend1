@@ -15,6 +15,7 @@ import AnimeImageForm from './AnimeImageForm';
 import AnimeDetailForm from './AnimeDetailForm';
 import AnimeTagForm from './AnimeTagForm';
 import CharacterFormList from './CharacterFormList';
+import Loading from "../components/Loading";
 
 // Model for notification
 import CustomedModal from '../components/Modal';
@@ -40,6 +41,9 @@ var characterId = 0;
 const AnimeForm = () => {
     //Check location to show button
     const location = useLocation();
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
 
     //Model properties and method to call model
     const [profileModalShow, setProfileModalShow] = useState(false);
@@ -237,6 +241,7 @@ const AnimeForm = () => {
                 setDefaultWallpaper(`data:image/*;base64,${res.wallpaper}`);
                 setUploadWallpaper(res.wallpaper);
 
+                setIsLoading('succeed');
             })
             .catch(err => setInputAnime({}));
         //Fetch all season
@@ -354,6 +359,12 @@ const AnimeForm = () => {
             });
     }
 
+    //Return loading
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     if (uploadStatus === true) {
         return (

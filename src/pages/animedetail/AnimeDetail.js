@@ -9,7 +9,7 @@ import {
 
 import Loading from "../components/Loading";
 
-const AnimeDetail = ({isLogin}) => {
+const AnimeDetail = ({ user }) => {
 
     // Declare Object Anime
     const [anime, setAnime] = useState({
@@ -27,15 +27,28 @@ const AnimeDetail = ({isLogin}) => {
     })
 
     //Rating list for chart
-    const [rateList, setRateList] = useState({});
+    const [rateList, setRateList] = useState({
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0
+    });
 
     //Review list for review
-    const [reviewList, setReviewList] = useState([]);
+    const [reviewList, setReviewList] = useState([
+        {
+            content: ""
+        }
+    ]);
 
     //Check to disable rating and favorite button
     const [isClicked, setIsClicked] = useState({
+        animeId: "",
+        userId: "",
         rated: true,
-        favorite: true
+        favorite: true,
+        reviewed: true
     });
 
     // Check Loading
@@ -44,21 +57,23 @@ const AnimeDetail = ({isLogin}) => {
     // Get animeId to show
     let { animeId } = useParams();
 
+    //Get anime from DB
     const getAnime = async () => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/${animeId}`,
             {
                 method: "GET"
             }).then(async res => {
-            // Updated successfully
-            if (res.status === 200) {
-                let obj = await res.json();
-                setAnime(obj);
-                setIsLoading('succeed');
-            }
-            // Error in back-end...
-            else {
-                setAnime({});
-            }});
+                // Updated successfully
+                if (res.status === 200) {
+                    let obj = await res.json();
+                    setAnime(obj);
+                    setIsLoading('succeed');
+                }
+                // Error in back-end...
+                else {
+                    setAnime({});
+                }
+            });
     }
 
     // Get rating list From Database
@@ -81,14 +96,39 @@ const AnimeDetail = ({isLogin}) => {
             .catch(err => setReviewList([]));
     }
 
+    //Check Reviewed, rate, favorite
+    const getIsClicked = async () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/check`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    animeId: animeId,
+                    userId: user.userId
+                })
+            }).then(res => res.json())
+            .then(res => setIsClicked(res))
+            .catch(err => setIsClicked({}));
+    }
+
+    useEffect(() => {
+        if (user.userId !== undefined) {
+            getIsClicked();
+        }
+    }, [user]);
+
     useEffect(
         () => {
             getAnime();
             getRateScore();
             getReview();
+            
             window.scrollTo(0, 0);
-        },[]);
+        }, []);
 
+    //Return loading
     if (isLoading === 'loading') {
         return (
             <Loading />
@@ -103,8 +143,8 @@ const AnimeDetail = ({isLogin}) => {
 
     return (
         <div className="bg-dark-container row mx-0 w-100 h-auto m-0 p-0">
-            <AnimeDetailTop anime={anime} isClicked={isClicked} isLogin={isLogin}/>
-            <AnimeDetailBottom anime={anime} rateList={rateList} reviewList={reviewList}/>
+            <AnimeDetailTop anime={anime} isClicked={isClicked} user={user} />
+            <AnimeDetailBottom anime={anime} rateList={rateList} reviewList={reviewList} />
         </div>
     );
 }

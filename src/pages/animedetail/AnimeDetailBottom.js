@@ -58,7 +58,7 @@ const AnimeDetailBottom = ({ anime, rateList, reviewList }) => {
                     <CharacterList anime={anime} />
                     <Trailer anime={anime} />
                     <RatingChart rateList={rateList} />
-                    {/* <AnimeList content="Recommend" isVertical={false} animeList={thisSeasonAnime} /> */}
+                    <AnimeList content="Recommend" isVertical={false} animeList={thisSeasonAnime} />
                     <Reviews reviewList={reviewList} />
                 </div>
             </div>

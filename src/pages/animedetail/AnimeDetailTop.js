@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //local dependencies
 import './AnimeDetailTop.css';
 
-const AnimeDetailTop = ({ anime, isClicked, isLogin }) => {
+const AnimeDetailTop = ({ anime, isClicked, user }) => {
     //Load background image
     const bacground_style = {
         backgroundImage: `url("data:image/*;base64,${anime.wallpaper}")`,

@@ -128,7 +128,7 @@ const ThreadManage = () => {
 
     if (isLoading === 'loading') {
         return (
-            <Loading />
+            <Loading content="Loading threads from database..."/>
         )
     }
 

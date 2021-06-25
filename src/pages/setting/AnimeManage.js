@@ -148,7 +148,7 @@ const AnimeManage = () => {
 
     if (isLoading === 'loading') {
         return (
-            <Loading />
+            <Loading content="Loading anime from database..."/>
         )
     }
 
