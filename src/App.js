@@ -66,7 +66,7 @@ const App = () => {
   );
 
   const handleLogout = () => {// logout
-    removeCookie("user");// remove cookies
+    removeCookie("user", {path:"/"});// remove cookies
     setIsLogin(false);
   }
 

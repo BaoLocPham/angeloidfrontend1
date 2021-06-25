@@ -140,7 +140,7 @@ const SearchByText = () => {
                 seasons={seasons} handleSelectSeason={handleSelectSeason}
                 formats={formats} handleSelectFormat={handleSelectFormat} />
             <SearchTagList selectedTag={selectedTag} handleDeleteTag={handleDeleteTag} />
-            <SearchResult />
+            {/* <SearchResult /> */}
         </div>
     );
 }
