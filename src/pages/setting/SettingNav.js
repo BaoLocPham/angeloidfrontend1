@@ -73,6 +73,17 @@ const SettingNav = ({ showLeftNav, user }) => {
                         style={settingActive === "threadtable" ? settingActiveStyle : {}}
                 >
                     {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
+                    <i className="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
+                    <span className="p-2">Thread</span>
+                </Link>
+
+                {/* Thread Management */}
+                <Link to="/setting/dashboard"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("threadtable")}
+                        style={settingActive === "threadtable" ? settingActiveStyle : {}}
+                >
+                    {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
                     <i class="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
                     <span className="p-2">Thread</span>
                 </Link>

@@ -53,12 +53,6 @@ const UserManage = () => {
             .then(res => setUserList(res));
     }
 
-    useEffect(() => {
-        listAllUser();
-    },
-        []
-    );
-
     // Delete User By UserId
     const deleteUser = (selectedUserId) => {
         closeModal();
@@ -72,6 +66,12 @@ const UserManage = () => {
                 }
             });
     }
+
+    useEffect(() => {
+        listAllUser();
+    },
+        []
+    );
 
     //Datatable structure
     var datatable = ({

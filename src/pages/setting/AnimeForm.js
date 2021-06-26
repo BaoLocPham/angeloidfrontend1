@@ -1,5 +1,6 @@
 //dependencies
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 // import { useParams, Redirect } from 'react-router-dom';
 import {
     useParams,
@@ -14,28 +15,35 @@ import AnimeImageForm from './AnimeImageForm';
 import AnimeDetailForm from './AnimeDetailForm';
 import AnimeTagForm from './AnimeTagForm';
 import CharacterFormList from './CharacterFormList';
+import Loading from "../components/Loading";
 
 // Model for notification
 import CustomedModal from '../components/Modal';
 const modalConfigs = {
     inputFail: { header: "Failed", body: "Fail to add new anime please check your input carefully!" },
+    duplicate: { header: "Duplicate", body: "Anime is already exited" },
     inputConnectError: { header: "Connection fail", body: "Fail to connect to server!" },
 }
 
 // Declare color code for tag background
 const colorList = [
-    { id: 1, colorCode: "#EC294B" },
+    { id: 1, colorCode: "#FF7171" },
     { id: 2, colorCode: "#F2AC57" },
     { id: 3, colorCode: "#0880AE" },
     { id: 4, colorCode: "#178F58" },
     { id: 5, colorCode: "#14A38B" },
     { id: 6, colorCode: "#35DF90" },
-    { id: 7, colorCode: "#FF7171" },
 ]
 
 var characterId = 0;
 
 const AnimeForm = () => {
+    //Check location to show button
+    const location = useLocation();
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     //Model properties and method to call model
     const [profileModalShow, setProfileModalShow] = useState(false);
     const [modalProfile, setModalProfile] = useState({});
@@ -93,7 +101,7 @@ const AnimeForm = () => {
 
     // Wallpaper upload
     const handleUploadWallpaper = (event) => {
-        try{
+        try {
             if (!event.target.files[0].type.match(/image.*/)) {
                 alert('You can\'t upload this type of file.');
                 return;
@@ -107,7 +115,7 @@ const AnimeForm = () => {
                 setDefaultWallpaper(e.target.result);
             };
             reader.readAsDataURL(event.target.files[0]);
-        }catch{
+        } catch {
 
         }
     };
@@ -119,7 +127,7 @@ const AnimeForm = () => {
 
     // Set Random Background Color for Tag
     const setColor = () => {
-        const colorRandom = (Math.floor(Math.random() * 7) + 1)
+        const colorRandom = (Math.floor(Math.random() * 6) + 1)
         for (let color of colorList) {
             if (color.id === colorRandom) {
                 return color.colorCode;
@@ -232,6 +240,7 @@ const AnimeForm = () => {
                 setDefaultWallpaper(`data:image/*;base64,${res.wallpaper}`);
                 setUploadWallpaper(res.wallpaper);
 
+                setIsLoading('succeed');
             })
             .catch(err => setInputAnime({}));
         //Fetch all season
@@ -298,7 +307,11 @@ const AnimeForm = () => {
             }
         ).then(async res => {
             //Fail to add
-            if (res.status === 409 || res.status === 500) {
+            if (res.status === 409) {
+                toggleModal(modalConfigs.duplicate);
+                return;
+            }
+            if (res.status === 500 || res.status === 400) {
                 toggleModal(modalConfigs.inputFail);
                 return;
             }
@@ -345,6 +358,12 @@ const AnimeForm = () => {
             });
     }
 
+    //Return loading
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     if (uploadStatus === true) {
         return (
@@ -393,16 +412,16 @@ const AnimeForm = () => {
                         />
 
                         {/* Insert Button */}
-                        { (inputAnime.animeName === "") ? 
+                        {(location.pathname === "/setting/anime/form") ?
                         <div className="my-3 d-flex justify-content-end">
                             <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
                         </div>
 
-                        :
+                            :
 
-                        <div className="my-3 d-flex justify-content-end">
-                            <button type="submit" className="UploadButton btn" onClick={handleClickUpload}>Upload</button>
-                        </div>
+                            <div className="my-3 d-flex justify-content-end">
+                                <button type="submit" className="UploadButton btn" onClick={handleClickUpload}>Upload</button>
+                            </div>
 
                         }
 

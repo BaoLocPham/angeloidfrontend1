@@ -7,7 +7,9 @@ import {
     Redirect
 } from "react-router-dom";
 
-const AnimeDetail = () => {
+import Loading from "../components/Loading";
+
+const AnimeDetail = ({ user }) => {
 
     // Declare Object Anime
     const [anime, setAnime] = useState({
@@ -24,27 +26,114 @@ const AnimeDetail = () => {
         ]
     })
 
+    //Rating list for chart
+    const [rateList, setRateList] = useState({
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0
+    });
+
+    //Review list for review
+    const [reviewList, setReviewList] = useState([
+        {
+            content: ""
+        }
+    ]);
+
+    //Check to disable rating and favorite button
+    const [isClicked, setIsClicked] = useState({
+        animeId: "",
+        userId: "",
+        rated: true,
+        favorite: true,
+        reviewed: true
+    });
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     // Get animeId to show
     let { animeId } = useParams();
 
-    // Get Anime From Database
+    //Get anime from DB
     const getAnime = async () => {
-        fetch(`http://localhost:5000/api/anime/${animeId}`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/${animeId}`,
+            {
+                method: "GET"
+            }).then(async res => {
+                // Updated successfully
+                if (res.status === 200) {
+                    let obj = await res.json();
+                    setAnime(obj);
+                    setIsLoading('succeed');
+                }
+                // Error in back-end...
+                else {
+                    setAnime({});
+                }
+            });
+    }
+
+    // Get rating list From Database
+    const getRateScore = async () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/rate/${animeId}`,
             {
                 method: "GET"
             }).then(res => res.json())
-            .then(res => setAnime(res))
-            .catch(err => setAnime({}));
+            .then(res => setRateList(res))
+            .catch(err => setRateList({}));
     }
+
+    //Get review list from DB
+    const getReview = async () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/${animeId}`,
+            {
+                method: "GET"
+            }).then(res => res.json())
+            .then(res => setReviewList(res))
+            .catch(err => setReviewList([]));
+    }
+
+    //Check Reviewed, rate, favorite
+    const getIsClicked = async () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/check`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    animeId: animeId,
+                    userId: user.userId
+                })
+            }).then(res => res.json())
+            .then(res => setIsClicked(res))
+            .catch(err => setIsClicked({}));
+    }
+
+    useEffect(() => {
+        if (user.userId !== undefined) {
+            getIsClicked();
+        }
+    }, [user]);
 
     useEffect(
         () => {
             getAnime();
+            getRateScore();
+            getReview();
+            
             window.scrollTo(0, 0);
-        },
-        []
-    )
+        }, []);
 
+    //Return loading
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     // Redirect to Error Page if data is Undifine
     if (anime.animeName === undefined)
@@ -52,11 +141,10 @@ const AnimeDetail = () => {
             <Redirect to='/error' />
         )
 
-
     return (
         <div className="bg-dark-container row mx-0 w-100 h-auto m-0 p-0">
-            <AnimeDetailTop anime={anime} />
-            <AnimeDetailBottom anime={anime} />
+            <AnimeDetailTop anime={anime} isClicked={isClicked} user={user} />
+            <AnimeDetailBottom anime={anime} rateList={rateList} reviewList={reviewList} />
         </div>
     );
 }

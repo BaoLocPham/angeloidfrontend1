@@ -1,7 +1,7 @@
 import React from 'react';
 
-const AnimeTagForm = ({ tags, selectedTag, handleSelectTag, handleDeleteTag}) => {
-    return (  
+const AnimeTagForm = ({ tags, selectedTag, handleSelectTag, handleDeleteTag }) => {
+    return (
         <div className="row">
             {/* Select Tag */}
             <div className="col-12 col-md-6">
@@ -17,7 +17,7 @@ const AnimeTagForm = ({ tags, selectedTag, handleSelectTag, handleDeleteTag}) =>
             <div className="p-0 mt-3">
                 {selectedTag.map(tag =>
                     <div key={`selectedTag${tag.tagId}`}
-                        style={{ color: "white", backgroundColor: tag.tagBgColor }}
+                        style={{ color: "white", backgroundColor: (tag.tagBgColor == null) ? "#EC294B" : tag.tagBgColor }}
                         className="btn rounded-pill mx-2 mb-2 mx-md-3 mb-md-3">
                         {tag.tagName}
                         <i onClick={() => handleDeleteTag(tag.tagId)} className="ms-2 fa fa-times"></i>
