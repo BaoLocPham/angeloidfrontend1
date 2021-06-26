@@ -1,5 +1,6 @@
 //dependencies
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 // import { useParams, Redirect } from 'react-router-dom';
 import {
     useParams,
@@ -14,11 +15,13 @@ import AnimeImageForm from './AnimeImageForm';
 import AnimeDetailForm from './AnimeDetailForm';
 import AnimeTagForm from './AnimeTagForm';
 import CharacterFormList from './CharacterFormList';
+import Loading from "../components/Loading";
 
 // Model for notification
 import CustomedModal from '../components/Modal';
 const modalConfigs = {
     inputFail: { header: "Failed", body: "Fail to add new anime please check your input carefully!" },
+    duplicate: { header: "Duplicate", body: "Anime is already exited" },
     inputConnectError: { header: "Connection fail", body: "Fail to connect to server!" },
 }
 
@@ -35,6 +38,12 @@ const colorList = [
 var characterId = 0;
 
 const AnimeForm = () => {
+    //Check location to show button
+    const location = useLocation();
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     //Model properties and method to call model
     const [profileModalShow, setProfileModalShow] = useState(false);
     const [modalProfile, setModalProfile] = useState({});
@@ -231,6 +240,7 @@ const AnimeForm = () => {
                 setDefaultWallpaper(`data:image/*;base64,${res.wallpaper}`);
                 setUploadWallpaper(res.wallpaper);
 
+                setIsLoading('succeed');
             })
             .catch(err => setInputAnime({}));
         //Fetch all season
@@ -297,7 +307,11 @@ const AnimeForm = () => {
             }
         ).then(async res => {
             //Fail to add
-            if (res.status === 409 || res.status === 500) {
+            if (res.status === 409) {
+                toggleModal(modalConfigs.duplicate);
+                return;
+            }
+            if (res.status === 500 || res.status === 400) {
                 toggleModal(modalConfigs.inputFail);
                 return;
             }
@@ -344,6 +358,12 @@ const AnimeForm = () => {
             });
     }
 
+    //Return loading
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     if (uploadStatus === true) {
         return (
@@ -392,7 +412,7 @@ const AnimeForm = () => {
                         />
 
                         {/* Insert Button */}
-                        { (inputAnime.animeName === "") ? 
+                        {(location.pathname === "/setting/anime/form") ?
                         <div className="my-3 d-flex justify-content-end">
                             <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
                         </div>

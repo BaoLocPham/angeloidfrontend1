@@ -86,7 +86,7 @@ const App = () => {
           </Route>
 
           <Route path='/anime/:animeId'>
-            <AnimeDetail />
+            <AnimeDetail user={user}/>
           </Route>
 
           <Route path='/account'>
