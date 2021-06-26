@@ -51,6 +51,13 @@ const AnimeDetail = ({ user }) => {
         reviewed: true
     });
 
+    //After click 
+    const handleAfterRatingReviewFavorite = (modifiedClick, modifiedScore) => {
+        setIsClicked(Object.assign({}, isClicked, modifiedClick));
+        if (modifiedScore !== undefined)
+            setRateList(Object.assign({}, rateList, modifiedScore));
+    }
+
     // Check Loading
     const [isLoading, setIsLoading] = useState('loading');
 
@@ -143,7 +150,7 @@ const AnimeDetail = ({ user }) => {
 
     return (
         <div className="bg-dark-container row mx-0 w-100 h-auto m-0 p-0">
-            <AnimeDetailTop anime={anime} isClicked={isClicked} user={user} />
+            <AnimeDetailTop anime={anime} isClicked={isClicked} user={user} rateList={rateList} handleAfterRatingReviewFavorite={handleAfterRatingReviewFavorite}/>
             <AnimeDetailBottom anime={anime} rateList={rateList} reviewList={reviewList} />
         </div>
     );

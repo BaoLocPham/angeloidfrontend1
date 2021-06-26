@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //local dependencies
 import './AnimeDetailTop.css';
 
-const AnimeDetailTop = ({ anime, isClicked, user }) => {
+const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingReviewFavorite }) => {
     //Load background image
     const bacground_style = {
         backgroundImage: `url("data:image/*;base64,${anime.wallpaper}")`,
@@ -21,6 +21,42 @@ const AnimeDetailTop = ({ anime, isClicked, user }) => {
         backgroundSize: "cover"
     }
 
+    const handleRating = (score) => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/rate`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    animeId: anime.animeId,
+                    userId: user.userId,
+                    rateScore: score
+                })
+            })
+            .then(res => { 
+                let modifiedScore = {};
+                if (score === 1) {
+                    modifiedScore = {one: rateList.one + 1};
+                }
+                if (score === 2) {
+                    modifiedScore = { two: rateList.two + 1 };
+                }
+                if (score === 3) {
+                    modifiedScore = { three: rateList.three + 1 };
+                }
+                if (score === 4) {
+                    modifiedScore = { four: rateList.four + 1 };
+                }
+                if (score === 5) {
+                    modifiedScore = { five: rateList.five + 1 };
+                }
+
+                handleAfterRatingReviewFavorite({ rated: true }, modifiedScore);
+            })
+            .catch(err => { handleAfterRatingReviewFavorite({ rated: false })});
+    }
+
     return (
         <div className="row mx-0 w-100 anime-detail-top p-0 scale125">
 
@@ -35,15 +71,15 @@ const AnimeDetailTop = ({ anime, isClicked, user }) => {
                         <div className="modal-body bg-dark-container">
                             <div className="d-flex flex-row justify-content-center" >
                                 <div className="rate">
-                                    <input type="radio" id="star5" onClick={() => { console.log("5") }} name="rate" value="5" />
+                                    <input type="radio" id="star5" onClick={() => handleRating(5)} name="rate" value="5" data-bs-dismiss="modal"/>
                                     <label htmlFor="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" onClick={() => { console.log("4") }} name="rate" value="4" />
+                                    <input type="radio" id="star4" onClick={() => handleRating(4)} name="rate" value="4" data-bs-dismiss="modal"/>
                                     <label htmlFor="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" onClick={() => { console.log("3") }} name="rate" value="3" />
+                                    <input type="radio" id="star3" onClick={() => handleRating(3)} name="rate" value="3" data-bs-dismiss="modal"/>
                                     <label htmlFor="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" onClick={() => { console.log("2") }} name="rate" value="2" />
+                                    <input type="radio" id="star2" onClick={() => handleRating(2)} name="rate" value="2" data-bs-dismiss="modal"/>
                                     <label htmlFor="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" onClick={() => { console.log("1") }} name="rate" value="1" />
+                                    <input type="radio" id="star1" onClick={() => handleRating(1)} name="rate" value="1" data-bs-dismiss="modal"/>
                                     <label htmlFor="star1" title="text">1 star</label>
                                 </div>
                             </div>

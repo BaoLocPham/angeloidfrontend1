@@ -67,7 +67,7 @@ const ThreadManage = () => {
     );
 
     // Delete Thread By ThreadId
-    const deleteUser = (selectedThreadId) => {
+    const deleteThread = (selectedThreadId) => {
         closeModal();
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/${selectedThreadId}`,
             {
@@ -143,7 +143,7 @@ const ThreadManage = () => {
                 modalBody={modalContent.body}
                 handleToggle={closeModal}
                 show={deleteModalShow}
-                deleteBtn={{ btnFunction: deleteUser, message: "Delete", idToDelete: threadIdToDelete }}
+                deleteBtn={{ btnFunction: deleteThread, message: "Delete", idToDelete: threadIdToDelete }}
             />
         </>
     );
