@@ -37,7 +37,11 @@ const Review = ({ reviewList }) => {
             <h5 id="Review" className="py-3">Review</h5>
             <div className="row">
                 <div>
-                    {reviewList.map(review =>
+                    {
+                        (reviewList.length === 0) ?
+                            <span>There is no review for this anime.</span>
+                        :
+                        reviewList.map(review =>
                         <div key={review.userId} style={frame} className="mb-3 p-2">
                             {(review.content.length < 500) ? review.content : <ReadMore>{review.content}</ReadMore>}
                         </div>

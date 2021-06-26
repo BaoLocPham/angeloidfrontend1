@@ -120,12 +120,14 @@ const AnimeDetail = ({ user }) => {
             .catch(err => setIsClicked({}));
     }
 
+    //Only load isClicked Status when user differ than undefined
     useEffect(() => {
         if (user.userId !== undefined) {
             getIsClicked();
         }
     }, [user]);
 
+    //Load all data when component mount
     useEffect(
         () => {
             getAnime();

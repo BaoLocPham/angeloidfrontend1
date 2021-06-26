@@ -21,7 +21,9 @@ const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingRev
         backgroundSize: "cover"
     }
 
+    //When user rating
     const handleRating = (score) => {
+        //Send data to API
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/rate`,
             {
                 method: "POST",
@@ -35,6 +37,7 @@ const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingRev
                 })
             })
             .then(res => { 
+                //Local modify score in rating chart
                 let modifiedScore = {};
                 if (score === 1) {
                     modifiedScore = {one: rateList.one + 1};
@@ -52,9 +55,31 @@ const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingRev
                     modifiedScore = { five: rateList.five + 1 };
                 }
 
+                //Disable rating button and add new score to Rating chart
                 handleAfterRatingReviewFavorite({ rated: true }, modifiedScore);
             })
             .catch(err => { handleAfterRatingReviewFavorite({ rated: false })});
+    }
+
+    //When user click to favorite button
+    const handleAddToFavorite = () => {
+        //Fetch to API
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/favorite`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    animeId: anime.animeId,
+                    userId: user.userId,
+                })
+            })
+            .then(res => {
+                //Disable favorite button
+                handleAfterRatingReviewFavorite({ favorite: true });
+            })
+            .catch(err => { handleAfterRatingReviewFavorite({ favorite: false }) });
     }
 
     return (
@@ -117,6 +142,7 @@ const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingRev
                             type="button"
                             className="btn btn-danger ms-4 favorite-button"
                             disabled={isClicked.favorite}
+                            onClick={handleAddToFavorite}
                         >
                             <i className="fa fa-heart" aria-hidden="true"></i>
                         </button>

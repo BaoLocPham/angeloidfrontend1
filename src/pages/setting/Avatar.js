@@ -17,7 +17,7 @@ const Avatar = ({ user, currentUser, base64Img, setBase64Img, setUser }) => {
         backgroundImage: `url("https://randomc.net/image/To%20LOVE-Ru/To%20LOVE-Ru%20-%20Trouble%20Darkness%20-%2001%20-%20Large%2022.jpg")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        padding: "7rem 0rem 9rem 0rem"
+        padding: "7rem 0rem 7.5rem 0rem"
     }
     const lower = {
         padding: "8em 0 1em 0",
