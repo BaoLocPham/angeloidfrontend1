@@ -15,19 +15,7 @@ const colorList = [
 
 const SearchByText = () => {
 
-    //Khởi tạo giá trị cho các input form (sau này sẽ lấy dữ liệu từ api)
-    const tags = [
-        { tagId: 0, tagName: "" },
-        { tagId: 1, tagName: "Isekai" },
-        { tagId: 2, tagName: "Slice of life" },
-        { tagId: 3, tagName: "School" },
-        { tagId: 4, tagName: "Fantasy" },
-        { tagId: 5, tagName: "Comedy" },
-        { tagId: 6, tagName: "Romance" },
-        { tagId: 7, tagName: "Action" },
-        { tagId: 8, tagName: "Drama" },
-        { tagId: 9, tagName: "School" }
-    ]
+    const [tags, setTags] = useState([]);
 
     const years = [
         { yearId: 1, year: "2021" },
@@ -51,8 +39,11 @@ const SearchByText = () => {
         { formatId: 4, formatName: "Special" }
     ]
 
-    //State để quản lí các input form
+    useEffect(() => {
+        setTags()
+    }, []);
 
+    //State để quản lí các input form
     const [selectedName, setSelectedName] = useState("");
     const [selectedTag, setSelectedTag] = useState([]);
     const [selectedYear, setSelectedYear] = useState("");
