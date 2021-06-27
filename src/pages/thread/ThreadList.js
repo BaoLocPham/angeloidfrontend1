@@ -4,7 +4,7 @@ import ThreadContent from './ThreadContent'
 
 
 
-const ThreadList = () => {
+const ThreadList = (threadAdded) => {
     const [threadList, setThreadList] = useState([
         {threadId:0}
     ]);
@@ -24,6 +24,16 @@ const ThreadList = () => {
             .then(res => res.json())
             .then(res => setThreadList(res))
     }, []);
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
+            {
+                method: "GET",
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+            .then(res => res.json())
+            .then(res => setThreadList(res))
+    }, [threadAdded]);
 
     function noScroll() {
         var x = window.scrollX;

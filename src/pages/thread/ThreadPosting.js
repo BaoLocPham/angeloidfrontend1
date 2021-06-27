@@ -11,7 +11,7 @@ const MODAL_THREAD = {
 }
 
 
-const ThreadPosting = ({ user }) => {
+const ThreadPosting = ({ user, threadAdded, setThreadAdded }) => {
     // Posting Form state
     const [postingForm, setPostingForm] = useState({
         title: "",
@@ -103,17 +103,15 @@ const ThreadPosting = ({ user }) => {
                 body: JSON.stringify(postingForm)
             }
         )
-        setPostingForm(
-            {
-                title: "",
-                content: "",
-                image: ""
-            }
-        )
+        setThreadAdded(threadAdded + 1);
+        // setPostingForm(
+        //     {
+        //         title: "",
+        //         content: "",
+        //         image: ""
+        //     }
+        // )
     }
-
-
-
 
     return (
         <>
