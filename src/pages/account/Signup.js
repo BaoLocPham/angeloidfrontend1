@@ -99,7 +99,6 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             // .then(res => res.json())
             .then(res => {
                 if (res.status == 400) {
-                    console.log("here");
                     event.preventDefault();
                     toggleRegisterModal();
                 } else {
