@@ -24,7 +24,7 @@ const SettingNav = ({ showLeftNav, user }) => {
             <Link to="/setting/profile"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
                 onClick={() => handleSettingActive("profile")}
-                style={ settingActive === "profile" ? settingActiveStyle : {} }
+                style={settingActive === "profile" ? settingActiveStyle : {}}
             >
                 <i className="fa fa-user fa-lg p-2"></i>
                 <span className="p-2">Profile</span>
@@ -32,7 +32,7 @@ const SettingNav = ({ showLeftNav, user }) => {
             <Link to="/setting/change"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
                 onClick={() => handleSettingActive("password")}
-                style={ settingActive === "password" ? settingActiveStyle : {} }
+                style={settingActive === "password" ? settingActiveStyle : {}}
             >
                 <i className="fa fa-shield fa-lg p-2"></i>
                 <span className="p-2">Password</span>
@@ -40,7 +40,7 @@ const SettingNav = ({ showLeftNav, user }) => {
             <Link to="/setting/favorite"
                 className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
                 onClick={() => handleSettingActive("favorite")}
-                style={ settingActive === "favorite" ? settingActiveStyle : {} }
+                style={settingActive === "favorite" ? settingActiveStyle : {}}
             >
                 <i className="fa fa-heart fa-lg p-2"></i>
                 <span className="p-2">Favorite</span>
@@ -58,12 +58,34 @@ const SettingNav = ({ showLeftNav, user }) => {
                     <span className="p-2">Anime</span>
                 </Link>
                 <Link to="/setting/user"
-                className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
-                onClick={() => handleSettingActive("usertable")}
-                style={settingActive === "usertable" ? settingActiveStyle : {}}
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("usertable")}
+                    style={settingActive === "usertable" ? settingActiveStyle : {}}
                 >
-                <i className="fa fa-users fa-lg p-2"></i>
-                <span className="p-2">User</span>
+                    <i className="fa fa-users fa-lg p-2"></i>
+                    <span className="p-2">User</span>
+                </Link>
+
+                {/* Thread Management */}
+                <Link to="/setting/thread"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("threadtable")}
+                        style={settingActive === "threadtable" ? settingActiveStyle : {}}
+                >
+                    {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
+                    <i className="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
+                    <span className="p-2">Thread</span>
+                </Link>
+
+                {/* Thread Management */}
+                <Link to="/setting/dashboard"
+                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    onClick={() => handleSettingActive("threadtable")}
+                        style={settingActive === "threadtable" ? settingActiveStyle : {}}
+                >
+                    {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
+                    <i class="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
+                    <span className="p-2">Thread</span>
                 </Link>
             </>
             : "" }

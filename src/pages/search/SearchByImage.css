@@ -1,0 +1,10 @@
+.drop-zone {
+    padding-top: 70px;
+    background-color: #131E2A;
+    min-height: 100vh;
+}
+
+.image-filter {
+    margin-left: 6rem;
+    margin-right: 6rem;
+}

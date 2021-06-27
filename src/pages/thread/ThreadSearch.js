@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const ThreadSearch = () => {
 
     const [textInput, setTextInput] = useState();
+    
     const formStyle = {
         backgroundColor: "#131E2A", color: "#fff",
         padding:"2.5rem 0 0.5rem 0"

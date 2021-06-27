@@ -66,7 +66,7 @@ const App = () => {
   );
 
   const handleLogout = () => {// logout
-    removeCookie("user");// remove cookies
+    removeCookie("user", {path:"/"});// remove cookies
     setIsLogin(false);
   }
 
@@ -86,7 +86,7 @@ const App = () => {
           </Route>
 
           <Route path='/anime/:animeId'>
-            <AnimeDetail />
+            <AnimeDetail user={user}/>
           </Route>
 
           <Route path='/account'>

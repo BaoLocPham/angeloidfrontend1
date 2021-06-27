@@ -15,6 +15,10 @@
     right: 0%;
 }
 
+#threadList {
+    min-height: 50vh;
+}
+
 @media screen and (min-width: 768px) {
     .threadCenter {
     overflow-y: scroll;

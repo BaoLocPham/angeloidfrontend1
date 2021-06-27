@@ -1,6 +1,7 @@
 //dependencies
 import React, { useState, useEffect } from 'react';
 import CustomedModal from '../components/Modal';
+import Loading from "../components/Loading";
 
 //Data table
 import { MDBDataTableV5 } from 'mdbreact';
@@ -21,12 +22,15 @@ const backgroundStyle = {
     borderRadius: "10px"
 }
 
-const UserManage = () => {
+const ThreadManage = () => {
     // Declare Variable
-    const [userList, setUserList] = useState([]);
-    const [userIdToDelete, setUserIdToDelete] = useState(0);
+    const [threadList, setThreadList] = useState([]);
+    const [threadIdToDelete, setThreadIdToDelete] = useState(0);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
+
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
 
     // Show Modal
     const toggleModal = (modalConfig) => {
@@ -40,75 +44,68 @@ const UserManage = () => {
     }
 
     // Show Delete Modal
-    const toggleModalDelete = (modalConfig, userId) => {
+    const toggleModalDelete = (modalConfig, threadId) => {
         setModalContent(modalConfig);
-        setUserIdToDelete(userId);
+        setThreadIdToDelete(threadId);
         setDeleteModalShow(!deleteModalShow);
     }
 
     // Get all User From Database
-    const listAllUser = async () => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user`)
+    const listAllThread = async () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread`)
             .then(res => res.json())
-            .then(res => setUserList(res));
+            .then(res => {
+                setThreadList(res);
+                setIsLoading('succeed');
+            });
     }
 
-    // Delete User By UserId
-    const deleteUser = (selectedUserId) => {
+    useEffect(() => {
+        listAllThread();
+    },
+        []
+    );
+
+    // Delete Thread By ThreadId
+    const deleteUser = (selectedThreadId) => {
         closeModal();
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/${selectedUserId}`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/${selectedThreadId}`,
             {
                 method: "DELETE"
             }).then(res => {
                 // Deleted successfully
                 if (res.status === 200) {
-                    setUserList(userList.filter(user => user.userId !== selectedUserId));
+                    setThreadList(threadList.filter(thread => thread.threadId !== selectedThreadId));
                 }
             });
     }
-
-    useEffect(() => {
-        listAllUser();
-    },
-        []
-    );
 
     //Datatable structure
     var datatable = ({
         columns: [
             {
-                label: 'User ID',
-                field: 'userId',
-                width: 100,
-            },
-            {
-                label: 'Avatar',
-                field: 'avatar',
-                width: 87,
+                label: 'Title',
+                field: 'title',
+                width: 220,
                 attributes: {
                     'aria-controls': 'DataTable',
                     'aria-label': 'Name',
                 },
             },
             {
-                label: 'Full name',
-                field: 'fullname',
+                label: 'Image',
+                field: 'image',
                 width: 220,
             },
             {
-                label: 'Username',
+                label: 'Content',
+                field: 'content',
+                width: 220,
+            },
+            {
+                label: 'User',
                 field: 'username',
                 width: 220,
-            },
-            {
-                label: 'Email',
-                field: 'email',
-                width: 220,
-            },
-            {
-                label: 'Gender',
-                field: 'gender',
-                width: 80,
             },
             {
                 label: '',
@@ -116,21 +113,24 @@ const UserManage = () => {
                 width: 100,
             },
         ],
-        rows: userList.map(u => {
+        rows: threadList.map(thread => {
             return (
                 {
-                    userId: u.userId,
-                    avatar: <div style={{ height: "5rem", width: "5rem", backgroundSize: "cover", backgroundPosition: "center", backgroundImage: `url("data:image/jpeg;base64,${u.avatar}` }}></div>,
-                    fullname: u.fullname,
-                    username: u.userName,
-                    email: u.email,
-                    gender: u.gender,
-                    delete: <button onClick={() => toggleModalDelete(modalConfigs.confirmDelete, u.userId)} className="btn btn-danger">Delete</button>
+                    title: thread.title,
+                    image: <div style={{ height: "8rem", width: "8rem", backgroundSize: "cover", backgroundPosition: "center", backgroundImage: `url("data:image/jpeg;base64,${thread.image}` }}></div>,
+                    content: thread.content,
+                    username: thread.user.userName,
+                    delete: <button onClick={() => toggleModalDelete(modalConfigs.confirmDelete, thread.threadId)} className="btn btn-danger">Delete</button>
                 }
             );
         })
     });
 
+    if (isLoading === 'loading') {
+        return (
+            <Loading content="Loading threads from database..."/>
+        )
+    }
 
     return (
         <>
@@ -143,10 +143,10 @@ const UserManage = () => {
                 modalBody={modalContent.body}
                 handleToggle={closeModal}
                 show={deleteModalShow}
-                deleteBtn={{ btnFunction: deleteUser, message: "Delete", idToDelete: userIdToDelete }}
+                deleteBtn={{ btnFunction: deleteUser, message: "Delete", idToDelete: threadIdToDelete }}
             />
         </>
     );
 }
 
-export default UserManage;
+export default ThreadManage;

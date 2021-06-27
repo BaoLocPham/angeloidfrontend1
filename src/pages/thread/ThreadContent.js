@@ -19,7 +19,7 @@ const ThreadContent = ({content}) => {
     return (  
         <div className="my-3 d-flex flex-column rounded-3 bg-dark-content">
             {/* Avatar of user */}
-            <div class="d-flex flex-row px-3 py-2 align-items-center">
+            <div className="d-flex flex-row px-3 py-2 align-items-center">
                 <div className="rounded-circle" style={POSTING_AVATAR}></div>
                 <div className="ms-3 w-50 fw-bold h-auto">
                     <p className="m-0">{content.user.fullName}</p>
