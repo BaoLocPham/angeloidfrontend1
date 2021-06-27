@@ -3,11 +3,12 @@ import TopUser from './TopUser';
 
 const TopUserContainer = () => {
     const styleDiv = {
+        width:"90%",
         backgroundColor: "#19293B",
         color: "#FFFFFF",
         borderRadius: "8px",
-        margin:"1rem 2rem 1rem 0.5rem",
-        padding:"0 0 0 2rem"
+        margin: "1rem 2rem 1rem 0.5rem",
+        padding: "0 0 0 2rem"
     }
     const Users = [
         { username: "BaoLoc", avatar: "" },
@@ -21,18 +22,14 @@ const TopUserContainer = () => {
         { username: "BaoViet", avatar: "" }
     ]
     return (
-        <div className="w-auto h-auto"
-            style={styleDiv}
-        >
-            <div className="row">
-                {
-                    Users.map(user => (
-                        <TopUser className="" style={{border:"red"}} username={user.username}
-                            avatar={user.avatar}>
-                        </TopUser>
-                    ))
-                }
-            </div>
+        <div className="row" style={styleDiv}>
+            {
+                Users.map(user => (
+                    <TopUser className="" style={{ border: "red" }} username={user.username}
+                        avatar={user.avatar}>
+                    </TopUser>
+                ))
+            }
         </div>
     );
 }
