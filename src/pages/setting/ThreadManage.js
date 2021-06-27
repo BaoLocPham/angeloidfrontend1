@@ -1,5 +1,7 @@
 //dependencies
 import React, { useState, useEffect } from 'react';
+
+//Child component
 import CustomedModal from '../components/Modal';
 import Loading from "../components/Loading";
 
@@ -60,20 +62,19 @@ const ThreadManage = () => {
             });
     }
 
+    //Load data when component mount
     useEffect(() => {
         listAllThread();
-    },
-        []
-    );
+    },[]);
 
     // Delete Thread By ThreadId
-    const deleteUser = (selectedThreadId) => {
+    const deleteThread = (selectedThreadId) => {
         closeModal();
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/${selectedThreadId}`,
             {
                 method: "DELETE"
             }).then(res => {
-                // Deleted successfully
+                // Deleted successfully also filter selected thread
                 if (res.status === 200) {
                     setThreadList(threadList.filter(thread => thread.threadId !== selectedThreadId));
                 }
@@ -126,6 +127,7 @@ const ThreadManage = () => {
         })
     });
 
+    //Return loading when data loading
     if (isLoading === 'loading') {
         return (
             <Loading content="Loading threads from database..."/>
@@ -143,7 +145,7 @@ const ThreadManage = () => {
                 modalBody={modalContent.body}
                 handleToggle={closeModal}
                 show={deleteModalShow}
-                deleteBtn={{ btnFunction: deleteUser, message: "Delete", idToDelete: threadIdToDelete }}
+                deleteBtn={{ btnFunction: deleteThread, message: "Delete", idToDelete: threadIdToDelete }}
             />
         </>
     );
