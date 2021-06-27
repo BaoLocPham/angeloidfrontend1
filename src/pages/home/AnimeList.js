@@ -4,8 +4,26 @@ import React from 'react';
 //local dependencies
 import AnimeCard from './AnimeCard';
 
-const AnimeList = ({ content, isVertical, animeList }) => {
-
+const AnimeList = ({ content, isVertical, animeList, isFour }) => {
+    if (isFour) {
+        animeList = animeList.slice(0, 4);
+        return (
+            <div className="w-100 h-auto py-4" style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto " }}>
+                <div>
+                    <h5 style={{ display: "inline-block", width: "50%" }}>{content}</h5>
+                </div>
+                <div className="w-100 h-auto row mx-0 d-flex justify-content-between" style={{ textAlign: "center" }}>
+                    {
+                        animeList.map(
+                            anime => (
+                                <AnimeCard key={anime.animeId} anime={anime} isVertical={isVertical} isFour={isFour} />
+                            )
+                        )
+                    }
+                </div>
+            </div>
+        );
+    }
     //Horizontal view
     if (!isVertical) {
 
@@ -31,8 +49,8 @@ const AnimeList = ({ content, isVertical, animeList }) => {
                 </div>
             </div>
         );
-    } 
-    
+    }
+
     //Vertical view
     else {
         return (

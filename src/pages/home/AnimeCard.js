@@ -6,11 +6,10 @@ import ReactTooltip from 'react-tooltip';
 //local dependencies
 import AnimeTooltip from "./AnimeTooltip";
 
-const AnimeCard = ({ anime, isVertical, count }) => {
-
+const AnimeCard = ({ anime, isVertical, isFour, count }) => {
     //Vertical style
     const styleVertical = {
-        height: "15em", width: "10em",
+        height: "15em", width: "95%",
         backgroundSize: "cover",
         backgroundImage: `url("data:image/jpeg;base64,${anime.thumbnail}")`,
         backgroundRepeat: "no-repeat",
@@ -38,7 +37,19 @@ const AnimeCard = ({ anime, isVertical, count }) => {
             </div>
         );
     }
-
+    else if (isFour) {
+        return (
+            <div className="col-6 p-0 col-lg-3">
+                <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
+                    <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
+                    <ReactTooltip place="right" id={`${anime.animeId}`}>
+                        <AnimeTooltip anime={anime} />
+                    </ReactTooltip>
+                    <h6 style={{ color: "#fff", paddingTop: "1rem" }}>{anime.animeName}</h6>
+                </Link>
+            </div>
+        );
+    }
     // The last item in vertical view to config right tooltip
     else if (count !== 5) {
         return (
