@@ -60,6 +60,10 @@ const ThreadPosting = ({ user }) => {
         event.preventDefault();
         const inputedFile = event.target.files[0];
 
+        if (event.target.files.length === 0) {
+            return;
+        }
+
         // File is not .jpg, .jpeg, .png or file is bigger than 2MB
         if (!inputedFile.name.match(/\.(jpg|jpeg|png)$/) || inputedFile.size > 2097152) {
             togglePostingModal(MODAL_CONFIGS.validate);

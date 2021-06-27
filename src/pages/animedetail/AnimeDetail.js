@@ -4,12 +4,12 @@ import AnimeDetailTop from './AnimeDetailTop';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     useParams,
-    Redirect
+    Redirect,
 } from "react-router-dom";
 
 import Loading from "../components/Loading";
 
-const AnimeDetail = ({ user }) => {
+const AnimeDetail = ({ user, match }) => {
 
     // Declare Object Anime
     const [anime, setAnime] = useState({
@@ -130,7 +130,6 @@ const AnimeDetail = ({ user }) => {
             getAnime();
             getRateScore();
             getReview();
-            
             window.scrollTo(0, 0);
         }, []);
 
