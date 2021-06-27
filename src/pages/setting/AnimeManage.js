@@ -1,5 +1,5 @@
 //dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import CustomedModal from '../components/Modal';
 import Loading from "../components/Loading";
@@ -11,11 +11,13 @@ import { MDBDataTableV5 } from 'mdbreact';
 import './AnimeManage.css';
 
 const AnimeManage = () => {
+    let addBtn = useRef();
     // Const Variables
     const modalConfigs = {
         requestFailed: { header: "Failed", body: "Failed to send data to server!!!" },
         requestSucceed: { header: "Succeed", body: "Delete anime successfully!!!" },
-        confirmDelete: { header: "Warning", body: "Are you sure !!!" }
+        confirmDelete: { header: "Warning", body: "Are you sure !!!" },
+        addSucceed: { header: "Succeed", body: "Automatically Add Anime Successfully!" }
     }
     const [animeIdToDelete, setAnimeIdToDelete] = useState(0);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
@@ -72,6 +74,23 @@ const AnimeManage = () => {
     useEffect(() => {
         listAllAnime();
     }, []);
+
+    const fetchNode = async () => {
+        if (addBtn.current) {
+            addBtn.current.setAttribute("disabled", "disabled");
+        }
+        let url = process.env.REACT_APP_NODE_URL || 'http://localhost:9000/api/anime'
+        await fetch(url,
+            {
+                method: "GET"
+            }).then(res => {
+                console.log("res:" + res);
+                // Deleted successfully
+                if (res.status === 200) {
+                    toggleModal(modalConfigs.addSucceed);
+                }
+            });
+    }
 
     //Datatable structure
     var datatable = ({
@@ -131,7 +150,7 @@ const AnimeManage = () => {
                     episode: (a.episode !== "null") ? a.episode : "updating",
                     studio: (a.studio !== null) ? a.studio.studioName : "updating",
                     update: <Link to={`/setting/anime/form/${a.animeId}`} className="btn btn-warning">Edit</Link>,
-                    delete: <button onClick={()=> toggleModalDelete(modalConfigs.confirmDelete, a.animeId)} className="btn btn-danger">Delete</button>
+                    delete: <button onClick={() => toggleModalDelete(modalConfigs.confirmDelete, a.animeId)} className="btn btn-danger">Delete</button>
                 }
             );
         })
@@ -155,6 +174,7 @@ const AnimeManage = () => {
     return (
         <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
             <Link to={`/setting/anime/form`} className="btn btn-success m-2">Add new</Link>
+            <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2">Automatically Add Anime</button>
             <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal
                 modalHeader={modalContent.header}

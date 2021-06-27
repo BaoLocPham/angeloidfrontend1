@@ -89,6 +89,7 @@ const SettingNav = ({ showLeftNav, user }) => {
                 </Link>
             </>
             : "" }
+            <a href="mailto:lprojekt7@gmail.com" className="btn btn-success" style={{ position:"fixed", bottom: "6%" }}>Contact Us</a>
         </nav>
     );
 };
