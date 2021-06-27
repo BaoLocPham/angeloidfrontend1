@@ -87,7 +87,9 @@ const Dashboard = () => {
                     </div>
 
                 </div>
-                <TopUserContainer className="col-12"></TopUserContainer>
+            </div>
+            <div className="row">
+            <TopUserContainer className="col-12"></TopUserContainer>
             </div>
 
         </div>
