@@ -8,7 +8,7 @@ const ThreadContent = ({content}) => {
 
     // Styles
     const POSTING_AVATAR = {
-        backgroundImage: `url(${(content.title === "Anime ga sukidesu") ? wall : wall2})`,
+        backgroundImage: `url(data:image/*;base64,${content.user.avatar})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "40px 40px",
@@ -36,8 +36,8 @@ const ThreadContent = ({content}) => {
             <div className="d-flex py-1 justify-content-end">
                 <img 
                     className="w-100" 
-                    // src={`data:image/*;base64,${content.image}`} 
-                    src={(content.title === "Anime ga sukidesu") ? wall : wall2}
+                    src={`data:image/*;base64,${content.image}`} 
+                    // src={(content.title === "Anime ga sukidesu") ? wall : wall2}
                     alt=""
                 />
             </div>

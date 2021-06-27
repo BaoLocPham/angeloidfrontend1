@@ -76,11 +76,19 @@ const Account = ({ setUser, isLogin, setCookie }) => {
             </Route>
 
             <Route path='/account/forgot'>
-                <ForgotPassword />
+                <ForgotPassword 
+                    BackGround={BackGround}
+                    Author={Author}
+                    AuthorLink={AuthorLink}
+                />
             </Route>
 
-            <Route path='/account/change'>
-                <ChangePassword />
+            <Route path='/account/change/:guid'>
+                <ChangePassword 
+                    BackGround={BackGround}
+                    Author={Author}
+                    AuthorLink={AuthorLink}
+                />
             </Route>
             
             <Route path='*'>

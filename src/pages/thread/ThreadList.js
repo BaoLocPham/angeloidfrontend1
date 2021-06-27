@@ -2,67 +2,82 @@ import React, { useState, useEffect } from 'react';
 
 import ThreadContent from './ThreadContent'
 
+
+
 const ThreadList = () => {
     const [threadList, setThreadList] = useState([
-        { threadId: 1, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: ""}},
-        { threadId: 2, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 3, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 4, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 5, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 6, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 7, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 8, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 9, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } },
-        { threadId: 10, title: "Anime ga sukidesu", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Mash", avatar: "" } }
+        {threadId:0}
     ]);
-
-    const updateThreadList = [
-        { threadId: 11, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 12, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 13, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 14, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 15, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 16, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 17, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 18, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 19, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-        { threadId: 20, title: "I like this anime", content: "Anyone know this character. I see this on the internet.", image: "", user: { fullName: "Haruka", avatar: "" } },
-    ];
-
-    //xóa vị trí củ sau khi render lại 
+    // last thread id -> for fetch api
+    const [lastId, setLastId] = useState(0);
+    // is there any thread left
+    const [isAnyLeft, setIsAnyLeft] = useState(true);
+    //xóa vị trí cũ sau khi render lại 
     useEffect(() => {
         window.history.scrollRestoration = "manual";
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
+            {
+                method: "GET",
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+            .then(res => res.json())
+            .then(res => setThreadList(res))
     }, []);
 
-    const handleUpdate = () => {
+    function noScroll() {
+        var x = window.scrollX;
+        var y = window.scrollY;
+        window.scrollTo(x, y);
     }
 
     useEffect(() => {
-        const threadList = document.getElementById("threadList");
+        const insidethreadList = document.getElementById("threadList");
         window.addEventListener('scroll', () => {
             //Nếu tọa độ hiện tại theo chiều dọc + chiều dài của màn hình người dùng
             //Bằng với chiều dài của threadList cộng khoảng cách từ threadList hiện tại tới đầu trang - 16
             //Thực hiện thâm dữ liệu 
-            if (window.scrollY + window.innerHeight > threadList.clientHeight + threadList.offsetTop - 16) {
-
+            if (isAnyLeft && window.scrollY + window.innerHeight > insidethreadList.clientHeight + insidethreadList.offsetTop - 16) {
+                // temporary disable scrolling
+                window.addEventListener('scroll', noScroll);
                 //Thực hiện cập nhật thêm Thread khi khéo xuống cuối trang
-                setThreadList(prev => { return [...prev, ...updateThreadList] });
+                // setThreadList(prev => { return [...prev, ...updateThreadList] });
+                if (lastId != undefined) {
+                    fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/load/${lastId}`,
+                        {
+                            method: "GET"
+                        }
+                    )
+                        .then(res => res.json())
+                        .then(res => {
+                            if(res.length !== 0){
+                                setThreadList([...threadList, ...res]);
+                            }
+                            if(res.length == 0 ){ // if res is null=> there is no thread left
+                                setIsAnyLeft(false);
+                            }
+                        })
+                }
             }
         });
         return () => {
-            window.removeEventListener('scroll', handleUpdate);
+            window.removeEventListener('scroll', noScroll);
         };
     });
 
+    useEffect(() => {
+        setLastId(threadList[threadList.length - 1].threadId);
+    }, [threadList])
+
     return (
         <div id="threadList">
-            {
+            {   // check if threadList is default or not 
+                // if threadlist is default then not load thread content
+                threadList.length === 1 ? "" :
                 threadList.map(thread => (
-
-                    <ThreadContent content={thread} />
+                    <ThreadContent key={thread.threadId} content={thread} />
                 ))
             }
-
         </div>
     );
 }

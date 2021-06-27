@@ -17,7 +17,7 @@ const Home = ({ isLogin }) => {
         const fetchAnimeHome = async () => {
 
             //Fetch this season anime
-            const thisSeasonAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/thisseason`,
+            const thisSeasonAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/home/thisseason`,
                 { method: "GET" }
             ).then(res => res.json())
                 .then(res => setThisSeasonAnime(res))
@@ -26,7 +26,7 @@ const Home = ({ isLogin }) => {
                 });
 
             //Fetch next season anime
-            const nextSeasonAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/nextseason`,
+            const nextSeasonAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/home/nextseason`,
                 { method: "GET" }
             ).then(res => res.json())
                 .then(res => {
@@ -37,7 +37,7 @@ const Home = ({ isLogin }) => {
                 });
 
             //Fetch all timme popular anime
-            const allTimePopularAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/alltimepopular`,
+            const allTimePopularAnimeData = fetch(`${process.env.REACT_APP_BACKEND_URL}api/home/alltimepopular`,
                 { method: "GET" }
             ).then(res => res.json())
                 .then(res => setAllTimePopular(res))
