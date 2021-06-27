@@ -85,8 +85,10 @@ const App = () => {
             <Search />
           </Route>
 
-          <Route path='/anime/:animeId'>
-            <AnimeDetail user={user}/>
+          <Route path='/anime/:animeId' render={(props) => (
+            <AnimeDetail key={props.match.params.animeId} user={user}/>
+          )}>
+            
           </Route>
 
           <Route path='/account'>
