@@ -10,7 +10,7 @@ import RatingChart from "./RatingChart";
 import Content from "./Content";
 import AnimeList from "../home/AnimeList";
 
-const AnimeDetailBottom = ({ anime, rateList, reviewList }) => {
+const AnimeDetailBottom = ({ anime, rateList, reviewList, setReviewList, user, isClicked, handleAfterRatingReviewFavorite }) => {
 
     //List of content anime
     const [thisSeasonAnime, setThisSeasonAnime] = useState([]);
@@ -59,7 +59,7 @@ const AnimeDetailBottom = ({ anime, rateList, reviewList }) => {
                     <Trailer anime={anime} />
                     <RatingChart rateList={rateList} />
                     <AnimeList content="Recommend" isVertical={false} animeList={thisSeasonAnime} />
-                    <Reviews reviewList={reviewList} />
+                    <Reviews reviewList={reviewList} setReviewList={setReviewList} user={user} anime={anime} isClicked={isClicked} handleAfterRatingReviewFavorite={handleAfterRatingReviewFavorite}/>
                 </div>
             </div>
         </div>

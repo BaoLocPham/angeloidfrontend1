@@ -71,7 +71,11 @@ const FavoriteList = ({ user }) => {
             <h4 style={{ color: "white", marginTop: "5%" }} className="p-0"><b>Anime</b></h4>
             {/* List Anime */}
             <div className="Favorite-Frame row justify-content-start mt-3 p-3">
-                {animeList.map(anime =>
+                {
+                    (animeList.length === 0) ?
+                    <span style={{ color: "white"}}>There is no thing in your favorite list.</span>
+                    :
+                    animeList.map(anime =>
                     <AnimeFavorite key={anime.animeId} anime={anime} onDelete={onDelete} />
                 )}
             </div>
