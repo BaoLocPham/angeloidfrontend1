@@ -37,9 +37,6 @@ const AnimeDetail = ({ user }) => {
 
     //Review list for review
     const [reviewList, setReviewList] = useState([
-        {
-            content: ""
-        }
     ]);
 
     //Check to disable rating and favorite button
@@ -50,6 +47,13 @@ const AnimeDetail = ({ user }) => {
         favorite: true,
         reviewed: true
     });
+
+    //After click 
+    const handleAfterRatingReviewFavorite = (modifiedClick, modifiedScore) => {
+        setIsClicked(Object.assign({}, isClicked, modifiedClick));
+        if (modifiedScore !== undefined)
+            setRateList(Object.assign({}, rateList, modifiedScore));
+    }
 
     // Check Loading
     const [isLoading, setIsLoading] = useState('loading');
@@ -113,12 +117,14 @@ const AnimeDetail = ({ user }) => {
             .catch(err => setIsClicked({}));
     }
 
+    //Only load isClicked Status when user differ than undefined
     useEffect(() => {
         if (user.userId !== undefined) {
             getIsClicked();
         }
     }, [user]);
 
+    //Load all data when component mount
     useEffect(
         () => {
             getAnime();
@@ -135,7 +141,7 @@ const AnimeDetail = ({ user }) => {
         )
     }
 
-    // Redirect to Error Page if data is Undifine
+    // Redirect to Error Page if data is Undefine
     if (anime.animeName === undefined)
         return (
             <Redirect to='/error' />
@@ -143,8 +149,20 @@ const AnimeDetail = ({ user }) => {
 
     return (
         <div className="bg-dark-container row mx-0 w-100 h-auto m-0 p-0">
-            <AnimeDetailTop anime={anime} isClicked={isClicked} user={user} />
-            <AnimeDetailBottom anime={anime} rateList={rateList} reviewList={reviewList} />
+            <AnimeDetailTop anime={anime} 
+                isClicked={isClicked} 
+                user={user} 
+                rateList={rateList} 
+                handleAfterRatingReviewFavorite={handleAfterRatingReviewFavorite}
+            />
+            <AnimeDetailBottom anime={anime} 
+                rateList={rateList} 
+                reviewList={reviewList}
+                setReviewList={setReviewList} 
+                user={user} 
+                isClicked={isClicked} 
+                handleAfterRatingReviewFavorite={handleAfterRatingReviewFavorite} 
+            />
         </div>
     );
 }

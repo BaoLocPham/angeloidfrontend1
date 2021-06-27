@@ -28,7 +28,7 @@ const Character = ({ character }) => {
 
     return (
         // Show Character Info
-        <div style={frame} className="my-2 anime-frame">
+        <div style={frame} className="anime-frame mb-3">
             <div className="row">
                 {/* Character Info */}
                 <div style={chaImg} className="col-2"></div>
