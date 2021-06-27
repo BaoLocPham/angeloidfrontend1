@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
+import TopUserContainer from './TopUser/TopUserContainer';
 
 // Style Line Chart
 const lineContent =
@@ -86,6 +87,7 @@ const Dashboard = () => {
                     </div>
 
                 </div>
+                <TopUserContainer className="col-12"></TopUserContainer>
             </div>
 
         </div>
