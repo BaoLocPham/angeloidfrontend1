@@ -1,11 +1,9 @@
 .trailer{
-    border-radius: 8px;
-    height: 15rem;
+    border-radius: 3px;
+    width: 100%;
+    aspect-ratio: 16/9;
 }
 
-@media (max-width: 768px) {
-    .trailer{
-        border-radius: 8px;
-        height: 11.2rem;
-    }
+.font-weight-light-bold{
+    font-weight: 500;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 const RatingChart = ({rateList}) => {
@@ -35,9 +35,9 @@ const RatingChart = ({rateList}) => {
         },
     };
     return (
-        <div className="col-12 col-md-6 h-auto" >
+        <div className="col-12 col-md-6 h-auto">
             <h5 className="py-2">Rating</h5>
-            <Bar style={{ backgroundColor: "#19293B" }} data={data} options={options} />
+            <Bar className="trailer" style={{ backgroundColor: "#19293B"}} data={data} options={options} />
         </div>
     );
 }

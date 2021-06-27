@@ -24,7 +24,7 @@ const AnimeDetailTop = ({ anime, isClicked, user, rateList, handleAfterRatingRev
     //When user rating
     const handleRating = (score) => {
         //Send data to API
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review/rate`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/review`,
             {
                 method: "POST",
                 headers: {
