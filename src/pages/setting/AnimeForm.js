@@ -206,8 +206,8 @@ const AnimeForm = () => {
 
     // Get animeId to show
     let { animeId } = useParams();
-    //Async fetch data when load form
-    const fetchAnimeRelateData = async () => {
+
+    const fetchAnimeData = () => {
         // fetch anime data 
         fetch(`http://localhost:5000/api/anime/${animeId}`,
             {
@@ -243,6 +243,10 @@ const AnimeForm = () => {
                 setIsLoading('succeed');
             })
             .catch(err => setInputAnime({}));
+    }
+
+    //Async fetch data when load form
+    const fetchAnimeRelateData = async () => {
         //Fetch all season
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/season`,
             { method: "GET" }
@@ -276,6 +280,11 @@ const AnimeForm = () => {
     //Load data form db when page is loaded and Redirect to error page when load data fail
     useEffect(() => {
         //Call fetch anime
+        if (location.pathname !== "/setting/anime/form") {
+            fetchAnimeData();
+        } else {
+            setIsLoading('succeed');
+        }
         fetchAnimeRelateData();
         window.scrollTo(0, 0);
     }, [])
@@ -285,7 +294,6 @@ const AnimeForm = () => {
             <Redirect to='/Error' />
         );
     }
-    // console.log(characters);
 
     // Insert new anime and redirect or notify error to user
     const handleClickInsert = (event) => {

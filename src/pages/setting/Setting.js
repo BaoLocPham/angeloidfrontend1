@@ -79,7 +79,7 @@ const Setting = ({ user, setUser, isLogin }) => {
                     </Route>
 
                     <Route path="/setting/favorite">
-                        <FavoriteList />
+                        <FavoriteList user={user}/>
                     </Route>
 
                     {user.isAdmin ?

@@ -84,11 +84,12 @@ const SettingNav = ({ showLeftNav, user }) => {
                         style={settingActive === "threadtable" ? settingActiveStyle : {}}
                 >
                     {/* <i className="fa fa-folder-open fa-lg p-2"></i> */}
-                    <i class="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
+                    <i className="fa fa-file-text fa-lg p-2" aria-hidden="true"></i>
                     <span className="p-2">Thread</span>
                 </Link>
             </>
             : "" }
+            <a href="mailto:lprojekt7@gmail.com" className="btn btn-success" style={{ position:"fixed", bottom: "6%" }}>Contact Us</a>
         </nav>
     );
 };
