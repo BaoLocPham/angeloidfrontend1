@@ -1,4 +1,5 @@
 .setting-nav {
+    position: fixed;
     width: 100vw;
     height: 100vh;
     left: -100vw;
@@ -7,7 +8,7 @@
 }
 
 .btn-left-nav {
-    position: absolute;
+    position: fixed;
     height: 200px;
     width: 30px;
     left: -15px;
@@ -32,7 +33,7 @@
 
 @media screen and (min-width: 768px) {
     .setting-nav {
-        width: 100%;
+        width: 20vw;
         left: 0;
     }
 }

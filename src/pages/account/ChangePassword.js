@@ -103,10 +103,11 @@ const ChangePassword = ({ BackGround, Author, AuthorLink }) => {
                 let obj = await res.json();
                 togglePasswordModal({ header: "Error", body: obj.Message });
             }
+            // Enable submit btn
+            if (passwordSubmitBtn.current) {
+                passwordSubmitBtn.current.removeAttribute("disabled");
+            }
         });
-
-        // Enable submit btn
-        passwordSubmitBtn.current.removeAttribute("disabled");
     }
 
 
