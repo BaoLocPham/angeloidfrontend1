@@ -7,7 +7,7 @@ const CharacterList = ({ anime }) => {
         // Show Character List
         <div id="character" className="col-12">
             <h5 id="Character" className="p-0">Character</h5>
-            <div className="row p-0 mx-0">
+            <div className="row">
                 {anime.characters.map(character =>
                     <Character key={character.characterId} character={character} />
                 )}

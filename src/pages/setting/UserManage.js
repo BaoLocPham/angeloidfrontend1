@@ -1,6 +1,9 @@
 //dependencies
 import React, { useState, useEffect } from 'react';
+
+//Child component
 import CustomedModal from '../components/Modal';
+import Loading from "../components/Loading";
 
 //Data table
 import { MDBDataTableV5 } from 'mdbreact';
@@ -28,6 +31,9 @@ const UserManage = () => {
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
 
+    // Check Loading
+    const [isLoading, setIsLoading] = useState('loading');
+
     // Show Modal
     const toggleModal = (modalConfig) => {
         setModalContent(modalConfig);
@@ -50,8 +56,18 @@ const UserManage = () => {
     const listAllUser = async () => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}api/user`)
             .then(res => res.json())
-            .then(res => setUserList(res));
+            .then(res => {
+                setUserList(res);
+                setIsLoading('succeed');
+            });
     }
+
+    //Load data when component mount
+    useEffect(() => {
+        listAllUser();
+    },
+        []
+    );
 
     // Delete User By UserId
     const deleteUser = (selectedUserId) => {
@@ -66,12 +82,6 @@ const UserManage = () => {
                 }
             });
     }
-
-    useEffect(() => {
-        listAllUser();
-    },
-        []
-    );
 
     //Datatable structure
     var datatable = ({
@@ -131,6 +141,12 @@ const UserManage = () => {
         })
     });
 
+    //Return loading when data loading
+    if (isLoading === 'loading') {
+        return (
+            <Loading content="Loading users from database..." />
+        )
+    }
 
     return (
         <>
