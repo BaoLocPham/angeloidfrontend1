@@ -11,11 +11,6 @@ import Profile from './Profile';
 import PasswordSetting from './PasswordSetting';
 import FavoriteList from './FavoriteList';
 import Error from '../error/Error';
-import AnimeForm from './AnimeForm';
-import AnimeManage from './AnimeManage';
-import UserManage from './UserManage';
-import ThreadManage from './ThreadManage';
-import Dashboard from "./Dashboard";
 import './Setting.css';
 
 const Setting = ({ user, setUser, isLogin }) => {
@@ -81,35 +76,6 @@ const Setting = ({ user, setUser, isLogin }) => {
                     <Route path="/setting/favorite">
                         <FavoriteList user={user}/>
                     </Route>
-
-                    {user.isAdmin ?
-                        <>
-                            <Route path="/setting/anime" exact>
-                                <AnimeManage />
-                            </Route>
-
-                            <Route path="/setting/anime/form" exact>
-                                <AnimeForm />
-                            </Route>
-
-                            <Route path="/setting/anime/form/:animeId">
-                                <AnimeForm />
-                            </Route>
-                            
-                            <Route path="/setting/user">
-                                <UserManage />
-                            </Route>
-
-                            <Route path="/setting/thread">
-                                <ThreadManage />
-                            </Route>
-
-                            <Route path="/setting/dashboard">
-                                <Dashboard />
-                            </Route>
-                        </>
-                        : ""
-                    }
 
                     <Route path="*">
                         <Error />

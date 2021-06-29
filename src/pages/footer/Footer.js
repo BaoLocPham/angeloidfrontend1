@@ -12,7 +12,7 @@ const style = {
 const Footer = () => {
     let location = useLocation();
     return (
-        <footer className="row mx-0" style={{width:"100%"}} style={ location.pathname === "/thread" || location.pathname.startsWith("/setting") ? {display: "none"} : {}}>
+        <footer className="row mx-0" style={{width:"100%"}} style={ location.pathname === "/thread" || location.pathname.startsWith("/setting") || location.pathname.startsWith("/admin") ? {display: "none"} : {}}>
             <div className="col-12 col-md-6" style={style}>
                 <div className="d-flex flex-row mb-4 mt-4">
                     <i className="fa fa-map-marker fa-2x me-4" style={{color: "white"}}></i>
