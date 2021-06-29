@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
+import TopUser from './TopUser/TopUser';
 import TopUserContainer from './TopUser/TopUserContainer';
 
 // Style Line Chart
@@ -21,7 +22,18 @@ const doughnutContent =
 }
 
 const Dashboard = () => {
+    const [TopUsers, setTopUsers] = useState([]);
+    const listTopUsers = () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/topuser`)
+        .then(res=>res.json())
+        .then(res=>{
+            setTopUsers(res);
+        });
+    }
 
+    useEffect(() => {
+        listTopUsers();
+    }, []);
     // Config Line Chart  
     const lineData = {
         labels: ["Jan", "Feb", "March", "April", "May",
@@ -67,7 +79,7 @@ const Dashboard = () => {
                             <h5>Total traffic</h5>
                             <Doughnut data={doughnutData} />
                         </div>
-                        
+
                         <div style={doughnutContent} className="col-5 p-3 m-2">
                             <h5>Total traffic</h5>
                             <Doughnut data={doughnutData} />
@@ -89,7 +101,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="row">
-            <TopUserContainer className="col-12"></TopUserContainer>
+                <TopUserContainer TopUsers={TopUsers} className="col-12"></TopUserContainer>
             </div>
 
         </div>

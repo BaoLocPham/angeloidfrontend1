@@ -12,8 +12,7 @@ const TopUser = ({ username, avatar }) => {
         width: 40,
         height: 40,
         borderRadius: "100%",
-        // backgroundImage: `url(data:image/*;base64,${user.avatar})`,
-        backgroundImage: `url("https://via.placeholder.com/500")`,
+        backgroundImage: `url(data:image/*;base64,${avatar})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover"
