@@ -110,7 +110,6 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                             <FacebookS setUser={setUser} isLogin={isLogin} setCookie={setCookie}
                             />
                         </div>
-                        <br />
                         <h5>OR</h5>
                         <form >
                             <CustomedPopover
@@ -143,11 +142,10 @@ const Login = ({ setUser, isLogin, setCookie, BackGround, Author, AuthorLink }) 
                                 onClick={handleSubmitLogin} className="btn btn-login" >Login</button>
                             <br />
                             <br />
-                            <h5 className="the-or">OR</h5>
+                            <h5 className="the-or" >OR</h5>
                         </form>
                         <br />
-                        <Link className="btn btn-login" to="/account/signup">Register</Link>
-                        <br />
+                        <Link className="btn btn-login register-link" to="/account/signup">Register</Link>
                         <br />
                         <Link className="btn btn-forgot" to="/account/forgot">Forgot Password ?</Link>
                     </div>

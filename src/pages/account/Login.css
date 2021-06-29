@@ -50,7 +50,7 @@
     cursor: pointer;
     background-color: #14A38B;   
     font-size: 16px;
-    height: 50px;
+    /* height: 50px; */
     max-width: 310px;
     width: 100%;
 }
@@ -61,6 +61,10 @@
     letter-spacing: 1px;
     color: white;
 }
+.the-or{
+    color: black;
+}
+
 
 
 .btn-forgot {

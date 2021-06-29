@@ -58,7 +58,7 @@ const AnimeDetailBottom = ({ anime, rateList, reviewList, setReviewList, user, i
                     <CharacterList anime={anime} />
                     <Trailer anime={anime} />
                     <RatingChart rateList={rateList} />
-                    <AnimeList content="Recommend" isVertical={false} animeList={thisSeasonAnime} />
+                    <AnimeList content="Recommend" isVertical={false} isFour={true} animeList={thisSeasonAnime} />
                     <Reviews reviewList={reviewList} setReviewList={setReviewList} user={user} anime={anime} isClicked={isClicked} handleAfterRatingReviewFavorite={handleAfterRatingReviewFavorite}/>
                 </div>
             </div>
