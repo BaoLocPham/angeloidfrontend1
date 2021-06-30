@@ -4,7 +4,7 @@ import ThreadContent from './ThreadContent'
 
 
 
-const ThreadList = (threadAdded) => {
+const ThreadList = ({threadAdded}) => {
     const [threadList, setThreadList] = useState([
         {threadId:0}
     ]);
@@ -43,13 +43,11 @@ const ThreadList = (threadAdded) => {
 
     useEffect(() => {
         const insidethreadList = document.getElementById("threadList");
-        window.addEventListener('scroll', () => {
+        const handle_scroll = () => {
             //Nếu tọa độ hiện tại theo chiều dọc + chiều dài của màn hình người dùng
             //Bằng với chiều dài của threadList cộng khoảng cách từ threadList hiện tại tới đầu trang - 16
             //Thực hiện thâm dữ liệu 
             if (isAnyLeft && window.scrollY + window.innerHeight > insidethreadList.clientHeight + insidethreadList.offsetTop - 16) {
-                // temporary disable scrolling
-                window.addEventListener('scroll', noScroll);
                 //Thực hiện cập nhật thêm Thread khi khéo xuống cuối trang
                 // setThreadList(prev => { return [...prev, ...updateThreadList] });
                 if (lastId != undefined) {
@@ -69,10 +67,12 @@ const ThreadList = (threadAdded) => {
                         })
                 }
             }
-        });
-        return () => {
-            window.removeEventListener('scroll', noScroll);
-        };
+        }
+        
+        window.addEventListener('scroll', handle_scroll);
+        return ()=>{
+            window.removeEventListener("scroll", handle_scroll);
+        }
     });
 
     useEffect(() => {
