@@ -49,7 +49,8 @@ const ThreadCenter = ({ user, isLogin }) => {
                 })
             })
                 .then(res => res.json())
-                .then(res => setThreadList(res))
+                .then(res =>{ setThreadList(res); console.log(res)})
+
         }
     }
 
