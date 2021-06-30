@@ -1,28 +1,20 @@
-.threadFixed {
+.threadAnimeList {
     position: fixed;
-    height: 100vh;
+    overflow-y: scroll;
+    height: 89%;
+    right: 0%;
 }
 
-.threadAnimeList {
-    overflow-y: scroll;
-    height: 95%;
-    right: 0%;
+.advertisement {
+    position: fixed;
+    left: 0%;
+    height: 88%;
 }
 
 .threadCenter {
     overflow-y: scroll;
-    height: 94%;
-    right: 0%;
 }
 
 #threadList {
     min-height: 50vh;
-}
-
-@media screen and (min-width: 768px) {
-    .threadCenter {
-    overflow-y: scroll;
-    height: 94%;
-    right: 27%;
-}
 }

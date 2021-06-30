@@ -6,7 +6,7 @@ const ThreadSearch = () => {
     
     const formStyle = {
         backgroundColor: "#131E2A", color: "#fff",
-        padding:"2.5rem 0 0.5rem 0"
+        // padding:"2.5rem 0 0.5rem 0"
     }
     const transparent = {
         backgroundColor: "#19293B",

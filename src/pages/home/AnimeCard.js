@@ -9,7 +9,7 @@ import AnimeTooltip from "./AnimeTooltip";
 const AnimeCard = ({ anime, isVertical, isFour, count }) => {
     //Vertical style
     const styleVertical = {
-        height: "15em", width: "95%",
+        height: "16rem", width: "95%",
         backgroundSize: "cover",
         backgroundImage: `url("data:image/jpeg;base64,${anime.thumbnail}")`,
         backgroundRepeat: "no-repeat",
@@ -68,7 +68,6 @@ const AnimeCard = ({ anime, isVertical, isFour, count }) => {
     // Display for mobile app
     else {
         return (
-
             <div className="col-6 col-lg-2 d-none d-lg-block">
                 <Link to={`/anime/${anime.animeId}`} style={linkStyle}>
                     <div data-tip data-for={`${anime.animeId}`} style={styleVertical}></div>
