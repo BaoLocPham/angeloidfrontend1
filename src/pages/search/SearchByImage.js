@@ -89,7 +89,7 @@ const SearchByImage = () => {
             .then(res => res.json())
             .then(async res => {
                 setImageShow(res.image)
-                fetch('http://localhost:5000/api/anime/searchImage', {
+                fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/searchImage`, {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
