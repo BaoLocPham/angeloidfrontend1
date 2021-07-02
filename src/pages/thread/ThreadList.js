@@ -2,54 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 import ThreadContent from './ThreadContent'
 
+const ThreadList = ({ threadList, setThreadList, isSearch }) => {
 
-
-const ThreadList = (threadAdded) => {
-    const [threadList, setThreadList] = useState([
-        {threadId:0}
-    ]);
     // last thread id -> for fetch api
     const [lastId, setLastId] = useState(0);
     // is there any thread left
     const [isAnyLeft, setIsAnyLeft] = useState(true);
-    //xóa vị trí cũ sau khi render lại 
-    useEffect(() => {
-        window.history.scrollRestoration = "manual";
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
-            {
-                method: "GET",
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-            .then(res => res.json())
-            .then(res => setThreadList(res))
-    }, []);
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
-            {
-                method: "GET",
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-            .then(res => res.json())
-            .then(res => setThreadList(res))
-    }, [threadAdded]);
-
-    function noScroll() {
-        var x = window.scrollX;
-        var y = window.scrollY;
-        window.scrollTo(x, y);
-    }
 
     useEffect(() => {
         const insidethreadList = document.getElementById("threadList");
-        window.addEventListener('scroll', () => {
+        const handle_scroll = () => {
             //Nếu tọa độ hiện tại theo chiều dọc + chiều dài của màn hình người dùng
             //Bằng với chiều dài của threadList cộng khoảng cách từ threadList hiện tại tới đầu trang - 16
             //Thực hiện thâm dữ liệu 
             if (isAnyLeft && window.scrollY + window.innerHeight > insidethreadList.clientHeight + insidethreadList.offsetTop - 16) {
-                // temporary disable scrolling
-                window.addEventListener('scroll', noScroll);
                 //Thực hiện cập nhật thêm Thread khi khéo xuống cuối trang
                 // setThreadList(prev => { return [...prev, ...updateThreadList] });
                 if (lastId != undefined) {
@@ -69,10 +35,12 @@ const ThreadList = (threadAdded) => {
                         })
                 }
             }
-        });
-        return () => {
-            window.removeEventListener('scroll', noScroll);
-        };
+        }
+        
+        window.addEventListener('scroll', handle_scroll);
+        return ()=>{
+            window.removeEventListener("scroll", handle_scroll);
+        }
     });
 
     useEffect(() => {
@@ -84,9 +52,9 @@ const ThreadList = (threadAdded) => {
             {   // check if threadList is default or not 
                 // if threadlist is default then not load thread content
                 threadList.length === 1 ? "" :
-                threadList.map(thread => (
-                    <ThreadContent key={thread.threadId} content={thread} />
-                ))
+                    threadList.map(thread => (
+                        <ThreadContent key={thread.threadId} content={thread} />
+                    ))
             }
         </div>
     );
