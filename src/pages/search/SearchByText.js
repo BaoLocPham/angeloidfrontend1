@@ -206,7 +206,7 @@ const SearchByText = () => {
                     <img className="my-2 img-fluid" src={Cell} alt="Platelet - Hataraku Saibou" />
                 </div>
                 : isAnimeLoading === 'loading' ? 
-                    <div className="d-flex flex-column justify-content-center align-items-center py-3">
+                    <div className="d-flex flex-column justify-content-center align-items-center p-3">
                         <h4 className="text-light">{quote.quote}</h4>
                         <p className="text-light"><i>---{quote.author}---</i></p>
                         <div class="spinner-border text-light" role="status">
@@ -214,7 +214,7 @@ const SearchByText = () => {
                         </div>
                     </div>
                     : searchResult.length === 0 ?
-                        <div className="d-flex flex-column justify-content-center align-items-center" style={{ width: "100vw", height: "400px" }}>
+                        <div className="d-flex flex-column justify-content-center align-items-center mt-2" style={{ width: "100vw", height: "400px" }}>
                             <h5 className="p-2"><u>Oops... We could not find your anime...</u></h5>
                             <div className="my-2" style={KANNA_IMG_STYLE} ></div>
                         </div>
