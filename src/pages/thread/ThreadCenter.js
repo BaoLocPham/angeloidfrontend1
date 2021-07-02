@@ -14,6 +14,7 @@ const KANNA_IMG_STYLE = {
 }
 
 const ThreadCenter = ({ user, isLogin }) => {
+    // Declare Variables
     const [threadAdded, setThreadAdded] = useState(0);
     const [threadList, setThreadList] = useState([
         { threadId: 0 }
@@ -21,7 +22,7 @@ const ThreadCenter = ({ user, isLogin }) => {
     const [textInput, setTextInput] = useState("");
     const [isSearch, setIsSearch] = useState(false);
 
-
+    // Check key text is empty, has whitespaces
     function isEmptyOrSpaces(str) {
         return str === null || str.match(/^ *$/) !== null;
     }
@@ -49,8 +50,7 @@ const ThreadCenter = ({ user, isLogin }) => {
                 })
             })
                 .then(res => res.json())
-                .then(res =>{ setThreadList(res); console.log(res)})
-
+                .then(res => setThreadList(res))
         }
     }
 
