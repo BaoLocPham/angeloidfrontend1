@@ -25,6 +25,7 @@ const AnimeManage = () => {
 
     // Check Loading
     const [isLoading, setIsLoading] = useState('loading');
+    const [isProccessing, setIsProccessing] = useState(false);
 
     // Show Modal
     const toggleModal = (modalConfig) => {
@@ -71,21 +72,27 @@ const AnimeManage = () => {
             });
     }
 
+    const getProcessing = async () => {
+        let url = `${process.env.REACT_APP_NODE_URL}api/process` || 'http://localhost:9000/api/process';
+        await fetch(url)
+            .then(res => res.json())
+            .then(res => setIsProccessing(res));
+    }
+
     useEffect(() => {
         listAllAnime();
+        getProcessing();
     }, []);
 
     const fetchNode = async () => {
         if (addBtn.current) {
             addBtn.current.setAttribute("disabled", "disabled");
         }
-        let url = process.env.REACT_APP_NODE_URL || 'http://localhost:9000/api/anime'
+        let url = `${process.env.REACT_APP_NODE_URL}api/anime` || 'http://localhost:9000/api/anime';
         await fetch(url,
             {
                 method: "GET"
             }).then(res => {
-                console.log("res:" + res);
-                // Deleted successfully
                 if (res.status === 200) {
                     toggleModal(modalConfigs.addSucceed);
                 }
@@ -174,7 +181,7 @@ const AnimeManage = () => {
     return (
         <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
             <Link to={`/setting/anime/form`} className="btn btn-success m-2">Add new</Link>
-            <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2">Automatically Add Anime</button>
+            <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2" disabled={isProccessing}>Automatically Add Anime</button>
             <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal
                 modalHeader={modalContent.header}

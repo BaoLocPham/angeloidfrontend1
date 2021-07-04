@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
+import TopUser from './TopUser/TopUser';
 import TopUserContainer from './TopUser/TopUserContainer';
 
 // Style Line Chart
@@ -21,6 +22,31 @@ const doughnutContent =
 }
 
 const Dashboard = () => {
+    // Declare Variables
+    const [TopUsers, setTopUsers] = useState([]);
+    const [loginTimes, setLoginTimes] = useState([]);
+
+    // Fetch All Login Time of User
+    const listAllLoginTimes = () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/LoginTime`)
+            .then(res => res.json())
+            .then(res => {
+                setLoginTimes(res);
+            });
+    }
+
+    const listTopUsers = () => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/topuser`)
+            .then(res => res.json())
+            .then(res => {
+                setTopUsers(res);
+            });
+    }
+
+    useEffect(() => {
+        listAllLoginTimes();
+        listTopUsers();
+    }, []);
 
     // Config Line Chart  
     const lineData = {
@@ -29,7 +55,7 @@ const Dashboard = () => {
         datasets: [
             {
                 label: 'Visits',
-                data: [200, 180, 50, 384, 216, 333, 100, 400, 150, 500, 232, 353],
+                data: loginTimes,
                 backgroundColor: '#178F58',
                 borderColor: '#178F58',
             },
@@ -57,7 +83,7 @@ const Dashboard = () => {
         <div className="col-12 ms-5">
             <div className="row">
                 <div style={lineContent} className="col-7 p-3 m-2">
-                    <h4>Visit</h4>
+                    <h4>Login Time</h4>
                     <Line data={lineData} />
                 </div>
 
@@ -67,7 +93,7 @@ const Dashboard = () => {
                             <h5>Total traffic</h5>
                             <Doughnut data={doughnutData} />
                         </div>
-                        
+
                         <div style={doughnutContent} className="col-5 p-3 m-2">
                             <h5>Total traffic</h5>
                             <Doughnut data={doughnutData} />
@@ -89,7 +115,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="row">
-            <TopUserContainer className="col-12"></TopUserContainer>
+                <TopUserContainer TopUsers={TopUsers} className="col-12"></TopUserContainer>
             </div>
 
         </div>

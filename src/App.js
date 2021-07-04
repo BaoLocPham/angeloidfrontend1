@@ -20,6 +20,7 @@ import Search from './pages/search/Search';
 import Account from './pages/account/Account';
 import Setting from './pages/setting/Setting';
 import Thread from './pages/thread/Thread';
+import Admin from './pages/admin/Admin';
 import Error from './pages/error/Error';
 import Footer from './pages/footer/Footer';
 
@@ -85,8 +86,9 @@ const App = () => {
             <Search />
           </Route>
 
-          <Route path='/anime/:animeId'>
-            <AnimeDetail user={user}/>
+          <Route path='/anime/:animeId' render={(props) => (
+            <AnimeDetail key={props.match.params.animeId} user={user}/>
+          )}>
           </Route>
 
           <Route path='/account'>
@@ -99,6 +101,10 @@ const App = () => {
 
           <Route path='/thread'>
             <Thread user={user} isLogin={isLogin} />
+          </Route>
+
+          <Route path='/admin'>
+            <Admin user={user} isLogin={isLogin} />
           </Route>
 
           <Route path='*'>

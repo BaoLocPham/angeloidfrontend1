@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Character.css';
 
 const Character = ({ character }) => {
 
@@ -28,16 +27,16 @@ const Character = ({ character }) => {
 
     return (
         // Show Character Info
-        <div style={frame} className="anime-frame mb-3">
-            <div className="row">
+        <div className="col-12 col-md-6 mb-2">
+            <div style={frame} className="row mx-0">
                 {/* Character Info */}
                 <div style={chaImg} className="col-2"></div>
-                <div className="col-4 pt-2">
+                <div className="col-4">
                     <div style={{ height: "50%" }} className="col-12 text-center">{character.characterName}</div>
                     <div style={{ height: "50%" }} className="col-12 text-center">{character.characterRole}</div>
                 </div>
                 {/* Seiyuu Info */}
-                <div className="col-4 pt-2">
+                <div className="col-4">
                     <div style={{ height: "50%" }} className="col-12 text-center">{character.seiyuu.seiyuuName}</div>
                 </div>
                 <div style={seiyuuImg} className="col-2"></div>
