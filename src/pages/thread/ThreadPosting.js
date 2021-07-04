@@ -104,13 +104,13 @@ const ThreadPosting = ({ user, threadAdded, setThreadAdded }) => {
             }
         )
         setThreadAdded(threadAdded + 1);
-        // setPostingForm(
-        //     {
-        //         title: "",
-        //         content: "",
-        //         image: ""
-        //     }
-        // )
+        setPostingForm(
+            {
+                title: "",
+                content: "",
+                image: ""
+            }
+        )
     }
 
     return (
