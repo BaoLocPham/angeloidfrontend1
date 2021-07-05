@@ -1,6 +1,7 @@
 //#region Import
 // Libs
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router';
 import { fetchSearchData, search } from '../../adapters/SearchAPI';
 // Components
 import TextFilter from './TextFilter';
@@ -50,24 +51,8 @@ const SearchByText = () => {
     const [isAnimeLoading, setIsAnimeLoading] = useState('init');
     const [tags, setTags] = useState([]);
     const [years, setYears] = useState([]);
+    const [clickBtn, setClickBtn] = useState(false);
     const seasons = ["Winter", "Spring", "Summer", "Fall"];
-
-    const formats = [
-        { formatId: 1, formatName: "Oneshot/Movie" },
-        { formatId: 2, formatName: "Series" },
-    ]
-
-    useEffect(() => {
-        Promise.all([
-            fetchSearchData(`${process.env.REACT_APP_BACKEND_URL}api/tag`),
-            fetchSearchData(`${process.env.REACT_APP_BACKEND_URL}api/season`),
-        ]).then(([tagList, seasonYearList]) => {
-            setTags(tagList);
-            setYears(seasonYearList.reverse());
-            setIsLoading('done');
-        });
-    }, []);
-
     //State để quản lí các input form
     const [selectedName, setSelectedName] = useState("");
     const [selectedTag, setSelectedTag] = useState([]);
@@ -75,6 +60,43 @@ const SearchByText = () => {
     const [selectedYear, setSelectedYear] = useState("");
     const [selectedSeason, setSelectedSeason] = useState("");
     const [selectedFormat, setSelectedFormat] = useState(0);
+    const [searchResult, setSearchResult] = useState([]);
+    // Ref to disable btn when user submit data
+    let searchBtn = useRef(null);
+
+    const formats = [
+        { formatId: 1, formatName: "Oneshot/Movie" },
+        { formatId: 2, formatName: "Series" },
+    ]
+
+    const location = useLocation();
+
+    useEffect(() => {
+        Promise.all([
+            fetchSearchData(`${process.env.REACT_APP_BACKEND_URL}api/tag`),
+            fetchSearchData(`${process.env.REACT_APP_BACKEND_URL}api/season`),
+        ])
+        .then(([tagList, seasonYearList]) => {
+            setTags(tagList);
+            setYears(seasonYearList.reverse());
+            setIsLoading('done');
+        })
+    }, []);
+
+    useEffect(() => {
+        // Only set SelectedTag if tags is fetched
+        if (location.state != undefined && tags.length !== 0) {
+            handleSelectTag({
+                // Prevent err when handle Select Tag call preventDefault()
+                preventDefault: () => true,
+                // Target value
+                target: {
+                    value: location.state.tag.tagId,
+                },
+            });
+            setClickBtn(true);
+        }
+    },[tags]);
 
     // Check các thay đổi trên các input 
     const handleSelectName = (event) => {
@@ -138,11 +160,6 @@ const SearchByText = () => {
         setSelectedFormat(event.target.value);
     }
 
-    //Xuất dữ liệu ra console
-    const [searchResult, setSearchResult] = useState([]);
-    // Ref to disable btn when user submit data
-    let searchBtn = useRef(null);
-
     const handleSubmitSearch = () => {
         setIsAnimeLoading('loading');
         // If Submit Button exist, disable it
@@ -175,7 +192,14 @@ const SearchByText = () => {
         if (isAnimeLoading !== 'init') {
             setIsAnimeLoading('done');
         }
-    }, [searchResult])
+    }, [searchResult]);
+
+    useEffect(() => {
+        if (clickBtn && selectedTag.length !== 0) {
+            handleSubmitSearch();
+            setClickBtn(false);
+        }
+    }, [selectedTag]);
 
     //#region Render
     if (isLoading === "loading") {
