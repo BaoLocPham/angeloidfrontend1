@@ -34,14 +34,14 @@ const Thread = ({ user, isLogin }) => {
     }
 
     return (
-        <div className="row mx-0 pt-5 bg-dark-container w-100">
-            <div className="d-none d-md-block col-md-3">
+        <div className="row mx-0 bg-dark-container w-100 d-flex justify-content-center" style={{minHeight: "100vh", paddingTop: "70px"}}>
+            <div className="d-none d-md-block col-md-3 advertisement">
                 <Advertisement />
             </div>
             <div className="col-12 col-md-6 px-5">
                 <ThreadCenter user={user} isLogin={isLogin} />
             </div>
-            <div className="d-none d-md-block col-md-3 px-5 py-3 threadFixed threadAnimeList">
+            <div className="d-none d-md-block col-md-3 threadAnimeList">
                 <AnimeList content="POPULAR THIS SEASON" isVertical={true} animeList={thisSeasonAnime} />
             </div>
         </div>

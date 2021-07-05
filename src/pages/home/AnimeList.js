@@ -3,6 +3,7 @@ import React from 'react';
 
 //local dependencies
 import AnimeCard from './AnimeCard';
+import './AnimeCard.css';
 
 const AnimeList = ({ content, isVertical, animeList, isFour }) => {
     if (isFour) {
@@ -31,12 +32,12 @@ const AnimeList = ({ content, isVertical, animeList, isFour }) => {
         var count = 0;
 
         return (
-            <div className="w-100 h-auto py-4" style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto " }}>
+            <div className="w-100 h-auto py-4 mx-0" style={{ backgroundColor: "#131E2A", color: "#fff", margin: "auto " }}>
                 <div>
                     <h5 style={{ display: "inline-block", width: "50%" }}>{content}</h5>
                     {/* <a style={{ display: "inline-block", width: "50%", textAlign: "right", textDecoration: 'none', color: "#fff", fontSize: "1rem" }} href="#">See all</a> */}
                 </div>
-                <div className="w-100 h-auto row justify-content-between" style={{ textAlign: "center" }}>
+                <div className="w-100 h-auto row justify-content-between mx-0" style={{ textAlign: "center" }}>
                     {
                         animeList.map(
                             anime => (
@@ -58,7 +59,7 @@ const AnimeList = ({ content, isVertical, animeList, isFour }) => {
                 <div>
                     <h5 className="pb-3 text-center" style={{ display: "inline-block", width: "100%" }}>{content}</h5>
                 </div>
-                <div className="row" style={{ textAlign: "center" }}>
+                <div className="row mx-0 anime-list-vertical" style={{ textAlign: "center" }}>
                     {
                         animeList.map(
                             anime => (

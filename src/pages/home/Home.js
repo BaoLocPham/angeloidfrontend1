@@ -66,9 +66,9 @@ const Home = ({ isLogin }) => {
                 <Welcome />
                 : <Features />
             }
-            <AnimeList content="POPULAR THIS SEASON" isVertical={false} animeList={thisSeasonAnime} />
-            <AnimeList content="UPCOMING NEXT SEASON" isVertical={false} animeList={nextSeasonAnime} />
-            <AnimeList content="ALL TIME POPULAR" isVertical={false} animeList={allTimePopularAnime} />
+            <AnimeList key="1" content="POPULAR THIS SEASON" isVertical={false} animeList={thisSeasonAnime} />
+            <AnimeList key="2" content="UPCOMING NEXT SEASON" isVertical={false} animeList={nextSeasonAnime} />
+            <AnimeList key="3" content="ALL TIME POPULAR" isVertical={false} animeList={allTimePopularAnime} />
         </div>
     );
 }
