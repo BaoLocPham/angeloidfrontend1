@@ -100,8 +100,8 @@ const ChangePassword = ({ BackGround, Author, AuthorLink }) => {
             }
             // Error in back-end...
             else {
-                let obj = await res.json();
-                togglePasswordModal({ header: "Error", body: obj.Message });
+                // let obj = await res.json();
+                togglePasswordModal({ header: "Error", body: "Sorry, we could not reset your password..." });
             }
             // Enable submit btn
             if (passwordSubmitBtn.current) {
