@@ -79,7 +79,7 @@ const SearchByImage = () => {
 
     // Send Image to Flask and fetch data from database
     useEffect(() => {
-        fetch('http://localhost:5002/api', {
+        fetch('https://ae7973195990.ap.ngrok.io/api', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
