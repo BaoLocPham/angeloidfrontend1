@@ -156,7 +156,7 @@ const AnimeManage = () => {
                     view: a.view,
                     episode: (a.episode !== "null") ? a.episode : "updating",
                     studio: (a.studio !== null) ? a.studio.studioName : "updating",
-                    update: <Link to={`/setting/anime/form/${a.animeId}`} className="btn btn-warning">Edit</Link>,
+                    update: <Link to={`/admin/anime/form/${a.animeId}`} className="btn btn-warning">Edit</Link>,
                     delete: <button onClick={() => toggleModalDelete(modalConfigs.confirmDelete, a.animeId)} className="btn btn-danger">Delete</button>
                 }
             );
@@ -180,7 +180,7 @@ const AnimeManage = () => {
 
     return (
         <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
-            <Link to={`/setting/anime/form`} className="btn btn-success m-2">Add new</Link>
+            <Link to={`/admin/anime/form`} className="btn btn-success m-2">Add new</Link>
             <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2" disabled={isProccessing}>Automatically Add Anime</button>
             <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal

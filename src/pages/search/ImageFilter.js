@@ -6,11 +6,6 @@ const ImageFilter = ({ handleUploadImg, inputfile, imageShow }) => {
     const inputfileBase64 = "data:image/jpeg;base64, " + inputfile;
     const imageShowBase64 = "data:image/jpeg;base64, " + imageShow;
 
-    const imageShowStyle = {
-        maxHeight: "30rem",
-        maxWidth: "35rem",
-    }
-
     return (
         <div>
             <div className="image-filter d-flex flex-row">
@@ -24,9 +19,13 @@ const ImageFilter = ({ handleUploadImg, inputfile, imageShow }) => {
                     </Link>
                 </div>
             </div>
-            <div className="image-filter d-flex justify-content-between my-3">
-                <img style={imageShowStyle} src={inputfileBase64} className="img-fluid" />
-                <img style={imageShowStyle} src={imageShowBase64} className="img-fluid" />
+            <div className="image-filter d-md-flex my-3">
+                <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
+                    <img src={inputfileBase64} className="img-fluid imageShowStyle" />
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
+                    <img src={imageShowBase64} className="img-fluid imageShowStyle" />
+                </div>
             </div>
         </div>
     );

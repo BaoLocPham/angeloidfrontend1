@@ -280,7 +280,7 @@ const AnimeForm = () => {
     //Load data form db when page is loaded and Redirect to error page when load data fail
     useEffect(() => {
         //Call fetch anime
-        if (location.pathname !== "/setting/anime/form") {
+        if (location.pathname !== "/admin/anime/form") {
             fetchAnimeData();
         } else {
             setIsLoading('succeed');
@@ -375,7 +375,7 @@ const AnimeForm = () => {
 
     if (uploadStatus === true) {
         return (
-            <Redirect to='/setting/anime' />
+            <Redirect to='/admin/anime' />
         );
     }
 
@@ -420,7 +420,7 @@ const AnimeForm = () => {
                         />
 
                         {/* Insert Button */}
-                        {(location.pathname === "/setting/anime/form") ?
+                        {(location.pathname === "/admin/anime/form") ?
                         <div className="my-3 d-flex justify-content-end">
                             <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
                         </div>

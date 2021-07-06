@@ -5,6 +5,19 @@
 }
 
 .image-filter {
-    margin-left: 6rem;
-    margin-right: 6rem;
+    margin-left: 5%;
+    margin-right: 5%;
 }
+
+.imageShowStyle{
+    max-height:  30rem;
+    max-Width: 35rem;
+    margin: auto 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .imageShowStyle{
+        max-height:  18rem;
+        max-Width: 21rem;
+    }
+  }
