@@ -1,6 +1,9 @@
 .anime-card{
     font-size: 15px;
 }
+.relation {
+    min-height: 100px;
+}
 
 @media screen and (min-width: 768px) {
     .anime-frame {
@@ -20,8 +23,5 @@
         align-items: center;
         font-size: 14px;
         font-weight: bold;
-    }
-    .relation{
-        width: 1000px;
     }
 }
