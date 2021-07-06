@@ -79,7 +79,7 @@ const SearchByImage = () => {
 
     // Send Image to Flask and fetch data from database
     useEffect(() => {
-        fetch('https://ae7973195990.ap.ngrok.io/api', {
+        fetch(`${process.env.REACT_APP_FLASK_URL}api`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -105,7 +105,10 @@ const SearchByImage = () => {
     return (
         <div id="drop_zone" className="drop-zone" onDrop={dropHandler} onDragOver={dragOverHandler}>
             <ImageFilter handleUploadImg={handleUploadImg} inputfile={inputfile} imageShow={imageShow} />
-            <SearchResult searchResult={searchResult} />
+            {searchResult.length > 0 ?
+                <SearchResult searchResult={searchResult} />
+                : <h4 style={{ color: "white", marginLeft: "5%" }}>No Result</h4>
+            }
 
             <CustomedModal
                 modalHeader={postingModal.header}
