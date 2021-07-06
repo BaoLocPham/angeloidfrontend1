@@ -73,7 +73,7 @@ const AnimeManage = () => {
     }
 
     const getProcessing = async () => {
-        let url = `${process.env.REACT_APP_NODE_URL}api/process` || 'http://localhost:9000/api/process';
+        let url = `${process.env.REACT_APP_BACKEND_URL}api/auto/process`;
         await fetch(url)
             .then(res => res.json())
             .then(res => setIsProccessing(res));
@@ -88,7 +88,7 @@ const AnimeManage = () => {
         if (addBtn.current) {
             addBtn.current.setAttribute("disabled", "disabled");
         }
-        let url = `${process.env.REACT_APP_NODE_URL}api/anime` || 'http://localhost:9000/api/anime';
+        let url = `${process.env.REACT_APP_BACKEND_URL}api/auto/add`
         await fetch(url,
             {
                 method: "GET"
