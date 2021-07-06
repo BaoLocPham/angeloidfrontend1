@@ -65,7 +65,7 @@ const FacebookS = ({ setUser, isLogin, setCookie }) => {
     return (
         <div>
             <FacebookLogin
-                appId="859481521322806"
+                appId="279593397296289"
                 fields="name,email,picture"
                 // onClick={stateClicked}
                 callback={responseFacebook}
