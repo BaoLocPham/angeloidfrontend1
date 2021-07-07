@@ -21,6 +21,7 @@ const AnimeManage = () => {
     }
     const [animeIdToDelete, setAnimeIdToDelete] = useState(0);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
 
     // Check Loading
@@ -33,9 +34,15 @@ const AnimeManage = () => {
         setDeleteModalShow(!deleteModalShow);
     }
 
+    const toggleModalAdd = (modalConfig) => {
+        setModalContent(modalConfig);
+        setAddModalShow(!addModalShow);
+    }
+
     // Set Close Modal
     const closeModal = () => {
         setDeleteModalShow(false);
+        setAddModalShow(false);
     }
 
     // Show Delete Modal
@@ -94,7 +101,7 @@ const AnimeManage = () => {
                 method: "GET"
             }).then(res => {
                 if (res.status === 200) {
-                    toggleModal(modalConfigs.addSucceed);
+                    toggleModalAdd(modalConfigs.addSucceed);
                 }
             });
     }
@@ -189,6 +196,12 @@ const AnimeManage = () => {
                 handleToggle={closeModal}
                 show={deleteModalShow}
                 deleteBtn={{ btnFunction: deleteAnime, message: "Delete", idToDelete: animeIdToDelete }}
+            />
+            <CustomedModal
+                modalHeader={modalContent.header}
+                modalBody={modalContent.body}
+                handleToggle={closeModal}
+                show={addModalShow}
             />
         </div>
 
