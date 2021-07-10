@@ -52,8 +52,11 @@ const AnimeForm = () => {
         setProfileModalShow(!profileModalShow);
     }
 
-    const [defaultThumbnail, setDefaultThumbnail] = useState("https://steamuserimages-a.akamaihd.net/ugc/1625192018160506083/C15D4EA1F20C70D056721EF003BB703643EAFDF0/");
-    const [defaultWallpaper, setDefaultWallpaper] = useState("https://steamuserimages-a.akamaihd.net/ugc/1755813918770084879/217A2F65616B66DC92206F403A2F6412BF7DD9E3/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+    const [imageModalShow, setImageModalShow] = useState(false);
+    const toggleModalImage = () => setImageModalShow(!imageModalShow);
+
+    const [defaultThumbnail, setDefaultThumbnail] = useState("https://www.colorbook.io/imagecreator.php?hex=edf2f5&width=400&height=300&text=%20400x300");
+    const [defaultWallpaper, setDefaultWallpaper] = useState("https://www.colorbook.io/imagecreator.php?hex=edf2f5&width=400&height=300&text=%20400x300");
 
     //all properties of anime input
     const [uploadThumbnail, setUploadThumbnail] = useState("");
@@ -80,11 +83,8 @@ const AnimeForm = () => {
     // Thumbnail upload
     const handleUploadThumbnail = (event) => {
         try {
-            if (!event.target.files[0].type.match(/image.*/)) {
-                alert('You can\'t upload this type of file.');
-                return;
-            } else if (event.target.files[0].size > 1e6) {
-                alert('You can\'t upload file has size greater than 1 mb.');
+            if (!event.target.files[0].type.match(/image.*/) || event.target.files[0].size > 2097152) {
+                toggleModalImage();
                 return;
             }
 
@@ -102,11 +102,8 @@ const AnimeForm = () => {
     // Wallpaper upload
     const handleUploadWallpaper = (event) => {
         try {
-            if (!event.target.files[0].type.match(/image.*/)) {
-                alert('You can\'t upload this type of file.');
-                return;
-            } else if (event.target.files[0].size > 1e6) {
-                alert('You can\'t upload file has size greater than 1 mb.');
+            if (!event.target.files[0].type.match(/image.*/) || event.target.files[0].size > 2097152) {
+                toggleModalImage();
                 return;
             }
             let reader = new FileReader();
@@ -351,6 +348,7 @@ const AnimeForm = () => {
                 })
             }
         ).then(async res => {
+            console.log(res)
             //Fail to add
             if (res.status === 409 || res.status === 500) {
                 toggleModal(modalConfigs.inputFail);
@@ -417,13 +415,14 @@ const AnimeForm = () => {
                             handAddNewCharacter={handAddNewCharacter}
                             handleInputCharactersInfo={handleInputCharactersInfo}
                             handleDeleteCharacter={handleDeleteCharacter}
+                            toggleModalImage={toggleModalImage}
                         />
 
                         {/* Insert Button */}
                         {(location.pathname === "/admin/anime/form") ?
-                        <div className="my-3 d-flex justify-content-end">
-                            <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
-                        </div>
+                            <div className="my-3 d-flex justify-content-end">
+                                <button type="submit" className="UploadButton btn" onClick={handleClickInsert}>Insert</button>
+                            </div>
 
                             :
 
@@ -432,7 +431,6 @@ const AnimeForm = () => {
                             </div>
 
                         }
-
                     </div>
                 </form>
             </div>
@@ -443,6 +441,14 @@ const AnimeForm = () => {
                 modalBody={modalProfile.body}
                 handleToggle={toggleModal}
                 show={profileModalShow}
+            />
+
+            {/* Modal to notify user */}
+            <CustomedModal
+                modalHeader="Alert"
+                modalBody="Please input file with extension .jpg, .jpeg, .png and smaller than 2MB"
+                handleToggle={toggleModalImage}
+                show={imageModalShow}
             />
         </div>
     );

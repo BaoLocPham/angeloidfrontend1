@@ -34,12 +34,6 @@ const UserManage = () => {
     // Check Loading
     const [isLoading, setIsLoading] = useState('loading');
 
-    // Show Modal
-    const toggleModal = (modalConfig) => {
-        setModalContent(modalConfig);
-        setDeleteModalShow(!deleteModalShow);
-    }
-
     // Set Close Modal
     const closeModal = () => {
         setDeleteModalShow(false);
