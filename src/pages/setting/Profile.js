@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ProfileEdit from './ProfileEdit';
 import Avatar from './Avatar';
 

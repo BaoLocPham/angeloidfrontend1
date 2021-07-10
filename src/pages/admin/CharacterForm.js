@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const CharacterForm = ({ character, handleDeleteCharacter, handleInputCharactersInfo }) => {
+const CharacterForm = ({ character, handleDeleteCharacter, handleInputCharactersInfo, toggleModalImage }) => {
     // Default image for character
     const [uploadCharacterImage, setUploadCharacterImage] = useState("https://s2.vndb.org/ch/97/62197.jpg");
     const [uploadSeiyuuImage, setUploadSeiyuuImage] = useState("http://www.kenproduction.co.jp/admin/img/talent/131/1.jpg?r=199083852");
@@ -18,11 +18,8 @@ const CharacterForm = ({ character, handleDeleteCharacter, handleInputCharacters
     // Handle Upload Thumbnail
     const handleUploadCharacterImage = (event) => {
         try {
-            if (!event.target.files[0].type.match(/image.*/)) {
-                alert('You can\'t upload this type of file.');
-                return;
-            } else if (event.target.files[0].size > 1e6) {
-                alert('You can\'t upload file has size greater than 1 mb.');
+            if (!event.target.files[0].type.match(/image.*/) || event.target.files[0].size > 2097152) {
+                toggleModalImage();
                 return;
             }
             let reader = new FileReader();
@@ -41,8 +38,8 @@ const CharacterForm = ({ character, handleDeleteCharacter, handleInputCharacters
     // Handle Upload Wallpaper
     const handleUploadSeiyuuImage = (event) => {
         try {
-            if (!event.target.files[0].type.match(/image.*/)) {
-                alert('You can\'t upload this type of file.');
+            if (!event.target.files[0].type.match(/image.*/) || event.target.files[0].size > 2097152) {
+                toggleModalImage();
                 return;
             }
             let reader = new FileReader();

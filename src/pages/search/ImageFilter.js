@@ -19,6 +19,7 @@ const ImageFilter = ({ handleUploadImg, inputfile, imageShow }) => {
                     </Link>
                 </div>
             </div>
+            {/* Show uploaded image and image was config */}
             <div className="image-filter d-md-flex my-3">
                 <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
                     <img src={inputfileBase64} className="img-fluid imageShowStyle" />

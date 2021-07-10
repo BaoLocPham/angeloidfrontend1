@@ -1,7 +1,7 @@
 import React from 'react';
 import CharacterForm from './CharacterForm';
 
-const CharacterFormList = ({ characters, handAddNewCharacter, handleInputCharactersInfo, handleDeleteCharacter, handleUploadCharacterImage, handleUploadSeiyuuImage}) => {
+const CharacterFormList = ({ characters, handAddNewCharacter, handleInputCharactersInfo, handleDeleteCharacter, handleUploadCharacterImage, handleUploadSeiyuuImage, toggleModalImage }) => {
     return (
         <div>
             {/* {console.log(characters.length)} */}
@@ -13,9 +13,10 @@ const CharacterFormList = ({ characters, handAddNewCharacter, handleInputCharact
                     key={character.characterId}
                     character={character}
                     handleDeleteCharacter={handleDeleteCharacter}
-                    handleInputCharactersInfo={handleInputCharactersInfo} 
-                    handleUploadCharacterImage ={handleUploadCharacterImage}
+                    handleInputCharactersInfo={handleInputCharactersInfo}
+                    handleUploadCharacterImage={handleUploadCharacterImage}
                     handleUploadSeiyuuImage={handleUploadSeiyuuImage}
+                    toggleModalImage={toggleModalImage}
                 />
             )}
 
