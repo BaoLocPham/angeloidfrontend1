@@ -51,7 +51,7 @@ const ThreadList = ({ threadList, setThreadList, isSearch }) => {
         <div id="threadList">
             {   // check if threadList is default or not 
                 // if threadlist is default then not load thread content
-                threadList.length === 1 ? "" :
+                threadList.length === 0 ? "" :
                     threadList.map(thread => (
                         <ThreadContent key={thread.threadId} content={thread} />
                     ))

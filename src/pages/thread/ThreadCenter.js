@@ -17,7 +17,6 @@ const ThreadCenter = ({ user, isLogin }) => {
     // Declare Variables
     const [threadAdded, setThreadAdded] = useState(0);
     const [threadList, setThreadList] = useState([
-        { threadId: 0 }
     ]);
     const [textInput, setTextInput] = useState("");
     const [isSearch, setIsSearch] = useState(false);
