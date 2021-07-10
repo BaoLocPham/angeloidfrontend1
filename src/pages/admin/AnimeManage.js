@@ -21,6 +21,7 @@ const AnimeManage = () => {
     }
     const [animeIdToDelete, setAnimeIdToDelete] = useState(0);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);
     const [modalContent, setModalContent] = useState({});
 
     // Check Loading
@@ -33,9 +34,15 @@ const AnimeManage = () => {
         setDeleteModalShow(!deleteModalShow);
     }
 
+    const toggleModalAdd = (modalConfig) => {
+        setModalContent(modalConfig);
+        setAddModalShow(!addModalShow);
+    }
+
     // Set Close Modal
     const closeModal = () => {
         setDeleteModalShow(false);
+        setAddModalShow(false);
     }
 
     // Show Delete Modal
@@ -73,7 +80,7 @@ const AnimeManage = () => {
     }
 
     const getProcessing = async () => {
-        let url = `${process.env.REACT_APP_NODE_URL}api/process` || 'http://localhost:9000/api/process';
+        let url = `${process.env.REACT_APP_BACKEND_URL}api/auto/process`;
         await fetch(url)
             .then(res => res.json())
             .then(res => setIsProccessing(res));
@@ -88,13 +95,13 @@ const AnimeManage = () => {
         if (addBtn.current) {
             addBtn.current.setAttribute("disabled", "disabled");
         }
-        let url = `${process.env.REACT_APP_NODE_URL}api/anime` || 'http://localhost:9000/api/anime';
+        let url = `${process.env.REACT_APP_BACKEND_URL}api/auto/add`
         await fetch(url,
             {
                 method: "GET"
             }).then(res => {
                 if (res.status === 200) {
-                    toggleModal(modalConfigs.addSucceed);
+                    toggleModalAdd(modalConfigs.addSucceed);
                 }
             });
     }
@@ -165,8 +172,9 @@ const AnimeManage = () => {
     });
 
     const backgroundStyle = {
-        marginTop: "70px",
-        marginBottom: "70px",
+        marginTop: "5%",
+        height: "93%",
+        width: "94%",
         color: "white",
         backgroundColor: "#19293B",
         borderRadius: "10px"
@@ -179,16 +187,22 @@ const AnimeManage = () => {
     }
 
     return (
-        <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
+        <div className="p-3 h-auto" style={backgroundStyle}>
             <Link to={`/admin/anime/form`} className="btn btn-success m-2">Add new</Link>
             <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2" disabled={isProccessing}>Automatically Add Anime</button>
-            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
+            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='25rem' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal
                 modalHeader={modalContent.header}
                 modalBody={modalContent.body}
                 handleToggle={closeModal}
                 show={deleteModalShow}
                 deleteBtn={{ btnFunction: deleteAnime, message: "Delete", idToDelete: animeIdToDelete }}
+            />
+            <CustomedModal
+                modalHeader={modalContent.header}
+                modalBody={modalContent.body}
+                handleToggle={closeModal}
+                show={addModalShow}
             />
         </div>
 
