@@ -172,8 +172,9 @@ const AnimeManage = () => {
     });
 
     const backgroundStyle = {
-        marginTop: "70px",
-        marginBottom: "70px",
+        marginTop: "5%",
+        height: "93%",
+        width: "94%",
         color: "white",
         backgroundColor: "#19293B",
         borderRadius: "10px"
@@ -186,10 +187,10 @@ const AnimeManage = () => {
     }
 
     return (
-        <div className="mx-5 p-3 h-auto" style={backgroundStyle}>
+        <div className="p-3 h-auto" style={backgroundStyle}>
             <Link to={`/admin/anime/form`} className="btn btn-success m-2">Add new</Link>
             <button ref={addBtn} onClick={fetchNode} className="btn btn-info m-2" disabled={isProccessing}>Automatically Add Anime</button>
-            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
+            <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='25rem' entriesOptions={[25, 50, 100]} entries={25} pagesAmount={3} data={datatable} />
             <CustomedModal
                 modalHeader={modalContent.header}
                 modalBody={modalContent.body}

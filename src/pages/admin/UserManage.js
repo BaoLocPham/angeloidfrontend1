@@ -17,8 +17,9 @@ const modalConfigs = {
 
 // Data Table Background Style
 const backgroundStyle = {
-    marginTop: "70px",
-    marginBottom: "70px",
+    marginTop: "5%",
+    height: "93%",
+    width: "94%",
     color: "white",
     backgroundColor: "#19293B",
     borderRadius: "10px"
