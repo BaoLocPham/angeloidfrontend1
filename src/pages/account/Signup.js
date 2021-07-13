@@ -79,13 +79,13 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
         {
             username: registerForm.username,
             email: registerForm.email,
-            avatar: `url("data:image/jpeg;base64,${avatar}")`,
+            avatar: AVATAR,
             password: md5(registerForm.password)
         }
         
         // Prevent too many request to the server
         registerSubmitBtn.current.setAttribute("disabled", "disabled");
-        // console.log(registerInput);
+        console.log(registerInput);
         fetch(
             `${process.env.REACT_APP_BACKEND_URL}api/user`,
             {
