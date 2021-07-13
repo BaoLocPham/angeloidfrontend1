@@ -50,7 +50,7 @@ const SettingNav = ({ showLeftNav, user }) => {
             { user.isAdmin ?
             <>
                 <Link to="/admin/dashboard"
-                    className="nav-link btn w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
+                    className="nav-link btn btn-admin w-100 text-light d-flex flex-row justify-content-between align-items-center my-2"
                 >
                     <i className="fa fa-user-secret fa-lg p-2"></i>
                     <span className="p-2">Admin</span>
