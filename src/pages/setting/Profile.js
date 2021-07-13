@@ -6,7 +6,7 @@ const Profile = ({ user, setUser, currentUser, setCurrentUser, base64Img, setBas
 
     return (
         <div className="row d-flex flex-column-reverse flex-md-row w-100 justify-content-center align-items-center">
-            <div className="col-12 col-md-8 ps-5 py-5">
+            <div className="col-12 col-md-8">
                 <ProfileEdit currentUser={currentUser} setCurrentUser={setCurrentUser} />
             </div>
             <div className="col-12 col-md-4 py-5">
