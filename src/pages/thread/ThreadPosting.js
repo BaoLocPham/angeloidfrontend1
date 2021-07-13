@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
 import CustomedModal from '../components/Modal';
 
 const MODAL_CONFIGS = {

@@ -1,5 +1,5 @@
 //dependencies
-import React, { useState } from 'react';
+import React from 'react';
 
 //Content of anime {show only on mobile}
 const Content = ({anime}) => {

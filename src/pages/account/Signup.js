@@ -21,8 +21,8 @@ const AVATAR = `/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
 
 const Signup = ({ BackGround, Author, AuthorLink }) => {
     const [isSigned, setSigned] = useState(false);
-
-
+    
+    
     // Form for Register
     const [registerForm, setRegisterForm] = useState({
         username: '',
@@ -49,7 +49,7 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
     const toggleRegisterModal = () => {
         setRegisterModalShow(!registerModalShow);
     }
-
+    
     // Ref to disable btn when user submit data
     let registerSubmitBtn = useRef();
     const handleSubmitRegister = (event) => {
@@ -82,7 +82,7 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             avatar: AVATAR,
             password: md5(registerForm.password)
         }
-
+        
         // Prevent too many request to the server
         registerSubmitBtn.current.setAttribute("disabled", "disabled");
         console.log(registerInput);
@@ -91,118 +91,122 @@ const Signup = ({ BackGround, Author, AuthorLink }) => {
             {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(registerInput)
+                body: JSON.stringify({
+                    "userName": registerForm.username,
+                    "email": registerForm.email,
+                    "avatar": AVATAR,
+                    "password": md5(registerForm.password)
+                })
             }
-        )
-            // .then(res => res.json())
-            .then(res => {
+            ).then(res => {
+                console.log(registerInput);
                 if (res.status == 400 || res.status == 409) {
                     event.preventDefault();
                     toggleRegisterModal();
                 } else {
-                    setSigned(true);
+                    setSigned(true); 
                 }
             })
-        // Enable submit btn
-        registerSubmitBtn.current.removeAttribute("disabled");
-    }
-
-    if (isSigned) {
-        return (
-            <Redirect to="/account/login" />
-        )
-    }
-    return (
-        <div style={BackGround} className="account-wallpaper d-flex flex-column justify-content-center"  >
-            <div className="container div-with-bg">
+            // Enable submit btn
+            registerSubmitBtn.current.removeAttribute("disabled");
+        }
+        
+        if (isSigned) {
+            return (
+                <Redirect to="/account/login" />
+                )
+            }
+            return (
+                <div style={BackGround} className="account-wallpaper d-flex flex-column justify-content-center"  >
+                <div className="container div-with-bg">
                 <div className="row">
-                    <div className="card rounded bg-info" id="formLogin" >
-                        <b>Signup</b>
-                        <form>
-                            {/* This is the Username input */}
-                            <CustomedPopover
-                                show={registerPopover.username}
-                                popoverTitle="Invalid username Format"
-                                popoverContent={USERNAME_FORMAT}
-                            >
-                                <label for="username"></label>
-                            </CustomedPopover>
-                            <input type="text" className="input-username"
-                                onChange={(event) => handleRegisterFormChange({ username: event.target.value })}
-                                onClick={() => toggleRegisterPopover({ username: false })}
-                                id="username" name="username" placeholder="Enter Username" ></input>
-                            <br />
-                            {/* This is the Email input */}
-                            <CustomedPopover
-                                show={registerPopover.email}
-                                popoverTitle="Invalid Email Format"
-                                popoverContent={EMAIL_FORMAT}
-                            >
-                                <label for="email"></label>
-                            </CustomedPopover>
-                            <input type="email" className="input-email"
-                                onChange={(event) => handleRegisterFormChange({ email: event.target.value })}
-                                onClick={() => toggleRegisterPopover({ email: false })}
-                                id="email" name="email" placeholder="Enter Email"></input>
-                            <br />
-                            {/* This is the Password input */}
-                            <CustomedPopover
-                                show={registerPopover.password}
-                                popoverTitle="Invalid password Format"
-                                popoverContent={PASSWORD_FORMAT}
-                            >
-                                <label for="password"></label>
-                            </CustomedPopover>
-                            <input type="password" className="input-password"
-                                onChange={(event) => handleRegisterFormChange({ password: event.target.value })}
-                                onClick={() => toggleRegisterPopover({ password: false })}
-                                id="password" name="password" placeholder="Enter Password"></input>
-                            <br />
-                            {/* This is the Re-Password input */}
-                            <CustomedPopover
-                                show={registerPopover.repassword}
-                                popoverTitle="Enter correct Password"
-                                popoverContent={REPASS_FORMAT}
-                            >
-                                <label for="repassword"></label>
-                            </CustomedPopover>
-                            <input type="password" className="input-password"
-                                onChange={(event) => handleRegisterFormChange({ repassword: event.target.value })}
-                                onClick={() => toggleRegisterPopover({ repassword: false })}
-                                id="password" name="password" placeholder="Re-Enter Password"></input>
-                            <br />
-                            {/* End of the Form */}
-                            <br />
-                            <button type="submit" className="btn btn-login" ref={registerSubmitBtn}
-                                onClick={handleSubmitRegister}>Signup</button>
-                            <br />
-                            <br />
-                        </form>
-                        <h5>OR</h5>
-                        <br />
-                        <Link className="btn btn-login" to="/account/login">Login</Link>
-                    </div>
+                <div className="card rounded bg-info" id="formLogin" >
+                <b>Signup</b>
+                <form>
+                {/* This is the Username input */}
+                <CustomedPopover
+                show={registerPopover.username}
+                popoverTitle="Invalid username Format"
+                popoverContent={USERNAME_FORMAT}
+                >
+                <label for="username"></label>
+                </CustomedPopover>
+                <input type="text" className="input-username"
+                onChange={(event) => handleRegisterFormChange({ username: event.target.value })}
+                onClick={() => toggleRegisterPopover({ username: false })}
+                id="username" name="username" placeholder="Enter Username" ></input>
+                <br />
+                {/* This is the Email input */}
+                <CustomedPopover
+                show={registerPopover.email}
+                popoverTitle="Invalid Email Format"
+                popoverContent={EMAIL_FORMAT}
+                >
+                <label for="email"></label>
+                </CustomedPopover>
+                <input type="email" className="input-email"
+                onChange={(event) => handleRegisterFormChange({ email: event.target.value })}
+                onClick={() => toggleRegisterPopover({ email: false })}
+                id="email" name="email" placeholder="Enter Email"></input>
+                <br />
+                {/* This is the Password input */}
+                <CustomedPopover
+                show={registerPopover.password}
+                popoverTitle="Invalid password Format"
+                popoverContent={PASSWORD_FORMAT}
+                >
+                <label for="password"></label>
+                </CustomedPopover>
+                <input type="password" className="input-password"
+                onChange={(event) => handleRegisterFormChange({ password: event.target.value })}
+                onClick={() => toggleRegisterPopover({ password: false })}
+                id="password" name="password" placeholder="Enter Password"></input>
+                <br />
+                {/* This is the Re-Password input */}
+                <CustomedPopover
+                show={registerPopover.repassword}
+                popoverTitle="Enter correct Password"
+                popoverContent={REPASS_FORMAT}
+                >
+                <label for="repassword"></label>
+                </CustomedPopover>
+                <input type="password" className="input-password"
+                onChange={(event) => handleRegisterFormChange({ repassword: event.target.value })}
+                onClick={() => toggleRegisterPopover({ repassword: false })}
+                id="repassword" name="repassword" placeholder="Re-Enter Password"></input>
+                <br />
+                {/* End of the Form */}
+                <br />
+                <button type="submit" className="btn btn-login" ref={registerSubmitBtn}
+                onClick={handleSubmitRegister}>Signup</button>
+                <br />
+                <br />
+                </form>
+                <h5>OR</h5>
+                <br />
+                <Link className="btn btn-login" to="/account/login">Login</Link>
                 </div>
-            </div>
-            <CustomedModal
+                </div>
+                </div>
+                <CustomedModal
                 modalHeader="Attention"
                 modalBody="Your username or email are already exited
                 Please check again !!!"
                 handleToggle={toggleRegisterModal}
                 show={registerModalShow}
-            />
-            {/* Reference to author's background image */}
-            <div style={{
-                position: "absolute",
-                left: "2%",
-                bottom: "3%"
-            }}>
+                />
+                {/* Reference to author's background image */}
+                <div style={{
+                    position: "absolute",
+                    left: "2%",
+                    bottom: "3%"
+                }}>
                 <span className="fw-bolder" style={{ color: "#76899C" }}>Artwork by <a target="_blank" href={AuthorLink} style={{ textDecoration: "none" }}>{Author}</a></span>
-            </div>
-        </div>
-    );
-}
-
-export default Signup;
-
+                </div>
+                </div>
+                );
+            }
+            
+            export default Signup;
+            
             //  <svg><rect x="0" y="0" fill="none" width="100%" height="100%" /></svg>

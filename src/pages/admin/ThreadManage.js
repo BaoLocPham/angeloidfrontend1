@@ -17,8 +17,9 @@ const modalConfigs = {
 
 // Data Table Background Style
 const backgroundStyle = {
-    marginTop: "70px",
-    marginBottom: "70px",
+    marginTop: "5%",
+    height: "93%",
+    width: "94%",
     color: "white",
     backgroundColor: "#19293B",
     borderRadius: "10px"
@@ -136,7 +137,7 @@ const ThreadManage = () => {
 
     return (
         <>
-            <div className="ms-1 p-3 h-auto" style={backgroundStyle}>
+            <div className="p-3" style={backgroundStyle}>
                 <MDBDataTableV5 style={{ color: "white" }} hover scrollY maxHeight='66vh' entriesOptions={[10, 20, 25]} entries={10} pagesAmount={4} data={datatable} />
             </div>
 
