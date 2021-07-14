@@ -8,7 +8,7 @@ const Avatar = ({ user, currentUser, base64Img, setBase64Img, setUser }) => {
         backgroundColor: "#19293B",
         borderRadius: "5%",
         color: "#fff",
-        marginLeft: "1.3em",
+        // marginLeft: "1.3em",
         textAlign: "center"
     }
     const upper = {
