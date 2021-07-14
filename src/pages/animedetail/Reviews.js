@@ -92,7 +92,7 @@ const Review = ({ reviewList, setReviewList, user, isClicked, anime, handleAfter
 
     return (
         // Show Review
-        <div id="review" className="col-12 p-0">
+        <div id="review" className="col-12">
             <h5 id="Review" className="py-3">Review</h5>
             {/* Input review */}
             {

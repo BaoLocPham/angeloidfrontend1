@@ -168,9 +168,15 @@
     }
 }
 
+@media (-webkit-device-pixel-ratio: 0.9) {
+    .scale125 {
+        zoom: 1.1;
+    }
+}
+
 @media (-webkit-device-pixel-ratio: 1.1) {
     .scale125 {
-        zoom: 0.95;
+        zoom: 0.91;
     }
 
     .thumb {
@@ -183,6 +189,6 @@
 
 @media (-webkit-device-pixel-ratio: 1.25) {
     .scale125 {
-        zoom: 0.85;
+        zoom: 0.805;
     }
 }

@@ -12,7 +12,7 @@ const AnimeRelations = () => {
         { id: 6, name: "Horimiya", description: "The most mat day dataset ever " },
     ]);
     return (
-        <div>
+        // <div>
             <div className="col-12">
                 <div className="row">
                     {
@@ -22,7 +22,7 @@ const AnimeRelations = () => {
                     }
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
