@@ -45,16 +45,16 @@ const AnimeDetailBottom = ({ anime, rateList, reviewList, setReviewList, user, i
             style={{ padding: "30px 7% 2rem 7%" }}
         >
             {/* Left content */}
-            <div className="col-12 col-md-3 mb-3 px-md-4 px-0">
+            <div className="col-12 col-md-3 px-md-4">
                 <AnimeProfile anime={anime} />
                 <AnimeTagList anime={anime} />
             </div>
 
             {/* Right content */}
             <div className="col-12 col-md-9">
-                <div className="row ps-1 ps-md-4">
+                <div className="row ps-md-4">
                     <Content anime={anime} />
-                    <AnimeRelations />
+                    {/* <AnimeRelations /> */}
                     <CharacterList anime={anime} />
                     <Trailer anime={anime} />
                     <RatingChart rateList={rateList} />
