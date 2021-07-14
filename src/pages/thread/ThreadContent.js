@@ -11,7 +11,7 @@ const ThreadContent = ({content}) => {
         backgroundImage: `url(data:image/*;base64,${content.user.avatar})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        backgroundSize: "40px 40px",
+        backgroundSize: "cover",
         width: 40,
         height: 40
     }
@@ -41,7 +41,7 @@ const ThreadContent = ({content}) => {
                     alt=""
                 />
             </div>
-            <div className="px-3 pt-3 form-group">Comment</div>
+            <div className="px-3 pt-1 form-group"></div>
         </div>
     );
 }

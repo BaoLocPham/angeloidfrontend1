@@ -38,7 +38,7 @@ const Thread = ({ user, isLogin }) => {
             <div className="d-none d-md-block col-md-3 advertisement">
                 <Advertisement />
             </div>
-            <div className="col-12 col-md-6 px-5">
+            <div className="col-12 col-md-6 px-3 px-md-5">
                 <ThreadCenter user={user} isLogin={isLogin} />
             </div>
             <div className="d-none d-md-block col-md-3 threadAnimeList">
