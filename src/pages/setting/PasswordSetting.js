@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './PasswordSetting.css';
 import CustomedModal from '../components/Modal';
 import CustomedPopover from '../components/Popover';
 import md5 from 'md5';
+import Loading from '../components/Loading';
+import Kanna from '../error/Kanna.png';
 
 const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{5,32}$/;
 const PASSWORD_MESSAGE = `Password length is between 5 to 32 and can only contains lowercase/uppercase alphabet characters, number and some special characters: !@#$%^&*`;
@@ -11,6 +13,15 @@ const modalConfigs = {
     requestFailed: { header: "Failed", body: "Update password failed!!!" },
     requestSucceed: { header: "Succeed", body: "Update password successfully!!!" }
 }
+const KANNA_IMG_STYLE = {
+    height: 290,
+    width: 290,
+    backgroundImage: `url(${Kanna})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover"
+}
+
 
 const PasswordSetting = ({ user }) => {
     const wrapper = {
@@ -42,6 +53,21 @@ const PasswordSetting = ({ user }) => {
         setPasswordModal(modalConfig);
         setPasswordModalShow(!passwordModalShow);
     }
+
+    const [isLoading, setIsLoading] = useState('loading');
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/user/password/check/${user.userId}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if (res) {
+                    setIsLoading('enabled');
+                } else {
+                    setIsLoading('disabled');
+                }
+            });
+    }, []);
 
     // Form State
     const [passwordForm, setPasswordForm] = useState({
@@ -104,6 +130,22 @@ const PasswordSetting = ({ user }) => {
 
         // Enable submit btn
         passwordSubmitBtn.current.removeAttribute("disabled");
+    }
+
+    if (isLoading === 'loading') {
+        return (
+            <Loading />
+        );
+    }
+
+    if (isLoading === 'disabled') {
+        return (
+            <div className="w-pass-setting h-auto p-3 d-flex flex-column justify-content-center align-items-center" style={wrapper}>
+                <h4 className="p-2">This account is logged in by Facebook!</h4>
+                <div className="my-2" style={KANNA_IMG_STYLE} ></div>
+                <div className="p-2">You cannot change this account password because this account don't have password!</div>    
+            </div>
+        );
     }
 
     return (
