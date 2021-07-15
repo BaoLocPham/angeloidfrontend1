@@ -32,6 +32,7 @@ const SearchByImage = () => {
 
     //Handle drop file
     const dropHandler = (event) => {
+        setImageShow("loading");
         try {
             event.preventDefault();
             var file = event.dataTransfer.files[0];
@@ -50,7 +51,6 @@ const SearchByImage = () => {
                 flask(read.result.split(",")[1]);
             }
         } catch { }
-        flask();
     }
 
     const dragOverHandler = (ev) => {
@@ -60,6 +60,7 @@ const SearchByImage = () => {
 
     // Handle upload image
     const handleUploadImg = (event) => {
+        setImageShow("loading");
         try {
             event.preventDefault();
             const inputedFile = event.target.files[0];
@@ -104,11 +105,14 @@ const SearchByImage = () => {
     }
 
     return (
-        <div id="drop_zone" className="drop-zone" onDrop={dropHandler} onDragOver={dragOverHandler}>
+        <div id="drop_zone" className="drop-zone" onDrop={imageShow == "loading" ? "" : dropHandler} onDragOver={dragOverHandler}>
             <ImageFilter handleUploadImg={handleUploadImg} inputfile={inputfile} imageShow={imageShow} />
             {searchResult.length > 0 ?
                 <SearchResult searchResult={searchResult} />
-                : <h4 style={{ color: "white", marginLeft: "5%" }}>No Result</h4>
+                :
+                <div style={{ backgroundColor: "#131E2A" }}>
+                    <h4 style={{ color: "white", marginLeft: "5%" }}>No Result</h4>
+                </div>
             }
 
             <CustomedModal
