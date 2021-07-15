@@ -46,10 +46,11 @@ const SearchByImage = () => {
             let read = new FileReader();
             read.readAsDataURL(file);
             read.onloadend = function () {
-                // console.log(read.result.split(",")[1]);
                 setInputfile(read.result.split(",")[1])
+                flask(read.result.split(",")[1]);
             }
         } catch { }
+        flask();
     }
 
     const dragOverHandler = (ev) => {
@@ -73,17 +74,18 @@ const SearchByImage = () => {
             reader.readAsDataURL(inputedFile);
             reader.onload = () => {
                 setInputfile(reader.result.split(",")[1])
+                flask(reader.result.split(",")[1]);
             }
         } catch { }
     }
 
     // Send Image to Flask and fetch data from database
-    useEffect(() => {
+    const flask = (inputedfile1) => {
         fetch(`${process.env.REACT_APP_FLASK_URL}api`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                image: inputfile
+                image: inputedfile1
             })
         })
             .then(res => res.json())
@@ -99,8 +101,7 @@ const SearchByImage = () => {
                     .then(res => res.json())
                     .then(res => setSearchResult(res));
             });
-    },
-        [inputfile])
+    }
 
     return (
         <div id="drop_zone" className="drop-zone" onDrop={dropHandler} onDragOver={dragOverHandler}>
