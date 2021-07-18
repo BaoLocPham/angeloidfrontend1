@@ -9,7 +9,7 @@ const ImageFilter = ({ handleUploadImg, inputfile, imageShow }) => {
     return (
         <div>
             <div className="image-filter d-flex flex-row">
-                <input class="form-control me-3" type="file" id="formFile" accept="image/png, image/jpeg" onChange={handleUploadImg} />
+                <input class="form-control me-3" type="file" id="formFile" accept="image/png, image/jpeg" onChange={handleUploadImg} disabled={imageShow == "loading" ? true : false} />
                 {/* Change search type button */}
                 <div className="">
                     <Link to="/search">
@@ -21,12 +21,27 @@ const ImageFilter = ({ handleUploadImg, inputfile, imageShow }) => {
             </div>
             {/* Show uploaded image and image was config */}
             <div className="image-filter d-md-flex my-3">
+                {/* Image Input */}
                 <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
-                    <img src={inputfileBase64} className="img-fluid imageShowStyle" />
+                    <img src={inputfileBase64} className="img-fluid imageShowStyle" alt="" />
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
-                    <img src={imageShowBase64} className="img-fluid imageShowStyle" />
-                </div>
+                {
+                    imageShow == "loading"
+                        ?
+                        // Loading
+                        <div className="col-12 col-sm-12 col-md-6">
+                            <div style={{ marginTop: "20%" }} className="text-center">
+                                <div className="spinner-border text-light" style={{ height: "3rem", width: "3rem" }} role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        // Image Result
+                        <div className="col-12 col-sm-12 col-md-6 mb-3 d-flex justify-content-center">
+                            <img src={imageShowBase64} className="img-fluid imageShowStyle" alt="" />
+                        </div>
+                }
             </div>
         </div>
     );

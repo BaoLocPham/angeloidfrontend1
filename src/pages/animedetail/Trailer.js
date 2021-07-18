@@ -9,9 +9,15 @@ const Trailer = ({ anime }) => {
         <div id="trailer" className="col-12 col-md-6">
             <h5 className="py-2">Trailer</h5>
             <div className="row">
-                <iframe className="trailer" title="Anime Trailer"
-                    src={anime.trailer}>
-                </iframe>
+                {
+                    anime.trailer === "null" || anime.trailer === null || anime.trailer === undefined
+                        ?
+                        <div>No Trailer</div>
+                        :
+                        <iframe className="trailer" title="Anime Trailer"
+                            src={anime.trailer}>
+                        </iframe>
+                }
             </div>
         </div>
     );
