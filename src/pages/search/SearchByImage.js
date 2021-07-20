@@ -32,7 +32,6 @@ const SearchByImage = () => {
 
     //Handle drop file
     const dropHandler = (event) => {
-        setImageShow("loading");
         try {
             event.preventDefault();
             var file = event.dataTransfer.files[0];
@@ -42,7 +41,7 @@ const SearchByImage = () => {
                 togglePostingModal(MODAL_CONFIGS.validate);
                 return;
             }
-
+            setImageShow("loading");
             //Read data from input file
             let read = new FileReader();
             read.readAsDataURL(file);
@@ -60,7 +59,6 @@ const SearchByImage = () => {
 
     // Handle upload image
     const handleUploadImg = (event) => {
-        setImageShow("loading");
         try {
             event.preventDefault();
             const inputedFile = event.target.files[0];
@@ -70,6 +68,7 @@ const SearchByImage = () => {
                 togglePostingModal(MODAL_CONFIGS.validate);
                 return;
             }
+            setImageShow("loading");
             // Read file
             let reader = new FileReader();
             reader.readAsDataURL(inputedFile);
