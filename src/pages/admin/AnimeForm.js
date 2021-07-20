@@ -206,7 +206,7 @@ const AnimeForm = () => {
 
     const fetchAnimeData = () => {
         // fetch anime data 
-        fetch(`http://localhost:5000/api/anime/${animeId}`,
+        fetch(`${process.env.REACT_APP_BACKEND_URL}api/anime/${animeId}`,
             {
                 method: "GET"
             }).then(res => res.json())
