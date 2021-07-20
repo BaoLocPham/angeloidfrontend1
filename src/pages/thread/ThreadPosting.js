@@ -10,7 +10,7 @@ const MODAL_THREAD = {
 }
 
 
-const ThreadPosting = ({ user, threadAdded, setThreadAdded }) => {
+const ThreadPosting = ({ user, threadList, setThreadList }) => {
     // Posting Form state
     const [postingForm, setPostingForm] = useState({
         title: "",
@@ -80,7 +80,7 @@ const ThreadPosting = ({ user, threadAdded, setThreadAdded }) => {
 
     const handlePostingSubmit = (event) => {
         // event.preventDefault();
-        console.log(postingForm);
+        // console.log(postingForm);
         if (postingForm.title === "") {
             togglePostingModal(MODAL_THREAD.validate);
             // activate the modal
@@ -102,8 +102,14 @@ const ThreadPosting = ({ user, threadAdded, setThreadAdded }) => {
                 body: JSON.stringify(postingForm)
             }
         ).then(() => {
-            setThreadAdded(threadAdded + 1);
-        }).then(() => {
+            setThreadList([{
+                threadId: Number.parseInt(threadList[0].threadId) + 1,
+                title: postingForm.title,
+                content: postingForm.content,
+                image: postingForm.image,
+                userId: user.userId,
+                user: user
+            }, ...threadList])
             setPostingForm(
                 {
                     title: "",
