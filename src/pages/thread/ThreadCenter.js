@@ -15,7 +15,7 @@ const KANNA_IMG_STYLE = {
 
 const ThreadCenter = ({ user, isLogin }) => {
     // Declare Variables
-    const [threadAdded, setThreadAdded] = useState(0);
+    // const [threadAdded, setThreadAdded] = useState(0);
     const [threadList, setThreadList] = useState([
     ]);
     const [textInput, setTextInput] = useState("");
@@ -67,24 +67,24 @@ const ThreadCenter = ({ user, isLogin }) => {
                 .then(res => setThreadList(res))
         }
     }, []);
-    useEffect(() => {
-        if (isSearch !== true) {
-            fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
-                {
-                    method: "GET",
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-                .then(res => res.json())
-                .then(res => setThreadList(res))
-        }
-    }, [threadAdded]);
+    // useEffect(() => {
+    //     if (isSearch !== true && threadList.length !== 0) {
+    //         fetch(`${process.env.REACT_APP_BACKEND_URL}api/thread/startup`,
+    //             {
+    //                 method: "GET",
+    //                 headers: { 'Content-Type': 'application/json' },
+    //             }
+    //         )
+    //             .then(res => res.json())
+    //             .then(res => setThreadList(res))
+    //     }
+    // }, [threadAdded]);
 
     return (
         <>
             <ThreadSearch handleSearchThread={handleSearchThread} setTextInput={setTextInput} />
             {isLogin ?
-                <ThreadPosting user={user} threadAdded={threadAdded} setThreadAdded={setThreadAdded} />
+                <ThreadPosting user={user} threadList={threadList} setThreadList={setThreadList} />
                 : <h5 className="p-3">Please Login to post something!!!</h5>}
             {threadList.length === 0
                 ?
